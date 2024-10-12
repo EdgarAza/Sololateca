@@ -95,7 +95,7 @@
                     
             </form>
 
-            <a href="controlador?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
+            <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <table class="table table-striped">
                 <thead>
                     <tr>

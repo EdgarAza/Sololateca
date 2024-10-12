@@ -102,12 +102,41 @@ public class inventarioDAO implements crudInventario {
 
     @Override
     public boolean editar(inventario inv) {
-        
+           String sql = "UPDATE productos SET codigo = ?, descripcion = ?, stock = ?, costo = ?, precio = ?, proveedor = ? WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, inv.getCodigo());
+            ps.setString(2, inv.getDescripcion());
+            ps.setString(3, inv.getStock());
+            ps.setString(4, inv.getCosto());
+            ps.setString(5, inv.getPrecio());
+            ps.setString(6, inv.getProveedor());
+            ps.setInt(7, inv.getId());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
     }
 
     @Override
-    public boolean eliminar(int usu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminar(int id) {
+         String sql = "DELETE FROM productos WHERE id = ?";
+        Connection con = null; 
+        PreparedStatement ps = null; 
+
+        try {
+            con = cn.getConnection(); 
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate(); 
+            return rowsAffected > 0; 
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
     }
 
 }

@@ -37,7 +37,27 @@ public class cInventario extends HttpServlet {
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/inventario/mostrarInventario.jsp";
-        }
+        } else if (action.equalsIgnoreCase("guardar")) {
+            acceso = "vistas//inventario/guardarInventario.jsp";
+
+        } else if (action.equalsIgnoreCase("Agregar")) {
+            String codigo = request.getParameter("txtCodigo");
+            String descripcion = request.getParameter("txtDescripcion");
+            String stock = request.getParameter("txtStock");
+            String costo = request.getParameter("txtCosto");
+            String precio = request.getParameter("txtPrecio");
+            String proveedor =  request.getParameter("txtProveedor");
+
+            inv.setCodigo(codigo);
+            inv.setDescripcion(descripcion);
+            inv.setStock(stock);
+            inv.setCosto(costo);
+            inv.setPrecio(precio);
+            inv.setProveedor(proveedor);
+            invDao.guardar(inv);
+           acceso = "vistas/inventario/mostrarInventario.jsp";
+
+        } 
          RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }

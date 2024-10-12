@@ -88,7 +88,7 @@ public class controlador extends HttpServlet {
             dao.eliminar(id);
             acceso = "vistas/mostrar.jsp";
         } else if (action.equalsIgnoreCase("Buscar")) {
-            System.out.println("llegamos 2");
+            
             String busqueda = request.getParameter("txtBuscar");
             
             request.setAttribute("busqueda", busqueda);
