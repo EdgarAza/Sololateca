@@ -46,7 +46,7 @@ public class cInventario extends HttpServlet {
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
             String precio = request.getParameter("txtPrecio");
-            String proveedor = request.getParameter("txtProveedor");
+            String proveedor = "proveedor1 ";//request.getParameter("txtProveedor");
             String minimo = request.getParameter("txtMinimo");
 
             inv.setCodigo(codigo);
@@ -59,6 +59,37 @@ public class cInventario extends HttpServlet {
             invDao.guardar(inv);
             acceso = "vistas/inventario/mostrarInventario.jsp";
 
+        }else if (action.equalsIgnoreCase("editar")) {
+            request.setAttribute("idUsu", request.getParameter("id"));
+            acceso = "vistas/inventario/editarInventario.jsp";
+
+        }
+        else if (action.equalsIgnoreCase("Actualizar")) {
+            id = Integer.parseInt(request.getParameter("txtid"));
+              String codigo = request.getParameter("txtCodigo");
+            String descripcion = request.getParameter("txtDescripcion");
+            String stock = request.getParameter("txtStock");
+            String costo = request.getParameter("txtCosto");
+            String precio = request.getParameter("txtPrecio");
+            String proveedor = "proveedor1 ";//request.getParameter("txtProveedor");
+            String minimo = request.getParameter("txtMinimo");
+
+           inv.setCodigo(codigo);
+            inv.setDescripcion(descripcion);
+            inv.setStock(stock);
+            inv.setCosto(costo);
+            inv.setPrecio(precio);
+            inv.setProveedor(proveedor);
+            inv.setMinimo(minimo);
+            inv.setId(id);
+            invDao.editar(inv);
+
+          acceso = "vistas/inventario/mostrarInventario.jsp";
+        }
+        else if (action.equalsIgnoreCase("eliminar")) {
+            id = Integer.parseInt(request.getParameter("id"));
+            invDao.eliminar(id);
+            acceso = "vistas/inventario/mostrarInventario.jsp";
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);

@@ -132,8 +132,8 @@
                         <td><%=inv.getMinimo()%></td>
 
                         <td>
-                            <a href="controlador?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="controlador?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
+                            <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
+                            <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
                         </td>
 
                     </tr>
