@@ -23,17 +23,17 @@ public class cInventario extends HttpServlet {
     int id;
     inventario inv = new inventario();
     inventarioDAO invDao = new inventarioDAO();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-         String acceso = "";
+        String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/inventario/mostrarInventario.jsp";
@@ -46,7 +46,8 @@ public class cInventario extends HttpServlet {
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
             String precio = request.getParameter("txtPrecio");
-            String proveedor =  request.getParameter("txtProveedor");
+            String proveedor = request.getParameter("txtProveedor");
+            String minimo = request.getParameter("txtMinimo");
 
             inv.setCodigo(codigo);
             inv.setDescripcion(descripcion);
@@ -54,11 +55,12 @@ public class cInventario extends HttpServlet {
             inv.setCosto(costo);
             inv.setPrecio(precio);
             inv.setProveedor(proveedor);
+            inv.setMinimo(minimo);
             invDao.guardar(inv);
-           acceso = "vistas/inventario/mostrarInventario.jsp";
+            acceso = "vistas/inventario/mostrarInventario.jsp";
 
-        } 
-         RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        }
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
 

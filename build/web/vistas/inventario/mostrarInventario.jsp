@@ -88,11 +88,11 @@
         <div class="tabla-madre">
 
             <form action="controlador" class="busqueda">                
-                    <label class="form-label">Busqueda Inteligente</label>
-                    <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
-                    <br>
-                     <input type="submit" class="btn btn-success" name="accion" value="Buscar">
-                    
+                <label class="form-label">Busqueda Inteligente</label>
+                <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
+                <br>
+                <input type="submit" class="btn btn-success" name="accion" value="Buscar">
+
             </form>
 
             <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
@@ -106,6 +106,7 @@
                         <th scope="col">Costo</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Provedoor</th>
+                        <th scope="col">Minimo</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -117,7 +118,7 @@
                     inventario inv = null;
                     while (iter.hasNext()) {
                         inv = iter.next();
-                      
+
                 %>
                 <tbody>
                     <tr>
@@ -128,6 +129,7 @@
                         <td><%=inv.getCosto()%></td>
                         <td><%=inv.getPrecio()%></td>
                         <td><%=inv.getProveedor()%></td>
+                        <td><%=inv.getMinimo()%></td>
 
                         <td>
                             <a href="controlador?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>

@@ -21,7 +21,7 @@
     <body>
 
         <form action="cInventario" class="formulario">
-        
+
             <div class="mb-3">
                 <label  class="form-label">Codigo</label>
                 <input type="text" class="form-control"  placeholder="Codigo" name="txtCodigo">
@@ -42,8 +42,13 @@
                 <label  class="form-label">Precio</label>
                 <input type="text" class="form-control"  placeholder="Precio" name="txtPrecio">
             </div>
-            
-                <div class="mb-3">
+            <div class="mb-3">
+                <label  class="form-label">Minimo</label>
+                <input type="number" class="form-control"  placeholder="Minimo" name="txtMinimo">
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label">Proveedor</label>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Proveedor</option>
                     <option value="Proveedor1">Proveedor1</option>

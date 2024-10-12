@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo;
 
 /**
@@ -17,11 +14,12 @@ public class inventario {
     private String costo;
     private String precio;
     private String proveedor;
+    private String minimo;
 
     public inventario() {
     }
 
-    public inventario(int id, String codigo, String descripcion, String stock, String costo, String precio, String proveedor) {
+    public inventario(int id, String codigo, String descripcion, String stock, String costo, String precio, String proveedor, String minimo) {
         this.id = id;
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -29,6 +27,7 @@ public class inventario {
         this.costo = costo;
         this.precio = precio;
         this.proveedor = proveedor;
+        this.minimo = minimo;
     }
 
     public int getId() {
@@ -86,8 +85,14 @@ public class inventario {
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
-    
-    
-    
-    
+
+    public String getMinimo() {
+        return minimo;
+    }
+
+    public void setMinimo(String minimo) {
+        this.minimo = minimo;
+    }
+
+  
 }
