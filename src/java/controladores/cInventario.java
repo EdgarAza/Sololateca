@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import configuracion.conexion;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.inventario;
 import modeloDAO.inventarioDAO;
+import reportes.reportesInventario;
 
 /**
  *
@@ -23,6 +25,8 @@ public class cInventario extends HttpServlet {
     int id;
     inventario inv = new inventario();
     inventarioDAO invDao = new inventarioDAO();
+       conexion con = new conexion();
+            reportesInventario reportes = new reportesInventario(con.getConnection());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,14 +63,13 @@ public class cInventario extends HttpServlet {
             invDao.guardar(inv);
             acceso = "vistas/inventario/mostrarInventario.jsp";
 
-        }else if (action.equalsIgnoreCase("editar")) {
+        } else if (action.equalsIgnoreCase("editar")) {
             request.setAttribute("idUsu", request.getParameter("id"));
             acceso = "vistas/inventario/editarInventario.jsp";
 
-        }
-        else if (action.equalsIgnoreCase("Actualizar")) {
+        } else if (action.equalsIgnoreCase("Actualizar")) {
             id = Integer.parseInt(request.getParameter("txtid"));
-              String codigo = request.getParameter("txtCodigo");
+            String codigo = request.getParameter("txtCodigo");
             String descripcion = request.getParameter("txtDescripcion");
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
@@ -74,7 +77,7 @@ public class cInventario extends HttpServlet {
             String proveedor = "proveedor1 ";//request.getParameter("txtProveedor");
             String minimo = request.getParameter("txtMinimo");
 
-           inv.setCodigo(codigo);
+            inv.setCodigo(codigo);
             inv.setDescripcion(descripcion);
             inv.setStock(stock);
             inv.setCosto(costo);
@@ -84,12 +87,23 @@ public class cInventario extends HttpServlet {
             inv.setId(id);
             invDao.editar(inv);
 
-          acceso = "vistas/inventario/mostrarInventario.jsp";
-        }
-        else if (action.equalsIgnoreCase("eliminar")) {
+            acceso = "vistas/inventario/mostrarInventario.jsp";
+        } else if (action.equalsIgnoreCase("eliminar")) {
             id = Integer.parseInt(request.getParameter("id"));
             invDao.eliminar(id);
             acceso = "vistas/inventario/mostrarInventario.jsp";
+        } else if (action.equalsIgnoreCase("Inventario")) {
+            reportes.InventarioCompleto();
+             acceso = "vistas/inventario/mostrarInventario.jsp";
+
+        } else if (action.equalsIgnoreCase("Minimo")) {         
+            reportes.InventarioMinimo();
+             acceso = "vistas/inventario/mostrarInventario.jsp";
+
+        }else if (action.equalsIgnoreCase("Existencia")) {         
+            reportes.InventarioExistencia();
+             acceso = "vistas/inventario/mostrarInventario.jsp";
+
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);

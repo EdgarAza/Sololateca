@@ -1,11 +1,14 @@
 
 
+<%@page import="reportes.reporteInventario"%>
+<%@page import="configuracion.conexion"%>
 <%@page import="modelo.inventario"%>
 <%@page import="modeloDAO.inventarioDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +20,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <style>
             .tabla-madre {
+                margin-top: 2%;
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+
+            .form-reportes {
                 margin-top: 2%;
                 margin-left: 3%;
                 margin-right: 3%;
@@ -35,6 +44,18 @@
             .fa-pencil{
                 color:coral;
             }
+
+            body {
+
+                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0;
+                height: 100vh;
+                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
+            }
+
         </style>
 
 
@@ -64,7 +85,7 @@
                                 Datos
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Productos</a></li>
+                                <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
                                 <li><a class="dropdown-item" href="#">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="#">Clientes</a></li>
                             </ul>
@@ -75,7 +96,7 @@
                                 Configuracion
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                                <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
                                 <li><a class="dropdown-item" href="#">Reportes</a></li>
                                 <li><a class="dropdown-item" href="#">Backup</a></li>
                             </ul>
@@ -86,14 +107,6 @@
             </div>
         </nav>
         <div class="tabla-madre">
-
-            <form action="controlador" class="busqueda">                
-                <label class="form-label">Busqueda Inteligente</label>
-                <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
-                <br>
-                <input type="submit" class="btn btn-success" name="accion" value="Buscar">
-
-            </form>
 
             <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <table class="table table-striped">
@@ -142,6 +155,17 @@
 
             </table>
         </div>
+
+        <div class="form-reportes">
+            <form action="cInventario" >       
+                <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
+                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
+                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
+
+            </form>
+        </div>
+
+
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>

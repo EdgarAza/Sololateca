@@ -39,6 +39,16 @@
             .fa-pencil{
                 color:coral;
             }
+            body {
+
+                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0;
+                height: 100vh;
+                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
+            }
         </style>
 
 
@@ -68,7 +78,7 @@
                                 Datos
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Productos</a></li>
+                                <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
                                 <li><a class="dropdown-item" href="#">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="#">Clientes</a></li>
                             </ul>
@@ -79,7 +89,7 @@
                                 Configuracion
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                                <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
                                 <li><a class="dropdown-item" href="#">Reportes</a></li>
                                 <li><a class="dropdown-item" href="#">Backup</a></li>
                             </ul>
@@ -92,11 +102,11 @@
         <div class="tabla-madre">
 
             <form action="controlador" class="busqueda">                
-                    <label class="form-label">Busqueda Inteligente</label>
-                    <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
-                    <br>
-                     <input type="submit" class="btn btn-success" name="accion" value="Buscar">
-                    
+                <label class="form-label">Busqueda Inteligente</label>
+                <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
+                <br>
+                <input type="submit" class="btn btn-success" name="accion" value="Buscar">
+
             </form>
 
             <a href="controlador?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>

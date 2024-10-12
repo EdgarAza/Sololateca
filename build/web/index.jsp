@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <a href="cInventario?accion=mostrar">Lista de usuarios</a>
+     <a href="cInventario?accion=mostrar">Inciar</a>
     </body>
 </html>

@@ -34,6 +34,16 @@
             .fa-pencil{
                 color:coral;
             }
+              body {
+               
+                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0;
+                height: 100vh;
+                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
+            }
         </style>
 
 
