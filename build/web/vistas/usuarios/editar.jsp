@@ -4,6 +4,7 @@
     Author     : DANIELS SYSTEMS
 --%>
 
+<%@page import="configuracion.encriptar"%>
 <%@page import="modelo.usuarios"%>
 <%@page import="modeloDAO.usuariosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,36 +14,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-      <style>
+
+        <style>
             .formulario {
                 margin-bottom: 2%;
                 margin-top: 5%;
                 margin-left: 25%;
                 margin-right: 25%;
-                  body {
-               
-                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                margin: 0;
-                height: 100vh;
-                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
-            }
+                body {
+
+                    background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    margin: 0;
+                    height: 100vh;
+                    color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
+                }
             }
 
         </style>
-    
+
     </head>
     <body>
-          <%
+        <%
             usuariosDAO dao = new usuariosDAO();
-            int id =  Integer.parseInt((String)request.getAttribute("idUsu"));
-            usuarios usu = (usuarios)dao.llenarCampos(id);
-            
+            int id = Integer.parseInt((String) request.getAttribute("idUsu"));
+            usuarios usu = (usuarios) dao.llenarCampos(id);
 
-            %>
+
+        %>
         <form action="controlador"  class="formulario">
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
@@ -55,6 +56,25 @@
                     <option value="Administrador" </option>
                     <option value="Vendedor"</option>
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="dpi" class="form-label">Usuario</label>
+                <input type="text" id="dpi" name="txtUsuario" class="form-control" value="<%=usu.getUsuario()%>">
+            </div>
+            <div class="mb-3">
+                <label for="dpi" class="form-label">Clave</label>
+                <%
+                    String encriptado = "";
+                    String clave = usu.getClave();
+                    encriptar encri = new encriptar();
+                    try {
+                        encriptado = encri.desencriptar(clave);
+                    } catch (Exception ex) {
+
+                    }
+                %>
+                <input type="text" id="dpi" name="txtClave" class="form-control" value="<%=encriptado%>">
             </div>
 
             <div class="mb-3">
@@ -90,6 +110,6 @@
             <button type="submit" class="btn btn-success" name="accion" value="Actualizar">Actualizar</button>
             <a href="controlador?accion=mostrar" class="btn btn-secondary">Regresar</a>
         </form>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

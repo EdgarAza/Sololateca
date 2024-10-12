@@ -13,6 +13,8 @@ public class usuarios {
     
      private int id;
     private String rol;
+    private String usuario;
+    private String clave;
     private String dpi;
     private String nombres;
     private String apellidos;
@@ -23,9 +25,11 @@ public class usuarios {
     public usuarios() {
     }
 
-    public usuarios(int id, String rol, String dpi, String nombres, String apellidos, String telefono, String direccion, String estado) {
+    public usuarios(int id, String rol, String usuario, String clave, String dpi, String nombres, String apellidos, String telefono, String direccion, String estado) {
         this.id = id;
         this.rol = rol;
+        this.usuario = usuario;
+        this.clave = clave;
         this.dpi = dpi;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -48,6 +52,22 @@ public class usuarios {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getDpi() {
@@ -97,6 +117,8 @@ public class usuarios {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+   
     
     
     

@@ -1,13 +1,15 @@
+<%-- 
+    Document   : mostrar
+    Created on : 18/09/2024, 22:02:54
+    Author     : DANIELS SYSTEMS
+--%>
 
-
-<%@page import="configuracion.conexion"%>
-<%@page import="modelo.inventario"%>
-<%@page import="modeloDAO.inventarioDAO"%>
+<%@page import="modeloDAO.BusquedaUsuarioDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-
+<%@page import="modelo.usuarios"%>
+<%@page import="modeloDAO.usuariosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,12 +26,11 @@
                 margin-right: 3%;
             }
 
-            .form-reportes {
+            .form-reportes{
                 margin-top: 2%;
                 margin-left: 3%;
                 margin-right: 3%;
             }
-
             .busqueda{
                 margin-top: 2%;
                 margin-right: 70%;
@@ -43,7 +44,6 @@
             .fa-pencil{
                 color:coral;
             }
-
             body {
 
                 background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
@@ -105,8 +105,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                  <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                    <li> <a class="dropdown-item" href="">Backup</a></li>
+                                   <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
+                                <li><a class="dropdown-item" href="#">Backup</a></li>
                             </ul>
                         </li>
 
@@ -114,68 +114,74 @@
                 </div>
             </div>
         </nav>
-        <h1>Inventario</h1>
+        <h1>Usuarios</h1>
         <div class="tabla-madre">
 
-            <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
+            <form action="controlador" class="busqueda">                
+                <label class="form-label">Busqueda Inteligente</label>
+                <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
+                <br>
+                <input type="submit" class="btn btn-success" name="accion" value="Buscar">
+
+            </form>
+
+            <a href="controlador?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Costo</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Provedoor</th>
-                        <th scope="col">Minimo</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Clave</th>
+                        <th scope="col">Dpi</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
 
                 <%
-                    inventarioDAO dao = new inventarioDAO();
-                    List<inventario> list = dao.mostrar();
-                    Iterator<inventario> iter = list.iterator();
-                    inventario inv = null;
+                    usuariosDAO dao = new usuariosDAO();
+                    List<usuarios> list = dao.mostrar();
+                    Iterator<usuarios> iter = list.iterator();
+                    usuarios usu = null;
                     while (iter.hasNext()) {
-                        inv = iter.next();
-
+                        usu = iter.next();
+                        System.out.println(usu.getApellidos());
                 %>
                 <tbody>
                     <tr>
-                        <td><%=inv.getId()%></td>
-                        <td><%=inv.getCodigo()%></td>
-                        <td><%=inv.getDescripcion()%></td>
-                        <td><%=inv.getStock()%></td>
-                        <td><%=inv.getCosto()%></td>
-                        <td><%=inv.getPrecio()%></td>
-                        <td><%=inv.getProveedor()%></td>
-                        <td><%=inv.getMinimo()%></td>
-
+                        <td><%=usu.getId()%></td>
+                        <td><%=usu.getRol()%></td>
+                        <td><%=usu.getUsuario()%></td>
+                        <td><%=usu.getClave()%></td>
+                        <td><%=usu.getDpi()%></td>
+                        <td><%=usu.getNombres()%></td>
+                        <td><%=usu.getApellidos()%></td>
+                        <td><%=usu.getTelefono()%></td>
+                        <td><%=usu.getDireccion()%></td>
+                        <td><%=usu.getEstado()%></td>
                         <td>
-                            <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
+                            <a href="controlador?accion=editar&id=<%=usu.getId()%>" class="fa-solid fa-pencil"></a>
+                            <a href="controlador?accion=eliminar&id=<%=usu.getId()%>"class="fa-solid fa-trash"></a>
                         </td>
 
                     </tr>
                     <%}%>
                 </tbody>
-
             </table>
         </div>
-
         <div class="form-reportes">
-            <form action="cInventario" >       
-                <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
-                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
-                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
+            <form action="controlador" >       
+                <input type="submit" class="btn btn-warning" name="accion" value="Usuarios">
+                <input type="submit" class="btn btn-warning" name="accion" value="Activos">
+                <input type="submit" class="btn btn-warning" name="accion" value="Inactivos">
 
             </form>
         </div>
-
-
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

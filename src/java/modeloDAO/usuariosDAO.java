@@ -38,6 +38,8 @@ public class usuariosDAO implements crudUsuarios {
                 usuarios usu = new usuarios();
                 usu.setId(rs.getInt("id"));
                 usu.setRol(rs.getString("rol"));
+                usu.setUsuario(rs.getString("usuario"));
+                usu.setClave(rs.getString("clave"));
                 usu.setDpi(rs.getString("dpi"));
                 usu.setNombres(rs.getString("nombres"));
                 usu.setApellidos(rs.getString("apellidos"));
@@ -60,11 +62,13 @@ public class usuariosDAO implements crudUsuarios {
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id); 
+            ps.setInt(1, id);
             rs = ps.executeQuery();
-            if (rs.next()) { 
+            if (rs.next()) {
                 usu.setId(rs.getInt("id"));
                 usu.setRol(rs.getString("rol"));
+                usu.setUsuario(rs.getString("usuario"));
+                usu.setClave(rs.getString("clave"));
                 usu.setDpi(rs.getString("dpi"));
                 usu.setNombres(rs.getString("nombres"));
                 usu.setApellidos(rs.getString("apellidos"));
@@ -81,17 +85,19 @@ public class usuariosDAO implements crudUsuarios {
 
     @Override
     public boolean guardar(usuarios usu) {
-        String sql = "INSERT INTO usuarios (rol,dpi,nombres,apellidos,telefono, direccion, estado) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (rol,usuario,clave,dpi,nombres,apellidos,telefono, direccion, estado) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, usu.getRol());
-            ps.setString(2, usu.getDpi());
-            ps.setString(3, usu.getNombres());
-            ps.setString(4, usu.getApellidos());
-            ps.setString(5, usu.getTelefono());
-            ps.setString(6, usu.getDireccion());
-            ps.setString(7, usu.getEstado());
+            ps.setString(2, usu.getUsuario());
+            ps.setString(3, usu.getClave());
+            ps.setString(4, usu.getDpi());
+            ps.setString(5, usu.getNombres());
+            ps.setString(6, usu.getApellidos());
+            ps.setString(7, usu.getTelefono());
+            ps.setString(8, usu.getDireccion());
+            ps.setString(9, usu.getEstado());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -102,18 +108,20 @@ public class usuariosDAO implements crudUsuarios {
 
     @Override
     public boolean editar(usuarios usu) {
-        String sql = "UPDATE usuarios SET rol = ?, dpi = ?, nombres = ?, apellidos = ?, telefono = ?, direccion = ?, estado = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET rol = ?, usuario=?, clave=?, dpi = ?, nombres = ?, apellidos = ?, telefono = ?, direccion = ?, estado = ? WHERE id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, usu.getRol());
-            ps.setString(2, usu.getDpi());
-            ps.setString(3, usu.getNombres());
-            ps.setString(4, usu.getApellidos());
-            ps.setString(5, usu.getTelefono());
-            ps.setString(6, usu.getDireccion());
-            ps.setString(7, usu.getEstado());
-            ps.setInt(8, usu.getId());
+             ps.setString(2, usu.getUsuario());
+            ps.setString(3, usu.getClave());
+            ps.setString(4, usu.getDpi());
+            ps.setString(5, usu.getNombres());
+            ps.setString(6, usu.getApellidos());
+            ps.setString(7, usu.getTelefono());
+            ps.setString(8, usu.getDireccion());
+            ps.setString(9, usu.getEstado());
+            ps.setInt(10, usu.getId());
 
             ps.execute();
             return true;
@@ -126,15 +134,15 @@ public class usuariosDAO implements crudUsuarios {
     @Override
     public boolean eliminar(int id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
-        Connection con = null; 
-        PreparedStatement ps = null; 
+        Connection con = null;
+        PreparedStatement ps = null;
 
         try {
-            con = cn.getConnection(); 
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            int rowsAffected = ps.executeUpdate(); 
-            return rowsAffected > 0; 
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println(e.toString());
             return false;

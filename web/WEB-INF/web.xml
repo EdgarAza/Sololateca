@@ -12,6 +12,14 @@
         <servlet-name>cInventario</servlet-name>
         <servlet-class>controladores.cInventario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cReportes</servlet-name>
+        <servlet-class>controladores.cReportes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cBakcup</servlet-name>
+        <servlet-class>controladores.cBackup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -23,5 +31,13 @@
     <servlet-mapping>
         <servlet-name>cInventario</servlet-name>
         <url-pattern>/cInventario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cReportes</servlet-name>
+        <url-pattern>/cReportes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cBakcup</servlet-name>
+        <url-pattern>/cBakcup</url-pattern>
     </servlet-mapping>
 </web-app>

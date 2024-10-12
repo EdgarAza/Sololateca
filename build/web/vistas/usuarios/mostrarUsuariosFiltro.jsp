@@ -110,6 +110,8 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Rol</th>
+                         <th scope="col">Rol</th>
+                        <th scope="col">Usuario</th>
                         <th scope="col">Dpi</th>
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
@@ -134,6 +136,8 @@
                     <tr>
                         <td><%=usu.getId()%></td>
                         <td><%=usu.getRol()%></td>
+                         <td><%=usu.getUsuario()%></td>
+                        <td><%=usu.getClave()%></td>
                         <td><%=usu.getDpi()%></td>
                         <td><%=usu.getNombres()%></td>
                         <td><%=usu.getApellidos()%></td>

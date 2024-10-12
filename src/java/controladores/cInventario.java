@@ -12,9 +12,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import modelo.inventario;
 import modeloDAO.inventarioDAO;
 import reportes.reportesInventario;
+
 
 /**
  *
@@ -27,7 +30,7 @@ public class cInventario extends HttpServlet {
     inventarioDAO invDao = new inventarioDAO();
     conexion con = new conexion();
     reportesInventario reportes = new reportesInventario(con.getConnection());
-
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -105,7 +108,7 @@ public class cInventario extends HttpServlet {
             acceso = "vistas/inventario/mostrarInventario.jsp";
 
         }
-        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+       RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
 

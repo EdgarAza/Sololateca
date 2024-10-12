@@ -20,30 +20,14 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <style>
-            .tabla-madre {
+            
+             .form-reportes {
                 margin-top: 2%;
                 margin-left: 3%;
                 margin-right: 3%;
+                 text-align: center;
             }
-
-            .form-reportes{
-                margin-top: 2%;
-                margin-left: 3%;
-                margin-right: 3%;
-            }
-            .busqueda{
-                margin-top: 2%;
-                margin-right: 70%;
-                margin-bottom: 3%;
-            }
-
-            .fa-trash{
-                color: red;
-            }
-
-            .fa-pencil{
-                color:coral;
-            }
+            
             body {
 
                 background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
@@ -63,6 +47,16 @@
                     2px -2px 0 black,
                     -2px  2px 0 black,
                     2px  2px 0 black;
+            }
+              h2 {
+                text-align: center;        /* Centrar el texto */
+                color: white;              /* Color del texto */
+                font-size: 2em;          /* Tamaño de la letra */
+                text-shadow:
+                    -1px -1px 0 black,
+                    1px -1px 0 black,
+                    -1px  1px 0 black,
+                    1px  1px 0 black;
             }
         </style>
 
@@ -105,7 +99,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                <li><a class="dropdown-item" href="#">Reportes</a></li>
+                                    <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
                                 <li><a class="dropdown-item" href="#">Backup</a></li>
                             </ul>
                         </li>
@@ -114,67 +108,21 @@
                 </div>
             </div>
         </nav>
-        <h1>Usuarios</h1>
-        <div class="tabla-madre">
-
-            <form action="controlador" class="busqueda">                
-                <label class="form-label">Busqueda Inteligente</label>
-                <input type="text" id="buscar" name="txtBuscar" class="form-control" placeholder="Buscar...">
-                <br>
-                <input type="submit" class="btn btn-success" name="accion" value="Buscar">
-
-            </form>
-
-            <a href="controlador?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Dpi</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-
-                <%
-                    usuariosDAO dao = new usuariosDAO();
-                    List<usuarios> list = dao.mostrar();
-                    Iterator<usuarios> iter = list.iterator();
-                    usuarios usu = null;
-                    while (iter.hasNext()) {
-                        usu = iter.next();
-                        System.out.println(usu.getApellidos());
-                %>
-                <tbody>
-                    <tr>
-                        <td><%=usu.getId()%></td>
-                        <td><%=usu.getRol()%></td>
-                        <td><%=usu.getDpi()%></td>
-                        <td><%=usu.getNombres()%></td>
-                        <td><%=usu.getApellidos()%></td>
-                        <td><%=usu.getTelefono()%></td>
-                        <td><%=usu.getDireccion()%></td>
-                        <td><%=usu.getEstado()%></td>
-                        <td>
-                            <a href="controlador?accion=editar&id=<%=usu.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="controlador?accion=eliminar&id=<%=usu.getId()%>"class="fa-solid fa-trash"></a>
-                        </td>
-
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
-        </div>
+        <h1>Reportes</h1>
+         <h2>Reportes Usuarios</h2>
         <div class="form-reportes">
-            <form action="controlador" >       
+            <form action="cReportes" >       
                 <input type="submit" class="btn btn-warning" name="accion" value="Usuarios">
                 <input type="submit" class="btn btn-warning" name="accion" value="Activos">
                 <input type="submit" class="btn btn-warning" name="accion" value="Inactivos">
+
+            </form>
+               <h2>Reportes Inventario</h2>
+                <div class="form-reportes">
+            <form action="cReportes" >       
+               <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
+                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
+                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
 
             </form>
         </div>

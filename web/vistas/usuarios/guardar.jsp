@@ -46,10 +46,20 @@
                 </select>
             </div>
 
+             <div class="mb-3">
+                <label  class="form-label">Usuario</label>
+                <input type="text" class="form-control"  placeholder="Usuario" name="txtUsuario">
+            </div>
+            
+             <div class="mb-3">
+                <label  class="form-label">Clave</label>
+                <input type="text" class="form-control"  placeholder="Clave" name="txtClave">
+            </div>
             <div class="mb-3">
                 <label  class="form-label">DPI</label>
                 <input type="text" class="form-control"  placeholder="DPI" name="txtDpi">
             </div>
+            
             <div class="mb-3">
                 <label  class="form-label">Nombres</label>
                 <input type="text" class="form-control"  placeholder="Nombres" name="txtNombres">

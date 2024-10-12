@@ -5,6 +5,7 @@
 package controladores;
 
 import configuracion.conexion;
+import configuracion.encriptar;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,10 +13,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.usuarios;
 import modeloDAO.usuariosDAO;
 import reportes.reportesUsuarios;
-
 
 /**
  *
@@ -26,8 +28,9 @@ public class controlador extends HttpServlet {
     usuariosDAO dao = new usuariosDAO();
     usuarios usu = new usuarios();
     int id;
-conexion con = new conexion();
+    conexion con = new conexion();
     reportesUsuarios reportes = new reportesUsuarios(con.getConnection());
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -39,20 +42,31 @@ conexion con = new conexion();
         String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
-            acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
         } else if (action.equalsIgnoreCase("guardar")) {
-            acceso = "vistas/guardar.jsp";
+            acceso = "vistas/usuarios/guardar.jsp";
 
         } else if (action.equalsIgnoreCase("Agregar")) {
             String rol = "ADMIN";//request.getParameter("txtRol");
+            String usuario = request.getParameter("txtUsuario");
+            String clave = request.getParameter("txtClave");
             String dpi = request.getParameter("txtDpi");
             String nombres = request.getParameter("txtNombres");
             String apellidos = request.getParameter("txtApellidos");
             String telefono = request.getParameter("txtTelefono");
             String direccion = request.getParameter("txtDireccion");
             String estado = "ACTIVO";
+            
+            String encriptado = "";
+            encriptar encri = new encriptar();
+            try {
+                encriptado = encri.encriptar(clave);
+            } catch (Exception ex) {
 
+            }
             usu.setRol(rol);
+            usu.setUsuario(usuario);
+            usu.setClave(encriptado);
             usu.setDpi(dpi);
             usu.setNombres(nombres);
             usu.setApellidos(apellidos);
@@ -60,15 +74,17 @@ conexion con = new conexion();
             usu.setDireccion(direccion);
             usu.setEstado(estado);
             dao.guardar(usu);
-            acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
 
         } else if (action.equalsIgnoreCase("editar")) {
             request.setAttribute("idUsu", request.getParameter("id"));
-            acceso = "vistas/editar.jsp";
+            acceso = "vistas/usuarios/editar.jsp";
 
         } else if (action.equalsIgnoreCase("Actualizar")) {
             id = Integer.parseInt(request.getParameter("txtid"));
             String rol = "ADMIN";//request.getParameter("txtRol");
+            String usuario = request.getParameter("txtUsuario");
+            String clave = request.getParameter("txtClave");
             String dpi = request.getParameter("txtDpi");
             String nombres = request.getParameter("txtNombres");
             String apellidos = request.getParameter("txtApellidos");
@@ -77,6 +93,8 @@ conexion con = new conexion();
             String estado = "ACTIVO";
 
             usu.setRol(rol);
+            usu.setUsuario(usuario);
+            usu.setClave(clave);
             usu.setDpi(dpi);
             usu.setNombres(nombres);
             usu.setApellidos(apellidos);
@@ -86,30 +104,29 @@ conexion con = new conexion();
             usu.setId(id);
             dao.editar(usu);
 
-            acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
         } else if (action.equalsIgnoreCase("eliminar")) {
             id = Integer.parseInt(request.getParameter("id"));
             dao.eliminar(id);
-            acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
         } else if (action.equalsIgnoreCase("Usuarios")) {
             reportes.UsuariosCompletos();
-             acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
 
-        } else if (action.equalsIgnoreCase("Activos")) {         
+        } else if (action.equalsIgnoreCase("Activos")) {
             reportes.UsuariosActivos();
-             acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
 
-        }else if (action.equalsIgnoreCase("Inactivos")) {         
+        } else if (action.equalsIgnoreCase("Inactivos")) {
             reportes.UsuariosInactivos();
-            acceso = "vistas/mostrar.jsp";
+            acceso = "vistas/usuarios/mostrar.jsp";
 
-        }
-        else if (action.equalsIgnoreCase("Buscar")) {            
+        } else if (action.equalsIgnoreCase("Buscar")) {
             String busqueda = request.getParameter("txtBuscar");
             request.setAttribute("busqueda", busqueda);
-            acceso = "vistas/mostrarUsuariosFiltro.jsp";
+            acceso = "vistas/usuarios/mostrarUsuariosFiltro.jsp";
         }
-        
+
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
