@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import configuracion.conexion;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.usuarios;
 import modeloDAO.usuariosDAO;
+import reportes.reportesUsuarios;
+
 
 /**
  *
@@ -23,7 +26,8 @@ public class controlador extends HttpServlet {
     usuariosDAO dao = new usuariosDAO();
     usuarios usu = new usuarios();
     int id;
-
+conexion con = new conexion();
+    reportesUsuarios reportes = new reportesUsuarios(con.getConnection());
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -87,12 +91,22 @@ public class controlador extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
             dao.eliminar(id);
             acceso = "vistas/mostrar.jsp";
-        } else if (action.equalsIgnoreCase("Buscar")) {
-            
-            String busqueda = request.getParameter("txtBuscar");
-            
-            request.setAttribute("busqueda", busqueda);
+        } else if (action.equalsIgnoreCase("Usuarios")) {
+            reportes.UsuariosCompletos();
+             acceso = "vistas/mostrar.jsp";
 
+        } else if (action.equalsIgnoreCase("Activos")) {         
+            reportes.UsuariosActivos();
+             acceso = "vistas/mostrar.jsp";
+
+        }else if (action.equalsIgnoreCase("Inactivos")) {         
+            reportes.UsuariosInactivos();
+            acceso = "vistas/mostrar.jsp";
+
+        }
+        else if (action.equalsIgnoreCase("Buscar")) {            
+            String busqueda = request.getParameter("txtBuscar");
+            request.setAttribute("busqueda", busqueda);
             acceso = "vistas/mostrarUsuariosFiltro.jsp";
         }
         

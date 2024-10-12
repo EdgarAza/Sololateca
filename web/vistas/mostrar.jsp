@@ -26,6 +26,11 @@
                 margin-right: 3%;
             }
 
+            .form-reportes{
+                margin-top: 2%;
+                margin-left: 3%;
+                margin-right: 3%;
+            }
             .busqueda{
                 margin-top: 2%;
                 margin-right: 70%;
@@ -48,6 +53,16 @@
                 margin: 0;
                 height: 100vh;
                 color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
+            }
+            h1 {
+                text-align: center;        /* Centrar el texto */
+                color: white;              /* Color del texto */
+                font-size: 3.5em;          /* Tamaño de la letra */
+                text-shadow:
+                    -2px -2px 0 black,
+                    2px -2px 0 black,
+                    -2px  2px 0 black,
+                    2px  2px 0 black;
             }
         </style>
 
@@ -99,6 +114,7 @@
                 </div>
             </div>
         </nav>
+        <h1>Usuarios</h1>
         <div class="tabla-madre">
 
             <form action="controlador" class="busqueda">                
@@ -152,10 +168,16 @@
                     </tr>
                     <%}%>
                 </tbody>
-
             </table>
         </div>
+        <div class="form-reportes">
+            <form action="controlador" >       
+                <input type="submit" class="btn btn-warning" name="accion" value="Usuarios">
+                <input type="submit" class="btn btn-warning" name="accion" value="Activos">
+                <input type="submit" class="btn btn-warning" name="accion" value="Inactivos">
 
+            </form>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

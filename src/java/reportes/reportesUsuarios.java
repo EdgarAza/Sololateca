@@ -27,15 +27,15 @@ import java.time.format.DateTimeFormatter;
  *
  * @author DANIELS SYSTEMS
  */
-public class reportesInventario {
+public class reportesUsuarios {
 
     private Connection connection;
 
-    public reportesInventario(Connection connection) {
+    public reportesUsuarios(Connection connection) {
         this.connection = connection;
     }
 
-    public void InventarioCompleto() {
+    public void UsuariosCompletos() {
         DateTimeFormatter anio = DateTimeFormatter.ofPattern("yyyy");
         DateTimeFormatter dia = DateTimeFormatter.ofPattern("dd");
         DateTimeFormatter mes = DateTimeFormatter.ofPattern("MM");
@@ -50,7 +50,7 @@ public class reportesInventario {
             Font normals = new Font(Font.FontFamily.UNDEFINED, 10, Font.BOLD, BaseColor.BLACK);
             Font titulos = new Font(Font.FontFamily.UNDEFINED, 25, Font.BOLD, BaseColor.BLACK);
 
-            String rutaPDF = "C:\\reportes\\reporte_inventario" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
+            String rutaPDF = "C:\\reportes\\reporte_usuarios" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
             FileOutputStream archivo = new FileOutputStream(rutaPDF);
             Document doc = new Document(PageSize.A4);
             PdfWriter.getInstance(doc, archivo);
@@ -61,179 +61,53 @@ public class reportesInventario {
             //img.scalePercent(21);
             // doc.add(img);
 
-            doc.add(new Paragraph("INVENTARIO", titulos));
+            doc.add(new Paragraph("Usuarios", titulos));
             doc.add(new Paragraph("Fecha: " + fdia));
             doc.add(new Paragraph(" "));
 
             PdfPTable titulo = new PdfPTable(8);
             titulo.setWidthPercentage(100);
-            float[] comnom1 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
+            float[] comnom1 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
             titulo.setWidths(comnom1);
             titulo.addCell(new Phrase("No.", normals));
-            titulo.addCell(new Phrase("Codigo", normals));
-            titulo.addCell(new Phrase("Descripcion", normals));
-            titulo.addCell(new Phrase("Stock", normals));
-            titulo.addCell(new Phrase("Costo", normals));
-            titulo.addCell(new Phrase("Precio", normals));
-            titulo.addCell(new Phrase("Proveedor", normals));
-            titulo.addCell(new Phrase("Minimo", normals));
+            titulo.addCell(new Phrase("Rol", normals));
+            titulo.addCell(new Phrase("Dpi", normals));
+            titulo.addCell(new Phrase("Nombres", normals));
+            titulo.addCell(new Phrase("Apellidos", normals));
+            titulo.addCell(new Phrase("Telefono", normals));
+            titulo.addCell(new Phrase("Direccion", normals));
+            titulo.addCell(new Phrase("Estado", normals));
 
             doc.add(titulo);
 
             PdfPTable tablax = new PdfPTable(8);
             tablax.setWidthPercentage(100);
-            float[] comnom0 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
+            float[] comnom0 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
             tablax.setWidths(comnom0);
 
-            double totalCompra = 0.00, totalVenta = 0.00, totalPro = 0;
-
-            // Consultar los datos de la base de datos
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM productos");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
             int contador = 0;
             while (rs.next()) {
-                String vCodigo = rs.getString("codigo");
-                String vDescripcion = rs.getString("descripcion");
-                double vCantidad = rs.getDouble("stock");
-                double vCompra = rs.getDouble("costo");
-                double vPrecio = rs.getDouble("precio");
-                String vProveedor = rs.getString("proveedor");
-                String vMinimo = rs.getString("minimo");
+                String vRol = rs.getString("rol");
+                String vDpi = rs.getString("dpi");
+                String vNombres = rs.getString("nombres");
+                String vApellidos = rs.getString("apellidos");
+                String vTelefono = rs.getString("telefono");
+                String vDireccion = rs.getString("direccion");
+                String vEstado = rs.getString("estado");
                 contador++;
-
                 tablax.addCell(new Phrase(String.valueOf(contador), normal));
-                tablax.addCell(new Phrase(vCodigo, normal));
-                tablax.addCell(new Phrase(vDescripcion, normal));
-                tablax.addCell(new Phrase(String.valueOf(vCantidad), normal));
-                tablax.addCell(new Phrase("Q" + vCompra, normal));
-                tablax.addCell(new Phrase("Q" + vPrecio, normal));
-                tablax.addCell(new Phrase(vProveedor, normal));
-                tablax.addCell(new Phrase(vMinimo, normal));
-
-                totalCompra += vCompra;
-                totalVenta += vPrecio;
-                totalPro += vCantidad;
+                tablax.addCell(new Phrase(vRol, normal));
+                tablax.addCell(new Phrase(vDpi, normal));
+                tablax.addCell(new Phrase(vNombres, normal));
+                tablax.addCell(new Phrase(vApellidos, normal));
+                tablax.addCell(new Phrase(vTelefono, normal));
+                tablax.addCell(new Phrase(vDireccion, normal));
+                tablax.addCell(new Phrase(vEstado, normal));
             }
 
             doc.add(tablax);
-
-            Paragraph info = new Paragraph();
-            info.add(Chunk.NEWLINE);
-            info.add("Total de costo: Q." + totalCompra);
-            info.add("\nTotal de precio: Q." + totalVenta);
-            info.add("\nTotal de productos: " + totalPro);
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
-
-            doc.close();
-            archivo.close();
-
-            try {
-                File pdfFile = new File(rutaPDF);
-                Desktop.getDesktop().open(pdfFile);
-            } catch (Exception e) {
-                System.err.println("Error al abrir el PDF: " + e);
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error al generar el PDF: " + e);
-        }
-    }
-
-    public void InventarioMinimo() {
-        DateTimeFormatter anio = DateTimeFormatter.ofPattern("yyyy");
-        DateTimeFormatter dia = DateTimeFormatter.ofPattern("dd");
-        DateTimeFormatter mes = DateTimeFormatter.ofPattern("MM");
-        String fanio = anio.format(LocalDateTime.now());
-        String fdias = dia.format(LocalDateTime.now());
-        String fmes = mes.format(LocalDateTime.now());
-        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String fdia = fechaFormatter.format(LocalDateTime.now());
-
-        try {
-            Font normal = new Font(Font.FontFamily.UNDEFINED, 9, Font.NORMAL, BaseColor.BLACK);
-            Font normals = new Font(Font.FontFamily.UNDEFINED, 10, Font.BOLD, BaseColor.BLACK);
-            Font titulos = new Font(Font.FontFamily.UNDEFINED, 25, Font.BOLD, BaseColor.BLACK);
-
-            String rutaPDF = "C:\\reportes\\reporte_inventario_minimo" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
-            FileOutputStream archivo = new FileOutputStream(rutaPDF);
-            Document doc = new Document(PageSize.A4);
-            PdfWriter.getInstance(doc, archivo);
-            doc.open();
-            // Agregar imagen (ajusta la ruta según tu necesidad)
-            //  com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance("C:\\sistema\\recursos\\logoInventario.png");
-            // img.setAbsolutePosition(33f, 734f);
-            //img.scalePercent(21);
-            // doc.add(img);
-
-            doc.add(new Paragraph("INVENTARIO MINIMO", titulos));
-            doc.add(new Paragraph("Fecha: " + fdia));
-            doc.add(new Paragraph(" "));
-
-            PdfPTable titulo = new PdfPTable(8);
-            titulo.setWidthPercentage(100);
-            float[] comnom1 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
-            titulo.setWidths(comnom1);
-            titulo.addCell(new Phrase("No.", normals));
-            titulo.addCell(new Phrase("Codigo", normals));
-            titulo.addCell(new Phrase("Descripcion", normals));
-            titulo.addCell(new Phrase("Stock", normals));
-            titulo.addCell(new Phrase("Costo", normals));
-            titulo.addCell(new Phrase("Precio", normals));
-            titulo.addCell(new Phrase("Proveedor", normals));
-            titulo.addCell(new Phrase("Minimo", normals));
-
-            doc.add(titulo);
-
-            PdfPTable tablax = new PdfPTable(8);
-            tablax.setWidthPercentage(100);
-            float[] comnom0 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
-            tablax.setWidths(comnom0);
-
-            double totalCompra = 0.00, totalVenta = 0.00, totalPro = 0;
-
-            // Consultar los datos de la base de datos
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM productos");
-            int contador = 0;
-
-            while (rs.next()) {
-
-                String vCodigo = rs.getString("codigo");
-                String vDescripcion = rs.getString("descripcion");
-                double vCantidad = rs.getDouble("stock");
-                double vCompra = rs.getDouble("costo");
-                double vPrecio = rs.getDouble("precio");
-                String vProveedor = rs.getString("proveedor");
-                Double vMinimo = rs.getDouble("minimo");
-
-                if (vCantidad <= vMinimo) {
-                    contador++;
-                    tablax.addCell(new Phrase(String.valueOf(contador), normal));
-                    tablax.addCell(new Phrase(vCodigo, normal));
-                    tablax.addCell(new Phrase(vDescripcion, normal));
-                    tablax.addCell(new Phrase(String.valueOf(vCantidad), normal));
-                    tablax.addCell(new Phrase("Q" + vCompra, normal));
-                    tablax.addCell(new Phrase("Q" + vPrecio, normal));
-                    tablax.addCell(new Phrase(vProveedor, normal));
-                    tablax.addCell(new Phrase(String.valueOf(vMinimo), normal));
-
-                    totalCompra += vCompra;
-                    totalVenta += vPrecio;
-                    totalPro += vCantidad;
-                }
-
-            }
-
-            doc.add(tablax);
-
-            Paragraph info = new Paragraph();
-            info.add(Chunk.NEWLINE);
-            info.add("Total de costo: Q." + totalCompra);
-            info.add("\nTotal de precio: Q." + totalVenta);
-            info.add("\nTotal de productos: " + totalPro);
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
 
             doc.close();
             archivo.close();
@@ -250,7 +124,8 @@ public class reportesInventario {
         }
     }
     
-     public void InventarioExistencia() {
+    
+     public void UsuariosActivos() {
         DateTimeFormatter anio = DateTimeFormatter.ofPattern("yyyy");
         DateTimeFormatter dia = DateTimeFormatter.ofPattern("dd");
         DateTimeFormatter mes = DateTimeFormatter.ofPattern("MM");
@@ -265,7 +140,7 @@ public class reportesInventario {
             Font normals = new Font(Font.FontFamily.UNDEFINED, 10, Font.BOLD, BaseColor.BLACK);
             Font titulos = new Font(Font.FontFamily.UNDEFINED, 25, Font.BOLD, BaseColor.BLACK);
 
-            String rutaPDF = "C:\\reportes\\reporte_inventario_existencia" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
+            String rutaPDF = "C:\\reportes\\reporte_usuarios_activos" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
             FileOutputStream archivo = new FileOutputStream(rutaPDF);
             Document doc = new Document(PageSize.A4);
             PdfWriter.getInstance(doc, archivo);
@@ -276,74 +151,148 @@ public class reportesInventario {
             //img.scalePercent(21);
             // doc.add(img);
 
-            doc.add(new Paragraph("INVENTARIO EXISTENCIAS", titulos));
+            doc.add(new Paragraph("Usuarios Activos", titulos));
             doc.add(new Paragraph("Fecha: " + fdia));
             doc.add(new Paragraph(" "));
 
             PdfPTable titulo = new PdfPTable(8);
             titulo.setWidthPercentage(100);
-            float[] comnom1 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
+            float[] comnom1 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
             titulo.setWidths(comnom1);
             titulo.addCell(new Phrase("No.", normals));
-            titulo.addCell(new Phrase("Codigo", normals));
-            titulo.addCell(new Phrase("Descripcion", normals));
-            titulo.addCell(new Phrase("Stock", normals));
-            titulo.addCell(new Phrase("Costo", normals));
-            titulo.addCell(new Phrase("Precio", normals));
-            titulo.addCell(new Phrase("Proveedor", normals));
-            titulo.addCell(new Phrase("Minimo", normals));
+            titulo.addCell(new Phrase("Rol", normals));
+            titulo.addCell(new Phrase("Dpi", normals));
+            titulo.addCell(new Phrase("Nombres", normals));
+            titulo.addCell(new Phrase("Apellidos", normals));
+            titulo.addCell(new Phrase("Telefono", normals));
+            titulo.addCell(new Phrase("Direccion", normals));
+            titulo.addCell(new Phrase("Estado", normals));
 
             doc.add(titulo);
 
             PdfPTable tablax = new PdfPTable(8);
             tablax.setWidthPercentage(100);
-            float[] comnom0 = new float[]{10f, 18f, 53f, 15f, 18f, 18f, 22f, 15f};
+            float[] comnom0 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
             tablax.setWidths(comnom0);
 
-            double totalCompra = 0.00, totalVenta = 0.00, totalPro = 0;
-
-            // Consultar los datos de la base de datos
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM productos");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
             int contador = 0;
-
             while (rs.next()) {
-
-                String vCodigo = rs.getString("codigo");
-                String vDescripcion = rs.getString("descripcion");
-                double vCantidad = rs.getDouble("stock");
-                double vCompra = rs.getDouble("costo");
-                double vPrecio = rs.getDouble("precio");
-                String vProveedor = rs.getString("proveedor");
-                Double vMinimo = rs.getDouble("minimo");
-
-                if (vCantidad > 0) {
-                    contador++;
-                    tablax.addCell(new Phrase(String.valueOf(contador), normal));
-                    tablax.addCell(new Phrase(vCodigo, normal));
-                    tablax.addCell(new Phrase(vDescripcion, normal));
-                    tablax.addCell(new Phrase(String.valueOf(vCantidad), normal));
-                    tablax.addCell(new Phrase("Q" + vCompra, normal));
-                    tablax.addCell(new Phrase("Q" + vPrecio, normal));
-                    tablax.addCell(new Phrase(vProveedor, normal));
-                    tablax.addCell(new Phrase(String.valueOf(vMinimo), normal));
-
-                    totalCompra += vCompra;
-                    totalVenta += vPrecio;
-                    totalPro += vCantidad;
+                String vRol = rs.getString("rol");
+                String vDpi = rs.getString("dpi");
+                String vNombres = rs.getString("nombres");
+                String vApellidos = rs.getString("apellidos");
+                String vTelefono = rs.getString("telefono");
+                String vDireccion = rs.getString("direccion");
+                String vEstado = rs.getString("estado");
+                if(vEstado.equals("ACTIVO")){ 
+                   contador++;
+                tablax.addCell(new Phrase(String.valueOf(contador), normal));
+                tablax.addCell(new Phrase(vRol, normal));
+                tablax.addCell(new Phrase(vDpi, normal));
+                tablax.addCell(new Phrase(vNombres, normal));
+                tablax.addCell(new Phrase(vApellidos, normal));
+                tablax.addCell(new Phrase(vTelefono, normal));
+                tablax.addCell(new Phrase(vDireccion, normal));
+                tablax.addCell(new Phrase(vEstado, normal));
                 }
-
+             
             }
 
             doc.add(tablax);
 
-            Paragraph info = new Paragraph();
-            info.add(Chunk.NEWLINE);
-            info.add("Total de costo: Q." + totalCompra);
-            info.add("\nTotal de precio: Q." + totalVenta);
-            info.add("\nTotal de productos: " + totalPro);
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
+            doc.close();
+            archivo.close();
+
+            try {
+                File pdfFile = new File(rutaPDF);
+                Desktop.getDesktop().open(pdfFile);
+            } catch (Exception e) {
+                System.err.println("Error al abrir el PDF: " + e);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al generar el PDF: " + e);
+        }
+    }
+     
+      public void UsuariosInactivos() {
+        DateTimeFormatter anio = DateTimeFormatter.ofPattern("yyyy");
+        DateTimeFormatter dia = DateTimeFormatter.ofPattern("dd");
+        DateTimeFormatter mes = DateTimeFormatter.ofPattern("MM");
+        String fanio = anio.format(LocalDateTime.now());
+        String fdias = dia.format(LocalDateTime.now());
+        String fmes = mes.format(LocalDateTime.now());
+        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fdia = fechaFormatter.format(LocalDateTime.now());
+
+        try {
+            Font normal = new Font(Font.FontFamily.UNDEFINED, 9, Font.NORMAL, BaseColor.BLACK);
+            Font normals = new Font(Font.FontFamily.UNDEFINED, 10, Font.BOLD, BaseColor.BLACK);
+            Font titulos = new Font(Font.FontFamily.UNDEFINED, 25, Font.BOLD, BaseColor.BLACK);
+
+            String rutaPDF = "C:\\reportes\\reporte_usuarios_inactivos" + "_" + fdias + "-" + fmes + "-" + fanio + ".pdf";
+            FileOutputStream archivo = new FileOutputStream(rutaPDF);
+            Document doc = new Document(PageSize.A4);
+            PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            // Agregar imagen (ajusta la ruta según tu necesidad)
+            //  com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance("C:\\sistema\\recursos\\logoInventario.png");
+            // img.setAbsolutePosition(33f, 734f);
+            //img.scalePercent(21);
+            // doc.add(img);
+
+            doc.add(new Paragraph("Usuarios Inactivos", titulos));
+            doc.add(new Paragraph("Fecha: " + fdia));
+            doc.add(new Paragraph(" "));
+
+            PdfPTable titulo = new PdfPTable(8);
+            titulo.setWidthPercentage(100);
+            float[] comnom1 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
+            titulo.setWidths(comnom1);
+            titulo.addCell(new Phrase("No.", normals));
+            titulo.addCell(new Phrase("Rol", normals));
+            titulo.addCell(new Phrase("Dpi", normals));
+            titulo.addCell(new Phrase("Nombres", normals));
+            titulo.addCell(new Phrase("Apellidos", normals));
+            titulo.addCell(new Phrase("Telefono", normals));
+            titulo.addCell(new Phrase("Direccion", normals));
+            titulo.addCell(new Phrase("Estado", normals));
+
+            doc.add(titulo);
+
+            PdfPTable tablax = new PdfPTable(8);
+            tablax.setWidthPercentage(100);
+            float[] comnom0 = new float[]{10f, 18f, 30f, 38f, 38f, 20f, 35f, 20f};
+            tablax.setWidths(comnom0);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+            int contador = 0;
+            while (rs.next()) {
+                String vRol = rs.getString("rol");
+                String vDpi = rs.getString("dpi");
+                String vNombres = rs.getString("nombres");
+                String vApellidos = rs.getString("apellidos");
+                String vTelefono = rs.getString("telefono");
+                String vDireccion = rs.getString("direccion");
+                String vEstado = rs.getString("estado");
+                if(vEstado.equals("INACTIVO")){ 
+                   contador++;
+                tablax.addCell(new Phrase(String.valueOf(contador), normal));
+                tablax.addCell(new Phrase(vRol, normal));
+                tablax.addCell(new Phrase(vDpi, normal));
+                tablax.addCell(new Phrase(vNombres, normal));
+                tablax.addCell(new Phrase(vApellidos, normal));
+                tablax.addCell(new Phrase(vTelefono, normal));
+                tablax.addCell(new Phrase(vDireccion, normal));
+                tablax.addCell(new Phrase(vEstado, normal));
+                }
+             
+            }
+
+            doc.add(tablax);
 
             doc.close();
             archivo.close();

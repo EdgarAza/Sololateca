@@ -25,8 +25,8 @@ public class cInventario extends HttpServlet {
     int id;
     inventario inv = new inventario();
     inventarioDAO invDao = new inventarioDAO();
-       conexion con = new conexion();
-            reportesInventario reportes = new reportesInventario(con.getConnection());
+    conexion con = new conexion();
+    reportesInventario reportes = new reportesInventario(con.getConnection());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,15 +94,15 @@ public class cInventario extends HttpServlet {
             acceso = "vistas/inventario/mostrarInventario.jsp";
         } else if (action.equalsIgnoreCase("Inventario")) {
             reportes.InventarioCompleto();
-             acceso = "vistas/inventario/mostrarInventario.jsp";
+            acceso = "vistas/inventario/mostrarInventario.jsp";
 
-        } else if (action.equalsIgnoreCase("Minimo")) {         
+        } else if (action.equalsIgnoreCase("Minimo")) {
             reportes.InventarioMinimo();
-             acceso = "vistas/inventario/mostrarInventario.jsp";
+            acceso = "vistas/inventario/mostrarInventario.jsp";
 
-        }else if (action.equalsIgnoreCase("Existencia")) {         
+        } else if (action.equalsIgnoreCase("Existencia")) {
             reportes.InventarioExistencia();
-             acceso = "vistas/inventario/mostrarInventario.jsp";
+            acceso = "vistas/inventario/mostrarInventario.jsp";
 
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);

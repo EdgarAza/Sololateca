@@ -1,6 +1,5 @@
 
 
-<%@page import="reportes.reporteInventario"%>
 <%@page import="configuracion.conexion"%>
 <%@page import="modelo.inventario"%>
 <%@page import="modeloDAO.inventarioDAO"%>
@@ -55,7 +54,16 @@
                 height: 100vh;
                 color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
             }
-
+            h1 {
+                text-align: center;        /* Centrar el texto */
+                color: white;              /* Color del texto */
+                font-size: 3.5em;          /* Tamaño de la letra */
+                text-shadow:
+                    -2px -2px 0 black,
+                    2px -2px 0 black,
+                    -2px  2px 0 black,
+                    2px  2px 0 black;
+            }
         </style>
 
 
@@ -106,6 +114,7 @@
                 </div>
             </div>
         </nav>
+        <h1>Inventario</h1>
         <div class="tabla-madre">
 
             <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
