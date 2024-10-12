@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet>
+        <servlet-name>controlador</servlet-name>
+        <servlet-class>controladores.controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>busquedaUsuarios</servlet-name>
+        <servlet-class>controladores.busquedaUsuariosSV</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cInventario</servlet-name>
+        <servlet-class>controladores.cInventario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>controlador</servlet-name>
+        <url-pattern>/controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>busquedaUsuarios</servlet-name>
+        <url-pattern>/busquedaUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cInventario</servlet-name>
+        <url-pattern>/cInventario</url-pattern>
+    </servlet-mapping>
+</web-app>
