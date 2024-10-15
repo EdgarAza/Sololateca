@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuarios</title>
+        <title>Productos</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -64,6 +64,18 @@
                     -2px  2px 0 black,
                     2px  2px 0 black;
             }
+
+            .table-responsive {
+                max-height: 300px; /* Ajusta la altura según sea necesario */
+                overflow-y: auto; /* Activa el scrollbar vertical */
+            }
+
+            .table thead th {
+                position: sticky;
+                top: 0; /* Fija el encabezado en la parte superior */
+                background-color: white; /* Color de fondo para el encabezado */
+                z-index: 10; /* Asegura que esté por encima de otras filas */
+            }
         </style>
 
 
@@ -105,8 +117,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                  <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                    <li> <a class="dropdown-item" href="">Backup</a></li>
+                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
+                                <li> <a class="dropdown-item" href="">Backup</a></li>
                             </ul>
                         </li>
 
@@ -116,65 +128,65 @@
         </nav>
         <h1>Inventario</h1>
         <div class="tabla-madre">
-
             <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Costo</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Provedoor</th>
-                        <th scope="col">Minimo</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Costo</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Provedoor</th>
+                            <th scope="col">Minimo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
 
-                <%
-                    inventarioDAO dao = new inventarioDAO();
-                    List<inventario> list = dao.mostrar();
-                    Iterator<inventario> iter = list.iterator();
-                    inventario inv = null;
-                    while (iter.hasNext()) {
-                        inv = iter.next();
+                    <%
+                        inventarioDAO dao = new inventarioDAO();
+                        List<inventario> list = dao.mostrar();
+                        Iterator<inventario> iter = list.iterator();
+                        inventario inv = null;
+                        while (iter.hasNext()) {
+                            inv = iter.next();
 
-                %>
-                <tbody>
-                    <tr>
-                        <td><%=inv.getId()%></td>
-                        <td><%=inv.getCodigo()%></td>
-                        <td><%=inv.getDescripcion()%></td>
-                        <td><%=inv.getStock()%></td>
-                        <td><%=inv.getCosto()%></td>
-                        <td><%=inv.getPrecio()%></td>
-                        <td><%=inv.getProveedor()%></td>
-                        <td><%=inv.getMinimo()%></td>
+                    %>
+                    <tbody>
+                        <tr>
+                            <td><%=inv.getId()%></td>
+                            <td><%=inv.getCodigo()%></td>
+                            <td><%=inv.getDescripcion()%></td>
+                            <td><%=inv.getStock()%></td>
+                            <td><%=inv.getCosto()%></td>
+                            <td><%=inv.getPrecio()%></td>
+                            <td><%=inv.getProveedor()%></td>
+                            <td><%=inv.getMinimo()%></td>
 
-                        <td>
-                            <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
-                        </td>
+                            <td>
+                                <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
+                                <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
+                            </td>
 
-                    </tr>
-                    <%}%>
-                </tbody>
+                        </tr>
+                        <%}%>
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
+
+            <div class="form-reportes">
+                <form action="cInventario" >       
+                    <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
+                    <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
+                    <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
+
+                </form>
+            </div>
+
         </div>
-
-        <div class="form-reportes">
-            <form action="cInventario" >       
-                <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
-                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
-                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
-
-            </form>
-        </div>
-
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>

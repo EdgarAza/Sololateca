@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuarios</title>
+        <title>Proveedores</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -61,6 +61,18 @@
                     -2px  2px 0 black,
                     2px  2px 0 black;
             }
+            .table-responsive {
+                max-height: 300px; /* Ajusta la altura según sea necesario */
+                overflow-y: auto; /* Activa el scrollbar vertical */
+            }
+
+            .table thead th {
+                position: sticky;
+                top: 0; /* Fija el encabezado en la parte superior */
+                background-color: white; /* Color de fondo para el encabezado */
+                z-index: 10; /* Asegura que esté por encima de otras filas */
+            }
+
         </style>
 
 
@@ -102,8 +114,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                  <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                    <li> <a class="dropdown-item" href="">Backup</a></li>
+                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
+                                <li> <a class="dropdown-item" href="">Backup</a></li>
                             </ul>
                         </li>
 
@@ -113,54 +125,48 @@
         </nav>
         <h1>Proveedores</h1>
         <div class="tabla-madre">
-
             <a href="cProveedores?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Costo</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Provedoor</th>
-                        <th scope="col">Minimo</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-
-                <%
-                    proveedoresDAO dao = new proveedoresDAO();
-                    List<proveedores> list = dao.mostrar();
-                    Iterator<proveedores> iter = list.iterator();
-                    proveedores pro = null;
-                    while (iter.hasNext()) {
-                        pro = iter.next();
-
-                %>
-                <tbody>
-                    <tr>
-                        <td><%=pro.getId()%></td>
-                        <td><%=pro.getCodigo()%></td>
-                        <td><%=pro.getNombre()%></td>
-                        <td><%=pro.getComercial()%></td>
-                        <td><%=pro.getDireccion()%></td>
-                        <td><%=pro.getCorreo()%></td>
-                        <td><%=pro.getTelefono()%></td>
-                        <td><%=pro.getNota()%></td>
-
-                        <td>
-                            <a href="cProveedores?accion=editar&id=<%=pro.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="cProveedores?accion=eliminar&id=<%=pro.getId()%>"class="fa-solid fa-trash"></a>
-                        </td>
-
-                    </tr>
-                    <%}%>
-                </tbody>
-
-            </table>
+               <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Costo</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Minimo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            proveedoresDAO dao = new proveedoresDAO();
+                            List<proveedores> list = dao.mostrar();
+                            for (proveedores pro : list) {
+                        %>
+                        <tr>
+                            <td><%= pro.getId()%></td>
+                            <td><%= pro.getCodigo()%></td>
+                            <td><%= pro.getNombre()%></td>
+                            <td><%= pro.getComercial()%></td>
+                            <td><%= pro.getDireccion()%></td>
+                            <td><%= pro.getCorreo()%></td>
+                            <td><%= pro.getTelefono()%></td>
+                            <td><%= pro.getNota()%></td>
+                            <td>
+                                <a href="cProveedores?accion=editar&id=<%= pro.getId()%>" class="fa-solid fa-pencil"></a>
+                                <a href="cProveedores?accion=eliminar&id=<%= pro.getId()%>" class="fa-solid fa-trash"></a>
+                            </td>
+                        </tr>
+                        <% }%>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
 
         <div class="form-reportes">
             <form action="cProveedores" >       

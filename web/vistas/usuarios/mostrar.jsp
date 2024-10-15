@@ -4,7 +4,6 @@
     Author     : DANIELS SYSTEMS
 --%>
 
-<%@page import="modeloDAO.BusquedaUsuarioDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.usuarios"%>
@@ -64,6 +63,17 @@
                     -2px  2px 0 black,
                     2px  2px 0 black;
             }
+            .table-responsive {
+                max-height: 300px; /* Ajusta la altura según sea necesario */
+                overflow-y: auto; /* Activa el scrollbar vertical */
+            }
+
+            .table thead th {
+                position: sticky;
+                top: 0; /* Fija el encabezado en la parte superior */
+                background-color: white; /* Color de fondo para el encabezado */
+                z-index: 10; /* Asegura que esté por encima de otras filas */
+            }
         </style>
 
 
@@ -105,7 +115,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                   <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
+                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
                                 <li><a class="dropdown-item" href="#">Backup</a></li>
                             </ul>
                         </li>
@@ -126,61 +136,63 @@
             </form>
 
             <a href="controlador?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Clave</th>
-                        <th scope="col">Dpi</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Clave</th>
+                            <th scope="col">Dpi</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
 
-                <%
-                    usuariosDAO dao = new usuariosDAO();
-                    List<usuarios> list = dao.mostrar();
-                    Iterator<usuarios> iter = list.iterator();
-                    usuarios usu = null;
-                    while (iter.hasNext()) {
-                        usu = iter.next();
-                        System.out.println(usu.getApellidos());
-                %>
-                <tbody>
-                    <tr>
-                        <td><%=usu.getId()%></td>
-                        <td><%=usu.getRol()%></td>
-                        <td><%=usu.getUsuario()%></td>
-                        <td><%=usu.getClave()%></td>
-                        <td><%=usu.getDpi()%></td>
-                        <td><%=usu.getNombres()%></td>
-                        <td><%=usu.getApellidos()%></td>
-                        <td><%=usu.getTelefono()%></td>
-                        <td><%=usu.getDireccion()%></td>
-                        <td><%=usu.getEstado()%></td>
-                        <td>
-                            <a href="controlador?accion=editar&id=<%=usu.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="controlador?accion=eliminar&id=<%=usu.getId()%>"class="fa-solid fa-trash"></a>
-                        </td>
+                    <%
+                        usuariosDAO dao = new usuariosDAO();
+                        List<usuarios> list = dao.mostrar();
+                        Iterator<usuarios> iter = list.iterator();
+                        usuarios usu = null;
+                        while (iter.hasNext()) {
+                            usu = iter.next();
+                            System.out.println(usu.getApellidos());
+                    %>
+                    <tbody>
+                        <tr>
+                            <td><%=usu.getId()%></td>
+                            <td><%=usu.getRol()%></td>
+                            <td><%=usu.getUsuario()%></td>
+                            <td><%=usu.getClave()%></td>
+                            <td><%=usu.getDpi()%></td>
+                            <td><%=usu.getNombres()%></td>
+                            <td><%=usu.getApellidos()%></td>
+                            <td><%=usu.getTelefono()%></td>
+                            <td><%=usu.getDireccion()%></td>
+                            <td><%=usu.getEstado()%></td>
+                            <td>
+                                <a href="controlador?accion=editar&id=<%=usu.getId()%>" class="fa-solid fa-pencil"></a>
+                                <a href="controlador?accion=eliminar&id=<%=usu.getId()%>"class="fa-solid fa-trash"></a>
+                            </td>
 
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
-        </div>
-        <div class="form-reportes">
-            <form action="controlador" >       
-                <input type="submit" class="btn btn-warning" name="accion" value="Usuarios">
-                <input type="submit" class="btn btn-warning" name="accion" value="Activos">
-                <input type="submit" class="btn btn-warning" name="accion" value="Inactivos">
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-reportes">
+                <form action="controlador" >       
+                    <input type="submit" class="btn btn-warning" name="accion" value="Usuarios">
+                    <input type="submit" class="btn btn-warning" name="accion" value="Activos">
+                    <input type="submit" class="btn btn-warning" name="accion" value="Inactivos">
 
-            </form>
+                </form>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>

@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Editar Proveedor</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
         <style>
@@ -32,7 +32,7 @@
     <body>
         <%
             proveedoresDAO dao = new proveedoresDAO();
-            int id = Integer.parseInt((String) request.getAttribute("idUsu"));
+            int id = Integer.parseInt((String) request.getAttribute("idPro"));
             proveedores pro = (proveedores) dao.llenarCampos(id);
 
 
