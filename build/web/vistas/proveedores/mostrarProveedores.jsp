@@ -111,7 +111,7 @@
                 </div>
             </div>
         </nav>
-        <h1>Inventario</h1>
+        <h1>Proveedores</h1>
         <div class="tabla-madre">
 
             <a href="cProveedores?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
@@ -163,11 +163,8 @@
         </div>
 
         <div class="form-reportes">
-            <form action="cInventario" >       
-                <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
-                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
-                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
-
+            <form action="cProveedores" >       
+                <input type="submit" class="btn btn-warning" name="accion" value="proveedores">
             </form>
         </div>
 

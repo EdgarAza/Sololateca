@@ -27,7 +27,7 @@ public class cProveedores extends HttpServlet {
     proveedores pro = new proveedores();
     proveedoresDAO proDAO = new proveedoresDAO();
     conexion con = new conexion();
-   
+    reportesProveedores reportes = new reportesProveedores(con.getConnection());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -95,7 +95,11 @@ public class cProveedores extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
             proDAO.eliminar(id);
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        } 
+        }else if (action.equalsIgnoreCase("proveedores")) {
+            reportes.ProveedoresCompleto();
+             acceso = "vistas/proveedores/mostrarProveedores.jsp";
+
+        }
        RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
      
