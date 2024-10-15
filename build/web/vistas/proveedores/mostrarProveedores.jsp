@@ -115,7 +115,7 @@
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
                                 <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                <li> <a class="dropdown-item" href="">Backup</a></li>
+                                <li> <a class="dropdown-item" href="cInventario?accion=Backup">Backup</a></li>
                             </ul>
                         </li>
 

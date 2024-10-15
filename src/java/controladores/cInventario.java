@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import configuracion.backup;
 import configuracion.conexion;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -105,6 +106,11 @@ public class cInventario extends HttpServlet {
 
         } else if (action.equalsIgnoreCase("Existencia")) {
             reportes.InventarioExistencia();
+            acceso = "vistas/inventario/mostrarInventario.jsp";
+
+        }else if (action.equalsIgnoreCase("Backup")) {
+            backup p = new backup();
+            p.ejecutar();
             acceso = "vistas/inventario/mostrarInventario.jsp";
 
         }
