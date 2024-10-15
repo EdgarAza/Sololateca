@@ -1,5 +1,3 @@
-
-
 <%@page import="configuracion.conexion"%>
 <%@page import="modelo.inventario"%>
 <%@page import="modeloDAO.inventarioDAO"%>
@@ -107,7 +105,7 @@
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
                                 <li><a class="dropdown-item" href="cProveedores?accion=mostrar">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Clientes</a></li>
+                                <li><a class="dropdown-item" href="cClientes?accion=mostrar">Clientes</a></li>
                             </ul>
                         </li>
 

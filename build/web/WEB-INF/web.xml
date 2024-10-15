@@ -24,6 +24,10 @@
         <servlet-name>cProveedores</servlet-name>
         <servlet-class>controladores.cProveedores</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cClientes</servlet-name>
+        <servlet-class>controladores.cClientes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -47,5 +51,9 @@
     <servlet-mapping>
         <servlet-name>cProveedores</servlet-name>
         <url-pattern>/cProveedores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cClientes</servlet-name>
+        <url-pattern>/cClientes</url-pattern>
     </servlet-mapping>
 </web-app>

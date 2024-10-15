@@ -5,22 +5,21 @@
 package interfaces;
 
 import java.util.List;
-import modelo.inventario;
+import modelo.clientes;
 
 /**
  *
  * @author DANIELS SYSTEMS
  */
-public interface crudInventario {
+public interface crudClientes {
 
     public List mostrar();
 
-    public inventario llenarCampos(int id);
+    public clientes llenarCampos(int id);
 
-    public boolean guardar(inventario inv);
+    public boolean guardar(clientes cli);
 
-    public boolean editar(inventario inv);
+    public boolean editar(clientes cli);
 
     public boolean eliminar(int id);
-
 }
