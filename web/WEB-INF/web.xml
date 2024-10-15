@@ -20,6 +20,10 @@
         <servlet-name>cBakcup</servlet-name>
         <servlet-class>controladores.cBackup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cProveedores</servlet-name>
+        <servlet-class>controladores.cProveedores</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>cBakcup</servlet-name>
         <url-pattern>/cBakcup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cProveedores</servlet-name>
+        <url-pattern>/cProveedores</url-pattern>
     </servlet-mapping>
 </web-app>

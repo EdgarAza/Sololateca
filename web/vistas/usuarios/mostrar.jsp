@@ -94,7 +94,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
-                                <li><a class="dropdown-item" href="#">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="cProveedores?accion=mostrar">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="#">Clientes</a></li>
                             </ul>
                         </li>

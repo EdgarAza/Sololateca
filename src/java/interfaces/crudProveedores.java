@@ -5,12 +5,17 @@
 package interfaces;
 
 import java.util.List;
+import modelo.proveedores;
 
 /**
  *
  * @author DANIELS SYSTEMS
  */
-public interface BusquedaUsuarios {
+public interface crudProveedores {
     
-     public List mostrar(String dato);
+     public List mostrar();
+    public proveedores llenarCampos(int id);
+    public boolean guardar(proveedores pro);
+    public boolean editar(proveedores pro);
+    public boolean eliminar(int id);
 }

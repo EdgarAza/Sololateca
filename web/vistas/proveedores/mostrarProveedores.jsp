@@ -1,11 +1,8 @@
 
-
-<%@page import="configuracion.conexion"%>
-<%@page import="modelo.inventario"%>
-<%@page import="modeloDAO.inventarioDAO"%>
 <%@page import="java.util.Iterator"%>
+<%@page import="modelo.proveedores"%>
 <%@page import="java.util.List"%>
-
+<%@page import="modeloDAO.proveedoresDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -117,7 +114,7 @@
         <h1>Inventario</h1>
         <div class="tabla-madre">
 
-            <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
+            <a href="cProveedores?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -134,28 +131,28 @@
                 </thead>
 
                 <%
-                    inventarioDAO dao = new inventarioDAO();
-                    List<inventario> list = dao.mostrar();
-                    Iterator<inventario> iter = list.iterator();
-                    inventario inv = null;
+                    proveedoresDAO dao = new proveedoresDAO();
+                    List<proveedores> list = dao.mostrar();
+                    Iterator<proveedores> iter = list.iterator();
+                    proveedores pro = null;
                     while (iter.hasNext()) {
-                        inv = iter.next();
+                        pro = iter.next();
 
                 %>
                 <tbody>
                     <tr>
-                        <td><%=inv.getId()%></td>
-                        <td><%=inv.getCodigo()%></td>
-                        <td><%=inv.getDescripcion()%></td>
-                        <td><%=inv.getStock()%></td>
-                        <td><%=inv.getCosto()%></td>
-                        <td><%=inv.getPrecio()%></td>
-                        <td><%=inv.getProveedor()%></td>
-                        <td><%=inv.getMinimo()%></td>
+                        <td><%=pro.getId()%></td>
+                        <td><%=pro.getCodigo()%></td>
+                        <td><%=pro.getNombre()%></td>
+                        <td><%=pro.getComercial()%></td>
+                        <td><%=pro.getDireccion()%></td>
+                        <td><%=pro.getCorreo()%></td>
+                        <td><%=pro.getTelefono()%></td>
+                        <td><%=pro.getNota()%></td>
 
                         <td>
-                            <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
-                            <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
+                            <a href="cProveedores?accion=editar&id=<%=pro.getId()%>" class="fa-solid fa-pencil"></a>
+                            <a href="cProveedores?accion=eliminar&id=<%=pro.getId()%>"class="fa-solid fa-trash"></a>
                         </td>
 
                     </tr>
