@@ -92,7 +92,7 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Nueva Venta</a></li>
+                                <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
                                 <li><a class="dropdown-item" href="#">Ventas</a></li>
                                 <li><a class="dropdown-item" href="#">Diario</a></li>
                             </ul>

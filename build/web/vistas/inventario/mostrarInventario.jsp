@@ -79,6 +79,8 @@
 
     </head>
     <body>
+    
+
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">LA SOLOLATECA</a>
@@ -93,7 +95,7 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Nueva Venta</a></li>
+                                <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
                                 <li><a class="dropdown-item" href="#">Ventas</a></li>
                                 <li><a class="dropdown-item" href="#">Diario</a></li>
                             </ul>
