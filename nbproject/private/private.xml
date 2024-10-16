@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/diarioDAO.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/diario/mostrarDiario.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/clientesDAO.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cDiario.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/interfaces/crudClientes.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cClientes.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/clientes/guardarClientes.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/clientes/mostrarClientes.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/venta/Venta.jsp</file>
         </group>
     </open-files>
 </project-private>

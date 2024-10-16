@@ -13,7 +13,7 @@ import modelo.clientes;
  */
 public interface crudClientes {
 
-    public List mostrar();
+    public List mostrar(String var);
 
     public clientes llenarCampos(int id);
 

@@ -26,10 +26,10 @@ public class clientesDAO implements crudClientes {
     clientes cli = new clientes();
 
     @Override
-    public List mostrar() {
+    public List mostrar(String var) {
         ArrayList<clientes> list = new ArrayList();
 
-        String sql = "SELECT * FROM clientes";
+        String sql = "SELECT * FROM clientes WHERE nombre LIKE '%" + var + "%' ";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

@@ -1,9 +1,10 @@
+<%@page import="modelo.busqueda"%>
 <%@page import="modelo.clientes"%>
 <%@page import="modeloDAO.clientesDAO"%>
 <%@page import="configuracion.conexion"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-
+<%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -28,11 +29,6 @@
                 margin-right: 3%;
             }
 
-            .busqueda{
-                margin-top: 2%;
-                margin-right: 70%;
-                margin-bottom: 3%;
-            }
 
             .fa-trash{
                 color: red;
@@ -125,7 +121,18 @@
             </div>
         </nav>
         <h1>Clientes</h1>
+
         <div class="tabla-madre">
+            <form action="cClientes" class="row g-3 align-items-center">
+                <div class="col-auto d-flex align-items-center">
+                    <input type="text" class="form-control mb-3" placeholder="Busqueda" name="txtBusqueda"> 
+                </div> 
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-success mb-3" name="accion" value="Buscar">Buscar</button>
+                </div>
+            </form>
+
+
             <a href="cClientes?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -141,8 +148,18 @@
                     </thead>
 
                     <%
+
+                        busqueda bus = (busqueda) session.getAttribute("buscar");
+                        String x = "";
+                        if (bus != null) {
+                            x = bus.getBuscar();
+                            // Ahora puedes usar 'x' como desees
+                        } else {
+                            x = "";
+                        }
                         clientesDAO dao = new clientesDAO();
-                        List<clientes> list = dao.mostrar();
+                        List<clientes> list = dao.mostrar(x);
+                        System.out.println("DATO DE BUSQUEDA " + x);
                         Iterator<clientes> iter = list.iterator();
                         clientes cli = null;
                         while (iter.hasNext()) {
@@ -156,7 +173,7 @@
                             <td><%=cli.getTelefono()%></td>
                             <td><%=cli.getCorreo()%></td>
                             <td><%=cli.getDireccion()%></td>
-                           
+
 
                             <td>
                                 <a href="cClientes?accion=editar&id=<%=cli.getId()%>" class="fa-solid fa-pencil"></a>
