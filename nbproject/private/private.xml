@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/diarioDAO.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/diario/mostrarDiario.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/clientesDAO.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cDiario.java</file>
+        </group>
     </open-files>
 </project-private>
