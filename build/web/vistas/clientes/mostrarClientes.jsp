@@ -94,7 +94,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="#">Ventas</a></li>
+                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
                                 <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
                             </ul>
                         </li>

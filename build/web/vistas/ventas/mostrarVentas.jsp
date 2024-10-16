@@ -1,5 +1,5 @@
-<%@page import="modelo.clientes"%>
-<%@page import="modeloDAO.clientesDAO"%>
+<%@page import="modelo.ventas"%>
+<%@page import="modeloDAO.ventasDAO"%>
 <%@page import="configuracion.conexion"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Clientes</title>
+        <title>Ventas</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -79,6 +79,8 @@
 
     </head>
     <body>
+
+
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">LA SOLOLATECA</a>
@@ -124,44 +126,35 @@
                 </div>
             </div>
         </nav>
-        <h1>Clientes</h1>
+        <h1>Indice de Ventas</h1>
         <div class="tabla-madre">
-            <a href="cClientes?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Total</th>
                         </tr>
                     </thead>
 
                     <%
-                        clientesDAO dao = new clientesDAO();
-                        List<clientes> list = dao.mostrar();
-                        Iterator<clientes> iter = list.iterator();
-                        clientes cli = null;
+                        ventasDAO dao = new ventasDAO();
+                        List<ventas> list = dao.mostrar();
+                        Iterator<ventas> iter = list.iterator();
+                        ventas ven = null;
                         while (iter.hasNext()) {
-                            cli = iter.next();
+                            ven = iter.next();
 
                     %>
                     <tbody>
                         <tr>
-                            <td><%=cli.getId()%></td>
-                            <td><%=cli.getNombre()%></td>
-                            <td><%=cli.getTelefono()%></td>
-                            <td><%=cli.getCorreo()%></td>
-                            <td><%=cli.getDireccion()%></td>
-                           
+                            <td><%=ven.getId()%></td>
+                            <td><%=ven.getFecha()%></td>
+                            <td><%=ven.getCliente()%></td>
+                            <td><%=ven.getTotal()%></td>
 
-                            <td>
-                                <a href="cClientes?accion=editar&id=<%=cli.getId()%>" class="fa-solid fa-pencil"></a>
-                                <a href="cClientes?accion=eliminar&id=<%=cli.getId()%>"class="fa-solid fa-trash"></a>
-                            </td>
 
                         </tr>
                         <%}%>
@@ -170,12 +163,7 @@
                 </table>
             </div>
 
-            <div class="form-reportes">
-                <form action="cClientes" >       
-                    <input type="submit" class="btn btn-warning" name="accion" value="Clientes">
-
-                </form>
-            </div>
+            
 
         </div>
 

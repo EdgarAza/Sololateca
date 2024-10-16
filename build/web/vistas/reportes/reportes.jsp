@@ -77,7 +77,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="#">Ventas</a></li>
+                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
                                 <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
                             </ul>
                         </li>
@@ -138,6 +138,7 @@
 
                 </form>
             </div>
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

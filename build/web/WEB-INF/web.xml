@@ -36,6 +36,10 @@
         <servlet-name>cDiario</servlet-name>
         <servlet-class>controladores.cDiario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cVentas</servlet-name>
+        <servlet-class>controladores.cVentas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>cDiario</servlet-name>
         <url-pattern>/cDiario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cVentas</servlet-name>
+        <url-pattern>/cVentas</url-pattern>
     </servlet-mapping>
 </web-app>

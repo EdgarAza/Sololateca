@@ -72,7 +72,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ventas</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="#">Ventas</a></li>
+                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
                                 <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
                             </ul>
                         </li>
