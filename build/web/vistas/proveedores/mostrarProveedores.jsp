@@ -1,4 +1,3 @@
-
 <%@page import="java.util.Iterator"%>
 <%@page import="modelo.proveedores"%>
 <%@page import="java.util.List"%>
@@ -126,18 +125,17 @@
         <h1>Proveedores</h1>
         <div class="tabla-madre">
             <a href="cProveedores?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-               <div class="table-responsive">
+            <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Costo</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Proveedor</th>
-                            <th scope="col">Minimo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Razon Social</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Direccion</th>   
+                            <th scope="col">Ver</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -149,13 +147,13 @@
                         %>
                         <tr>
                             <td><%= pro.getId()%></td>
-                            <td><%= pro.getCodigo()%></td>
                             <td><%= pro.getNombre()%></td>
-                            <td><%= pro.getComercial()%></td>
-                            <td><%= pro.getDireccion()%></td>
-                            <td><%= pro.getCorreo()%></td>
+                            <td><%= pro.getRazonsocial()%></td>
                             <td><%= pro.getTelefono()%></td>
-                            <td><%= pro.getNota()%></td>
+                            <td><%= pro.getCorreo()%></td>
+                            <td><%= pro.getDireccion()%></td>
+   
+                            <td> <a href="cProveedores?accion=editar&id=<%= pro.getId()%>" class="fa-solid fa-eye"></a></td>
                             <td>
                                 <a href="cProveedores?accion=editar&id=<%= pro.getId()%>" class="fa-solid fa-pencil"></a>
                                 <a href="cProveedores?accion=eliminar&id=<%= pro.getId()%>" class="fa-solid fa-trash"></a>

@@ -16,13 +16,12 @@ import modelo.proveedores;
 import modeloDAO.proveedoresDAO;
 import reportes.reportesProveedores;
 
-
 /**
  *
  * @author DANIELS SYSTEMS
  */
 public class cProveedores extends HttpServlet {
-    
+
     int id;
     proveedores pro = new proveedores();
     proveedoresDAO proDAO = new proveedoresDAO();
@@ -31,78 +30,80 @@ public class cProveedores extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
         } else if (action.equalsIgnoreCase("guardar")) {
             acceso = "vistas/proveedores/guardarProveedores.jsp";
-
         } else if (action.equalsIgnoreCase("Agregar")) {
-            String codigo = request.getParameter("txtCodigo");
             String nombre = request.getParameter("txtNombre");
-            String comercial = request.getParameter("txtComercial");
-            String direccion = request.getParameter("txtDireccion");
-            String correo = request.getParameter("txtCorreo");
+            String razonSocial = request.getParameter("txtRazonSocial");
             String telefono = request.getParameter("txtTelefono");
-            String nota = request.getParameter("txtNota");
+            String correo = request.getParameter("txtCorreo");
+            String direccion = request.getParameter("txtDireccion");
+            String infopago = request.getParameter("txtInfoPago");
+            String conpago = request.getParameter("txtConPago");
 
-            pro.setCodigo(codigo);
             pro.setNombre(nombre);
-            pro.setComercial(comercial);
-            pro.setDireccion(direccion);
-            pro.setCorreo(correo);
+            pro.setRazonsocial(razonSocial);
             pro.setTelefono(telefono);
-            pro.setNota(nota);
+            pro.setCorreo(correo);
+            pro.setDireccion(direccion);
+            pro.setInfopago(infopago);
+            pro.setConpago(conpago);
+            pro.setEstado("ACTIVO");
             proDAO.guardar(pro);
-           acceso = "vistas/proveedores/mostrarProveedores.jsp";
+            acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
         } else if (action.equalsIgnoreCase("editar")) {
             request.setAttribute("idPro", request.getParameter("id"));
             acceso = "vistas/proveedores/editarProveedores.jsp";
 
         } else if (action.equalsIgnoreCase("Actualizar")) {
-            id = Integer.parseInt(request.getParameter("txtid"));
-            String codigo = request.getParameter("txtCodigo");
+            id = Integer.parseInt(request.getParameter("txtId"));
             String nombre = request.getParameter("txtNombre");
-            String comercial = request.getParameter("txtComercial");
-            String direccion = request.getParameter("txtDireccion");
-            String correo = request.getParameter("txtCorreo");
+            String razonSocial = request.getParameter("txtRazonSocial");
             String telefono = request.getParameter("txtTelefono");
-            String nota = request.getParameter("txtNota");
+            String correo = request.getParameter("txtCorreo");
+            String direccion = request.getParameter("txtDireccion");
+            String infopago = request.getParameter("txtInfoPago");
+            String conpago = request.getParameter("txtConPago");
+            String estado = request.getParameter("txtEstado");
 
-            pro.setCodigo(codigo);
+            
+            
             pro.setNombre(nombre);
-            pro.setComercial(comercial);
-            pro.setDireccion(direccion);
-            pro.setCorreo(correo);
+            pro.setRazonsocial(razonSocial);
             pro.setTelefono(telefono);
-            pro.setNota(nota);
+            pro.setCorreo(correo);
+            pro.setDireccion(direccion);
+            pro.setInfopago(infopago);
+            pro.setConpago(conpago);
+            pro.setEstado(estado);
             pro.setId(id);
             proDAO.editar(pro);
 
-             acceso = "vistas/proveedores/mostrarProveedores.jsp";
+            acceso = "vistas/proveedores/mostrarProveedores.jsp";
         } else if (action.equalsIgnoreCase("eliminar")) {
             id = Integer.parseInt(request.getParameter("id"));
             proDAO.eliminar(id);
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        }else if (action.equalsIgnoreCase("proveedores")) {
+        } else if (action.equalsIgnoreCase("proveedores")) {
             reportes.ProveedoresCompleto();
-             acceso = "vistas/proveedores/mostrarProveedores.jsp";
+            acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
         }
-       RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
-     
+
     }
 
     @Override
@@ -111,7 +112,6 @@ public class cProveedores extends HttpServlet {
         processRequest(request, response);
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -34,32 +34,32 @@
         <form action="cProveedores" class="formulario">
 
             <div class="mb-3">
-                <label  class="form-label">Codigo</label>
-                <input type="text" class="form-control"  placeholder="Codigo" name="txtCodigo">
-            </div>
-            <div class="mb-3">
                 <label  class="form-label">Nombre</label>
                 <input type="text" class="form-control"  placeholder="Nombre" name="txtNombre">
             </div>
             <div class="mb-3">
-                <label  class="form-label">Comercial</label>
-                <input type="text" class="form-control"  placeholder="Comercial" name="txtComercial">
+                <label  class="form-label">Razon Social</label>
+                <input type="text" class="form-control"  placeholder="Razon Social" name="txtRazonSocial">
             </div>
             <div class="mb-3">
-                <label  class="form-label">Direccion</label>
-                <input type="text" class="form-control"  placeholder="Direccion" name="txtDireccion">
+                <label  class="form-label">Telefono</label>
+                <input type="text" class="form-control"  placeholder="Telefono" name="txtTelefono">
             </div>
             <div class="mb-3">
                 <label  class="form-label">Correo</label>
                 <input type="text" class="form-control"  placeholder="Correo" name="txtCorreo">
             </div>
             <div class="mb-3">
-                <label  class="form-label">Telefono</label>
-                <input type="text" class="form-control"  placeholder="Telefono" name="txtTelefono">
+                <label  class="form-label">Direccion</label>
+                <input type="text" class="form-control"  placeholder="Direccion" name="txtDireccion">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Info. Pago</label>
+                <input type="text" class="form-control"  placeholder="Informacion" name="txtInfoPago">
             </div>
              <div class="mb-3">
-                <label  class="form-label">Nota</label>
-                <input type="text" class="form-control"  placeholder="Nota" name="txtNota">
+                <label  class="form-label">Cond. Pago</label>
+                <input type="text" class="form-control"  placeholder="Condiciones" name="txtConPago">
             </div>
 
         

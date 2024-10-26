@@ -11,26 +11,29 @@ package modelo;
 public class proveedores {
     
     private int id;
-    private String codigo;
-    private String nombre;
-    private String comercial;
-    private String direccion;
-    private String correo;
-    private String telefono;
-    private String nota;
+   private String razonsocial;
+   private String nombre;
+   private String telefono;
+   private String correo;
+   private String direccion;
+   private String infopago;
+   private String conpago;
+   private String estado;
+   
 
     public proveedores() {
     }
 
-    public proveedores(int id, String codigo, String nombre, String comercial, String direccion, String correo, String telefono, String nota) {
+    public proveedores(int id, String razonsocial, String nombre, String telefono, String correo, String direccion, String infopago, String conpago, String estado) {
         this.id = id;
-        this.codigo = codigo;
+        this.razonsocial = razonsocial;
         this.nombre = nombre;
-        this.comercial = comercial;
-        this.direccion = direccion;
-        this.correo = correo;
         this.telefono = telefono;
-        this.nota = nota;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.infopago = infopago;
+        this.conpago = conpago;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -41,12 +44,12 @@ public class proveedores {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getRazonsocial() {
+        return razonsocial;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setRazonsocial(String razonsocial) {
+        this.razonsocial = razonsocial;
     }
 
     public String getNombre() {
@@ -57,20 +60,12 @@ public class proveedores {
         this.nombre = nombre;
     }
 
-    public String getComercial() {
-        return comercial;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setComercial(String comercial) {
-        this.comercial = comercial;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getCorreo() {
@@ -81,23 +76,38 @@ public class proveedores {
         this.correo = correo;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getNota() {
-        return nota;
+    public String getInfopago() {
+        return infopago;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public void setInfopago(String infopago) {
+        this.infopago = infopago;
     }
-    
-    
-    
+
+    public String getConpago() {
+        return conpago;
+    }
+
+    public void setConpago(String conpago) {
+        this.conpago = conpago;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     
 }
+    

@@ -46,13 +46,13 @@ public class cVenta extends HttpServlet {
             String telefono = request.getParameter("txtTelefono");
             String nota = request.getParameter("txtNota");
 
-            pro.setCodigo(codigo);
+          //  pro.setCodigo(codigo);
             pro.setNombre(nombre);
-            pro.setComercial(comercial);
+           // pro.setComercial(comercial);
             pro.setDireccion(direccion);
             pro.setCorreo(correo);
             pro.setTelefono(telefono);
-            pro.setNota(nota);
+            //pro.setNota(nota);
             proDAO.guardar(pro);
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
 

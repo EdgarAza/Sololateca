@@ -225,7 +225,7 @@
 
                         // Actualizar total acumulado
                         totalAcumulado += subtotal;
-                        console.log(totalAcumulado)
+                        console.log(totalAcumulado);
                         document.getElementById('totalAcumulado').innerText = 'Total: Q${totalAcumulado.toFixed(2)}';
 
                         // Limpiar campos

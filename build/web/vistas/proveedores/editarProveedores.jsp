@@ -40,42 +40,46 @@
         <form action="cProveedores"  class="formulario">
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
-                <input type="text" id="id" name="txtid" class="form-control" value="<%=pro.getId()%>" readonly>
+                <input type="text" id="Id" name="txtId" class="form-control" value="<%=pro.getId()%>" readonly>
             </div>
 
 
             <div class="mb-3">
-                <label for="dpi" class="form-label">Codigo</label>
-                <input type="text" id="Codigo" name="txtCodigo" class="form-control" value="<%=pro.getCodigo()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="nombres" class="form-label">Nombre</label>
+                <label for="dpi" class="form-label">Nombre</label>
                 <input type="text" id="Nombre" name="txtNombre" class="form-control" value="<%=pro.getNombre()%>">
             </div>
 
             <div class="mb-3">
-                <label for="apellidos" class="form-label">Comercial</label>
-                <input type="text" id="Comercial" name="txtComercial" class="form-control" value="<%=pro.getComercial()%>">
+                <label for="nombres" class="form-label">Razon Social</label>
+                <input type="text" id="RazonSocial" name="txtRazonSocial" class="form-control" value="<%=pro.getRazonsocial()%>">
             </div>
 
             <div class="mb-3">
-                <label for="telefono" class="form-label">Direccion</label>
-                <input type="text" id="Direccion" name="txtDireccion" class="form-control" value="<%=pro.getDireccion()%>">
+                <label for="apellidos" class="form-label">Telefono</label>
+                <input type="text" id="Telefono" name="txtTelefono" class="form-control" value="<%=pro.getTelefono()%>">
             </div>
 
             <div class="mb-3">
-                <label for="direccion" class="form-label">Correo</label>
+                <label for="telefono" class="form-label">Correo</label>
                 <input type="text" id="Correo" name="txtCorreo" class="form-control" value="<%=pro.getCorreo()%>">
+            </div>
+
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Direccion</label>
+                <input type="text" id="Direccion" name="txtDireccion" class="form-control" value="<%=pro.getDireccion()%>">
             </div>
             
             <div class="mb-3">
-                <label for="direccion" class="form-label">Telefono</label>
-                <input type="text" id="Telefono" name="txtTelefono" class="form-control" value="<%=pro.getTelefono()%>">
+                <label for="direccion" class="form-label">Info. Pago</label>
+                <input type="text" id="InfoPago" name="txtInfoPago" class="form-control" value="<%=pro.getInfopago()%>">
             </div>
             <div class="mb-3">
-                <label for="estado" class="form-label">Nota</label>
-                <input type="text" id="Nota" name="txtNota" class="form-control" value="<%=pro.getNota()%>">
+                <label for="estado" class="form-label">Con. Pago</label>
+                <input type="text" id="ConPago" name="txtConPago" class="form-control" value="<%=pro.getConpago()%>">
+            </div>
+              <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" id="Estado" name="txtEstado" class="form-control" value="<%=pro.getEstado()%>">
             </div>
             <button type="submit" class="btn btn-success" name="accion" value="Actualizar">Actualizar</button>
             <a href="cProveedores?accion=mostrar" class="btn btn-secondary">Regresar</a>
