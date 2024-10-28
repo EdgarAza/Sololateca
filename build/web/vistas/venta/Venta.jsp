@@ -127,7 +127,7 @@
                             <th scope="col">Descripción</th>
                             <th scope="col">Stock</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Proveedor</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -144,7 +144,7 @@
                             <td><%=inv.getDescripcion()%></td>
                             <td><%=inv.getStock()%></td>
                             <td><%=inv.getPrecio()%></td>
-                            <td><%=inv.getProveedor()%></td>
+                           
                         </tr>
                         <% }%>
                     </tbody>

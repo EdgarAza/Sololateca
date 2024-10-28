@@ -15,8 +15,6 @@ public interface crudInventario {
 
     public List mostrar();
 
-    public inventario llenarCampos(int id);
-
     public boolean guardar(inventario inv);
 
     public boolean editar(inventario inv);

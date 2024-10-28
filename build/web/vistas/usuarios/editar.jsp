@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar Usuario</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+        
 
     </head>
     <body>
@@ -28,8 +28,8 @@
                     <div class="modal-body">
                         <form id="formEditar" action="controlador" method="post">
                             <label>Id</label>
-                            <input type="text" class="form-control" name="txtId" required>
-                             <label>Rol</label>
+                            <input type="text" class="form-control" name="txtId" required disabled>
+                            <label>Rol</label>
                             <select class="form-select "  name='txtRol'>
                                 <option value="Administrador">Administrador</option>
                                 <option value="Vendedor">Vendedor</option>
@@ -70,6 +70,7 @@
                 const apellidos = button.getAttribute('data-apellidos');
                 const telefono = button.getAttribute('data-telefono');
                 const direccion = button.getAttribute('data-direccion');
+                console.log(id, rol, usuario, clave, dpi, nombres, apellidos, telefono, direccion);
 
                 // Rellenar los campos del formulario en el modal
                 const modalForm = editarModal.querySelector('form');

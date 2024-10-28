@@ -12,9 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos</title>
         <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+
         <style>
             .tabla-madre {
                 margin-top: 2%;
@@ -79,54 +80,20 @@
 
     </head>
     <body>
-    
+        <jsp:include page="../extras/nav.jsp" />
+        <%
+            String mensaje = (String) request.getAttribute("mensaje");
+            if (mensaje != null) {
+        %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Éxito!</strong> <%= mensaje%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <%
+            }
+        %>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">LA SOLOLATECA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ventas
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
-                                <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Datos
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
-                                <li><a class="dropdown-item" href="cProveedores?accion=mostrar">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="cClientes?accion=mostrar">Clientes</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Configuracion
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                <li> <a class="dropdown-item" href="cInventario?accion=Backup">Backup</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <h1>Inventario</h1>
+        <h1>Inventario este</h1>
         <div class="tabla-madre">
             <a href="cInventario?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
             <div class="table-responsive">
@@ -139,8 +106,7 @@
                             <th scope="col">Stock</th>
                             <th scope="col">Costo</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Provedoor</th>
-                            <th scope="col">Minimo</th>
+                            <th scope="col">Ganancia</th>                      
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -162,9 +128,8 @@
                             <td><%=inv.getStock()%></td>
                             <td><%=inv.getCosto()%></td>
                             <td><%=inv.getPrecio()%></td>
-                            <td><%=inv.getProveedor()%></td>
-                            <td><%=inv.getMinimo()%></td>
-
+                            <td><%=inv.getGanancia()%></td>
+                          
                             <td>
                                 <a href="cInventario?accion=editar&id=<%=inv.getId()%>" class="fa-solid fa-pencil"></a>
                                 <a href="cInventario?accion=eliminar&id=<%=inv.getId()%>"class="fa-solid fa-trash"></a>
@@ -177,14 +142,14 @@
                 </table>
             </div>
 
-            <div class="form-reportes">
-                <form action="cInventario" >       
-                    <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
-                    <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
-                    <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
 
-                </form>
-            </div>
+            <form action="cInventario" >       
+                <input type="submit" class="btn btn-warning" name="accion" value="Inventario">
+                <input type="submit" class="btn btn-warning" name="accion" value="Minimo">
+                <input type="submit" class="btn btn-warning" name="accion" value="Existencia">
+
+            </form>
+
 
         </div>
 

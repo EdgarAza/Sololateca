@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Usuario</title>
+        <title>Ver Usuario</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
@@ -55,8 +55,8 @@
         </div>
 
         <script>
-            const editarModal = document.getElementById('verModal');
-            editarModal.addEventListener('show.bs.modal', function (event) {
+            const verModal = document.getElementById('verModal');
+            verModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget; // Botón que activó el modal
                 const id = button.getAttribute('data-id');
                 const rol = button.getAttribute('data-rol');
@@ -69,7 +69,7 @@
                 const direccion = button.getAttribute('data-direccion');
 
                 // Rellenar los campos del formulario en el modal
-                const modalForm = editarModal.querySelector('form');
+                const modalForm = verModal.querySelector('form');
                 modalForm.querySelector('input[name="txtId"]').value = id;
                 modalForm.querySelector('select[name="txtRol"]').value = rol; // Cambiado para usar select
                 modalForm.querySelector('input[name="txtUsuario"]').value = usuario;

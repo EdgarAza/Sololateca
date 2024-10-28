@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/index.jsp</file>
             <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/assets/css/style.css</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/mostrar.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/editar.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/controlador.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/guardar.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/inventario/mostrarInventario.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cInventario.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/inventarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -13,21 +13,29 @@ public class inventario {
     private String stock;
     private String costo;
     private String precio;
-    private String proveedor;
+    private String ganancia;
     private String minimo;
+    private String marca;
+    private String categoria;
+    private String fechaCreacion;
+    private String fechaModificacion;
 
     public inventario() {
     }
 
-    public inventario(int id, String codigo, String descripcion, String stock, String costo, String precio, String proveedor, String minimo) {
+    public inventario(int id, String codigo, String descripcion, String stock, String costo, String precio, String ganancia, String minimo, String marca, String categoria, String fechaCreacion, String fechaModificacion) {
         this.id = id;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.stock = stock;
         this.costo = costo;
         this.precio = precio;
-        this.proveedor = proveedor;
+        this.ganancia = ganancia;
         this.minimo = minimo;
+        this.marca = marca;
+        this.categoria = categoria;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaModificacion = fechaModificacion;
     }
 
     public int getId() {
@@ -78,12 +86,12 @@ public class inventario {
         this.precio = precio;
     }
 
-    public String getProveedor() {
-        return proveedor;
+    public String getGanancia() {
+        return ganancia;
     }
 
-    public void setProveedor(String proveedor) {
-        this.proveedor = proveedor;
+    public void setGanancia(String ganancia) {
+        this.ganancia = ganancia;
     }
 
     public String getMinimo() {
@@ -94,5 +102,39 @@ public class inventario {
         this.minimo = minimo;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    
+    
   
 }
