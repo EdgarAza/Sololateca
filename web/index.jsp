@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <a href="cVenta?accion=mostrar">Inciar</a>
+     <form action="controlador" method="post"> 
+            <button type="submit" name="accion" value="mostrar">Iniciar</button>
+        </form>
     </body>
 </html>

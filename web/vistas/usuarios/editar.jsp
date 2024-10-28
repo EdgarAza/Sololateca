@@ -15,101 +15,76 @@
         <title>Editar Usuario</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <style>
-            .formulario {
-                margin-bottom: 2%;
-                margin-top: 5%;
-                margin-left: 25%;
-                margin-right: 25%;
-                body {
-
-                    background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
-                    background-size: cover;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    margin: 0;
-                    height: 100vh;
-                    color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
-                }
-            }
-
-        </style>
 
     </head>
     <body>
-        <%
-            usuariosDAO dao = new usuariosDAO();
-            int id = Integer.parseInt((String) request.getAttribute("idUsu"));
-            usuarios usu = (usuarios) dao.llenarCampos(id);
-
-
-        %>
-        <form action="controlador"  class="formulario">
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input type="text" id="id" name="txtid" class="form-control" value="<%=usu.getId()%>" readonly>
+        <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarModalLabel">Editar Datos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formEditar" action="controlador" method="post">
+                            <label>Id</label>
+                            <input type="text" class="form-control" name="txtId" required>
+                             <label>Rol</label>
+                            <select class="form-select "  name='txtRol'>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Vendedor">Vendedor</option>
+                            </select>
+                            <label>Usuario</label>
+                            <input type="text" class="form-control" name="txtUsuario" required>
+                            <label>Clave</label>
+                            <input type="text" class="form-control" name="txtClave" required>
+                            <label>DPI</label>
+                            <input type="text" class="form-control" name="txtDpi" required>
+                            <label>Nombres</label>
+                            <input type="text" class="form-control" name="txtNombres">
+                            <label>Apellidos</label>
+                            <input type="text" class="form-control" name="txtApellidos" required>
+                            <label>Telefono</label>
+                            <input type="text" class="form-control" name="txtTelefono">
+                            <label>Direccion</label>
+                            <input type="text" class="form-control" name="txtDireccion" required>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" form="formEditar" class="btn btn-warning" name="accion" value="Actualizar">Actualizar</button>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="mb-3">
-                <label for="rol" class="form-label">Rol</label>
-                <select class="form-select" id="rol" name="txtRol" aria-label="Rol">
-                    <option value="Administrador" </option>
-                    <option value="Vendedor"</option>
-                </select>
-            </div>
+        <script>
+            const editarModal = document.getElementById('editarModal');
+            editarModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget; // Botón que activó el modal
+                const id = button.getAttribute('data-id');
+                const rol = button.getAttribute('data-rol');
+                const usuario = button.getAttribute('data-usuario');
+                const clave = button.getAttribute('data-clave');
+                const dpi = button.getAttribute('data-dpi');
+                const nombres = button.getAttribute('data-nombres');
+                const apellidos = button.getAttribute('data-apellidos');
+                const telefono = button.getAttribute('data-telefono');
+                const direccion = button.getAttribute('data-direccion');
 
-            <div class="mb-3">
-                <label for="dpi" class="form-label">Usuario</label>
-                <input type="text" id="dpi" name="txtUsuario" class="form-control" value="<%=usu.getUsuario()%>">
-            </div>
-            <div class="mb-3">
-                <label for="dpi" class="form-label">Clave</label>
-                <%
-                    String encriptado = "";
-                    String clave = usu.getClave();
-                    encriptar encri = new encriptar();
-                    try {
-                        encriptado = encri.desencriptar(clave);
-                    } catch (Exception ex) {
+                // Rellenar los campos del formulario en el modal
+                const modalForm = editarModal.querySelector('form');
+                modalForm.querySelector('input[name="txtId"]').value = id;
+                modalForm.querySelector('select[name="txtRol"]').value = rol; // Cambiado para usar select
+                modalForm.querySelector('input[name="txtUsuario"]').value = usuario;
+                modalForm.querySelector('input[name="txtClave"]').value = clave;
+                modalForm.querySelector('input[name="txtDpi"]').value = dpi;
+                modalForm.querySelector('input[name="txtNombres"]').value = nombres;
+                modalForm.querySelector('input[name="txtApellidos"]').value = apellidos;
+                modalForm.querySelector('input[name="txtTelefono"]').value = telefono;
+                modalForm.querySelector('input[name="txtDireccion"]').value = direccion;
+            });
+        </script>
 
-                    }
-                %>
-                <input type="text" id="dpi" name="txtClave" class="form-control" value="<%=encriptado%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="dpi" class="form-label">DPI</label>
-                <input type="text" id="dpi" name="txtDpi" class="form-control" value="<%=usu.getDpi()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="nombres" class="form-label">Nombres</label>
-                <input type="text" id="nombres" name="txtNombres" class="form-control" value="<%=usu.getNombres()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" id="apellidos" name="txtApellidos" class="form-control" value="<%=usu.getApellidos()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" id="telefono" name="txtTelefono" class="form-control" value="<%=usu.getTelefono()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" id="direccion" name="txtDireccion" class="form-control" value="<%=usu.getDireccion()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="estado" class="form-label">Estado</label>
-                <input type="text" id="estado" name="txtEstado" class="form-control" value="<%=usu.getEstado()%>">
-            </div>
-
-            <button type="submit" class="btn btn-success" name="accion" value="Actualizar">Actualizar</button>
-            <a href="controlador?accion=mostrar" class="btn btn-secondary">Regresar</a>
-        </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

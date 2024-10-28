@@ -3,24 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/configuracion/encriptar.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/proveedoresDAO.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cProveedores.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/proveedores/mostrarProveedores.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/clientes/mostrarClientes.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/inventario/mostrarInventario.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/venta/Venta.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/inventarioDAO.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cInventario.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/configuracion/backup.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/proveedores/guardarProveedores.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modelo/busqueda.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cClientes.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/interfaces/crudDiario.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/reportes/reportesClientes.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/configuracion/conexion.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/modeloDAO/clientesDAO.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/ventas/mostrarVentas.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/index.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/assets/css/style.css</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/mostrar.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/editar.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/controlador.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/usuarios/guardar.jsp</file>
         </group>
     </open-files>
 </project-private>

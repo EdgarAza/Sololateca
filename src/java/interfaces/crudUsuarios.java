@@ -13,7 +13,6 @@ import modelo.usuarios;
  */
 public interface crudUsuarios {
     public List mostrar();
-    public usuarios llenarCampos(int id);
     public boolean guardar(usuarios usu);
     public boolean editar(usuarios usu);
     public boolean eliminar(int usu);
