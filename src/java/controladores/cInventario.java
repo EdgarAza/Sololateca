@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import modelo.inventario;
 import modeloDAO.inventarioDAO;
 import reportes.reportesInventario;
@@ -30,6 +32,8 @@ public class cInventario extends HttpServlet {
     inventarioDAO invDao = new inventarioDAO();
     conexion con = new conexion();
     reportesInventario reportes = new reportesInventario(con.getConnection());
+    DateTimeFormatter Fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String fdia = Fecha.format(LocalDateTime.now());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,12 +62,15 @@ public class cInventario extends HttpServlet {
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
             String precio = request.getParameter("txtPrecio");
-            String ganancia = request.getParameter("txtGanancia");
+            double cos = Double.parseDouble(costo);
+            double pres = Double.parseDouble(precio);
+            double res = pres - cos;
+            String ganancia = String.valueOf(res);
             String minimo = request.getParameter("txtMinimo");
             String marca = request.getParameter("txtMarca");
             String categoria = request.getParameter("txtCategoria");
-            String fechaCreacion = request.getParameter("txtCreacion");
-            String fechaModificacion = request.getParameter("txtModificacion");
+            String fechaCreacion = fdia;
+            String fechaModificacion = fdia;
 
             inv.setCodigo(codigo);
             inv.setDescripcion(descripcion);
@@ -86,12 +93,13 @@ public class cInventario extends HttpServlet {
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
             String precio = request.getParameter("txtPrecio");
-            String ganancia = request.getParameter("txtGanancia");
+            double cos = Double.parseDouble(costo);
+            double pres = Double.parseDouble(precio);
+            double res = pres - cos;
+            String ganancia = String.valueOf(res);
             String minimo = request.getParameter("txtMinimo");
             String marca = request.getParameter("txtMarca");
             String categoria = request.getParameter("txtCategoria");
-            String fechaCreacion = request.getParameter("txtCreacion");
-            String fechaModificacion = request.getParameter("txtModificacion");
 
             inv.setCodigo(codigo);
             inv.setDescripcion(descripcion);
@@ -102,8 +110,7 @@ public class cInventario extends HttpServlet {
             inv.setMinimo(minimo);
             inv.setMarca(marca);
             inv.setCategoria(categoria);
-            inv.setFechaCreacion(fechaCreacion);
-            inv.setFechaModificacion(fechaModificacion);
+            inv.setFechaModificacion(fdia);
             inv.setId(id);
             invDao.editar(inv);
 

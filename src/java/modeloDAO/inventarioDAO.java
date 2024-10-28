@@ -42,7 +42,7 @@ public class inventarioDAO implements crudInventario {
                 inv.setStock(rs.getString("stock"));
                 inv.setCosto(rs.getString("costo"));
                 inv.setPrecio(rs.getString("precio"));
-                inv.setGanancia(rs.getString("proveedor"));
+                inv.setGanancia(rs.getString("ganancia"));
                 inv.setMinimo(rs.getString("minimo"));
                 inv.setMarca(rs.getString("marca"));
                 inv.setCategoria(rs.getString("categoria"));
@@ -87,7 +87,7 @@ public class inventarioDAO implements crudInventario {
     @Override
     public boolean editar(inventario inv) {
         String sql = "UPDATE productos SET codigo = ?, descripcion = ?, stock = ?, costo = ?, precio = ?, "
-                + "ganancia = ?, minimo = ?,marca= ?,categoria= ?,fechacreacion= ?,fechamodificacion= ?, WHERE id = ?";
+                + "ganancia = ?, minimo = ?,marca= ?,categoria= ?,fechamodificacion= ? WHERE id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -100,9 +100,8 @@ public class inventarioDAO implements crudInventario {
             ps.setString(7, inv.getMinimo());
             ps.setString(8, inv.getMarca());
             ps.setString(9, inv.getCategoria());
-            ps.setString(10, inv.getFechaCreacion());
-            ps.setString(11, inv.getFechaModificacion());
-            ps.setInt(12, inv.getId());
+            ps.setString(10, inv.getFechaModificacion());
+            ps.setInt(11, inv.getId());
             ps.execute();
             return true;
         } catch (Exception e) {

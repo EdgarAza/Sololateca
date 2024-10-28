@@ -24,8 +24,8 @@
                     </div>
                     <div class="modal-body">
                         <form id="formVer" action="controlador" method="post">
-                            <label>Id</label>
-                            <input type="text" class="form-control" name="txtId" disabled>
+                            
+                            <input type="hidden" class="form-control" name="txtId" >
                             <label>Rol</label>
                             <select class="form-select" name="txtRol" disabled>
                                 <option value="Administrador">Administrador</option>

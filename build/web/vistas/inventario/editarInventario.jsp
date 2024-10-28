@@ -8,81 +8,73 @@
         <title>Editar Producto</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <style>
-            .formulario {
-                margin-bottom: 2%;
-                margin-top: 5%;
-                margin-left: 25%;
-                margin-right: 25%;
-            }
-              body {
-               
-                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                margin: 0;
-                height: 100vh;
-                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
-            }
-
-        </style>
-
     </head>
-    <body>
-        <%
-            inventarioDAO dao = new inventarioDAO();
-            int id = Integer.parseInt((String) request.getAttribute("idUsu"));
-            inventario inv = (inventario) dao.llenarCampos(id);
+    <!-- editar.jsp -->
+    <div class="modal fade" id="editarInventarioModal" tabindex="-1" aria-labelledby="editarInventarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarInventarioModalLabel">Editar Datos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditar" action="cInventario" method="post">
+                       
+                        <input type="hidden" name="txtId" value=""  >
+                        <label>Codigo</label>
+                        <input type="text" name="txtCodigo" class="form-control" required>
+                        <label>Descripcion</label>
+                        <input type="text" name="txtDescripcion" class="form-control" required>
+                        <label>Stock</label>
+                        <input type="text" name="txtStock" class="form-control" required>
+                        <label>Costo</label>
+                        <input type="text" name="txtCosto" class="form-control" required>
+                        <label>Precio</label>
+                        <input type="text" name="txtPrecio" class="form-control" required> 
+                        <label>Minimo</label>
+                        <input type="text" name="txtMinimo" class="form-control" required> 
+                        <label>Marca</label>
+                        <input type="text" name="txtMarca" class="form-control" required>
+                        <label>Categoria</label>
+                        <input type="text" name="txtCategoria" class="form-control" required>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="formEditar" class="btn btn-warning" name="accion" value="Actualizar">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const editarInventarioModal = document.getElementById('editarInventarioModal');
+        editarInventarioModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget; // Botón que activó el modal
+            const id = button.getAttribute('data-id');
+            const codigo = button.getAttribute('data-codigo');
+            const descripcion = button.getAttribute('data-descripcion');
+            const stock = button.getAttribute('data-stock');
+            const costo = button.getAttribute('data-costo');
+            const precio = button.getAttribute('data-precio');
+            const minimo = button.getAttribute('data-minimo');
+            const marca = button.getAttribute('data-marca');
+            const categoria = button.getAttribute('data-categoria');
+            // Rellenar los campos del formulario en el modal
+            const modalForm = editarInventarioModal.querySelector('form');
+            modalForm.querySelector('input[name="txtId"]').value = id;
+            modalForm.querySelector('input[name="txtCodigo"]').value = codigo;
+            modalForm.querySelector('input[name="txtDescripcion"]').value = descripcion;
+            modalForm.querySelector('input[name="txtStock"]').value = stock;
+            modalForm.querySelector('input[name="txtCosto"]').value = costo;
+            modalForm.querySelector('input[name="txtPrecio"]').value = precio;
+            modalForm.querySelector('input[name="txtMinimo"]').value = minimo;
+            modalForm.querySelector('input[name="txtMarca"]').value = marca;
+            modalForm.querySelector('input[name="txtCategoria"]').value = categoria;
+        });
+    </script>
 
 
-        %>
-        <form action="cInventario"  class="formulario">
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input type="text" id="id" name="txtid" class="form-control" value="<%=inv.getId()%>" readonly>
-            </div>
-
-
-            <div class="mb-3">
-                <label for="dpi" class="form-label">Codigo</label>
-                <input type="text" id="Codigo" name="txtCodigo" class="form-control" value="<%=inv.getCodigo()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="nombres" class="form-label">Descripcion</label>
-                <input type="text" id="Descripcion" name="txtDescripcion" class="form-control" value="<%=inv.getDescripcion()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="apellidos" class="form-label">Stock</label>
-                <input type="text" id="Stock" name="txtStock" class="form-control" value="<%=inv.getStock()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Costo</label>
-                <input type="text" id="Costo" name="txtCosto" class="form-control" value="<%=inv.getCosto()%>">
-            </div>
-
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Precio</label>
-                <input type="text" id="Precio" name="txtPrecio" class="form-control" value="<%=inv.getPrecio()%>">
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Proveedor</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Proveedor</option>
-                    <option value="Proveedor1">Proveedor1</option>
-                    <option value="Proveedor2">Proveedor2</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="estado" class="form-label">Minimo</label>
-                <input type="text" id="Minimo" name="txtMinimo" class="form-control" value="<%=inv.getMinimo()%>">
-            </div>
-            <button type="submit" class="btn btn-success" name="accion" value="Actualizar">Actualizar</button>
-            <a href="cInventario?accion=mostrar" class="btn btn-secondary">Regresar</a>
-        </form>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
 </html>
