@@ -12,10 +12,12 @@ import modelo.proveedores;
  * @author DANIELS SYSTEMS
  */
 public interface crudProveedores {
-    
-     public List mostrar();
-    public proveedores llenarCampos(int id);
+
+    public List mostrar();
+
     public boolean guardar(proveedores pro);
+
     public boolean editar(proveedores pro);
-    public boolean eliminar(int id);
+
+
 }

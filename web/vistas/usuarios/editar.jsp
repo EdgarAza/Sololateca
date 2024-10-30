@@ -70,12 +70,12 @@
                 const apellidos = button.getAttribute('data-apellidos');
                 const telefono = button.getAttribute('data-telefono');
                 const direccion = button.getAttribute('data-direccion');
-                console.log(id, rol, usuario, clave, dpi, nombres, apellidos, telefono, direccion);
+               
 
                 // Rellenar los campos del formulario en el modal
                 const modalForm = editarModal.querySelector('form');
                 modalForm.querySelector('input[name="txtId"]').value = id;
-                modalForm.querySelector('select[name="txtRol"]').value = rol; // Cambiado para usar select
+                modalForm.querySelector('select[name="txtRol"]').value = rol; 
                 modalForm.querySelector('input[name="txtUsuario"]').value = usuario;
                 modalForm.querySelector('input[name="txtClave"]').value = clave;
                 modalForm.querySelector('input[name="txtDpi"]').value = dpi;

@@ -37,13 +37,16 @@ public class cProveedores extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        } else if (action.equalsIgnoreCase("guardar")) {
-            acceso = "vistas/proveedores/guardarProveedores.jsp";
-        } else if (action.equalsIgnoreCase("Agregar")) {
+        }else if (action.equalsIgnoreCase("Agregar")) {
             String nombre = request.getParameter("txtNombre");
             String razonSocial = request.getParameter("txtRazonSocial");
             String telefono = request.getParameter("txtTelefono");
@@ -63,10 +66,6 @@ public class cProveedores extends HttpServlet {
             proDAO.guardar(pro);
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
-        } else if (action.equalsIgnoreCase("editar")) {
-            request.setAttribute("idPro", request.getParameter("id"));
-            acceso = "vistas/proveedores/editarProveedores.jsp";
-
         } else if (action.equalsIgnoreCase("Actualizar")) {
             id = Integer.parseInt(request.getParameter("txtId"));
             String nombre = request.getParameter("txtNombre");
@@ -78,8 +77,6 @@ public class cProveedores extends HttpServlet {
             String conpago = request.getParameter("txtConPago");
             String estado = request.getParameter("txtEstado");
 
-            
-            
             pro.setNombre(nombre);
             pro.setRazonsocial(razonSocial);
             pro.setTelefono(telefono);
@@ -92,24 +89,13 @@ public class cProveedores extends HttpServlet {
             proDAO.editar(pro);
 
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        } else if (action.equalsIgnoreCase("eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            proDAO.eliminar(id);
-            acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        } else if (action.equalsIgnoreCase("proveedores")) {
+        }  else if (action.equalsIgnoreCase("proveedores")) {
             reportes.ProveedoresCompleto();
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override

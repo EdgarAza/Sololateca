@@ -6,66 +6,42 @@
         <title>Nuevo Proveedor</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <style>
-            .formulario {
-                margin-bottom: 2%;
-                margin-top: 5%;
-                margin-left: 25%;
-                margin-right: 25%;
-                
-                  body {
-               
-                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                margin: 0;
-                height: 100vh;
-                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
-            }
-            }
-
-        </style>
-
-
+     
     </head>
     <body>
 
-        <form action="cProveedores" class="formulario">
+        <div class="modal fade" id="guardarProveedoresModal" tabindex="-1" aria-labelledby="guardarProveedoresModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="guardarProveedoresModalLabel">Agregar Datos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formGuardar" action="cProveedores" method="post">
+                            <label>Nombre</label>
+                            <input type="text" placeholder="Nombre" name="txtNombre" class="form-control" required>
+                            <label>Razon Social</label>
+                            <input type="text" placeholder="Razon Social" name="txtRazonSocial" class="form-control" required>
+                            <label>Telefono</label>
+                            <input type="text" placeholder="Telefono" name="txtTelefono" class="form-control" required>
+                            <label>Correo</label>
+                            <input type="text" placeholder="Correo" name="txtCorreo" class="form-control" required>   
+                            <label>Direccion</label>
+                            <input type="text" placeholder="Direccion" name="txtDireccion" class="form-control" required>
+                            <label>Informacion de pago</label>
+                            <input type="text" placeholder="Informacion de pago" name="txtInfoPago" class="form-control" required>
+                            <label>Condiciones de pago</label>
+                            <input type="text" placeholder="Condiciones de pago" name="txtConPago" class="form-control" required> 
+                        </form>
+                    </div>
+                    <div class="modal-footer">              
+                        <button type="submit" form="formGuardar" class="btn btn-success" name="accion" value="Agregar">Guardar</button>
 
-            <div class="mb-3">
-                <label  class="form-label">Nombre</label>
-                <input type="text" class="form-control"  placeholder="Nombre" name="txtNombre">
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label  class="form-label">Razon Social</label>
-                <input type="text" class="form-control"  placeholder="Razon Social" name="txtRazonSocial">
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Telefono</label>
-                <input type="text" class="form-control"  placeholder="Telefono" name="txtTelefono">
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Correo</label>
-                <input type="text" class="form-control"  placeholder="Correo" name="txtCorreo">
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Direccion</label>
-                <input type="text" class="form-control"  placeholder="Direccion" name="txtDireccion">
-            </div>
-            <div class="mb-3">
-                <label  class="form-label">Info. Pago</label>
-                <input type="text" class="form-control"  placeholder="Informacion" name="txtInfoPago">
-            </div>
-             <div class="mb-3">
-                <label  class="form-label">Cond. Pago</label>
-                <input type="text" class="form-control"  placeholder="Condiciones" name="txtConPago">
-            </div>
-
-        
-            <input type="submit" class="btn btn-success" name="accion" value="Agregar">
-            <a href="cProveedores?accion=mostrar" class="btn btn-secondary">Regresar</a>
-        </form>
+        </div>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

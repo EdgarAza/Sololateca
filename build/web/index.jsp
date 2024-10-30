@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <form action="cClientes" method="post"> 
+     <form action="cProveedores" method="post"> 
             <button type="submit" name="accion" class="btn btn-primary" value="mostrar">Iniciar</button>
         </form>
     </body>
