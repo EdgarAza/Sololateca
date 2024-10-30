@@ -40,6 +40,14 @@
         <servlet-name>cVentas</servlet-name>
         <servlet-class>controladores.cVentas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cMC</servlet-name>
+        <servlet-class>controladores.cMC</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cMarca</servlet-name>
+        <servlet-class>controladores.cMC</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -79,5 +87,13 @@
     <servlet-mapping>
         <servlet-name>cVentas</servlet-name>
         <url-pattern>/cVentas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cMC</servlet-name>
+        <url-pattern>/cMC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cMarca</servlet-name>
+        <url-pattern>/cMarca</url-pattern>
     </servlet-mapping>
 </web-app>

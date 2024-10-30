@@ -56,7 +56,11 @@
                             <td><%= pro.getRazonsocial()%></td>
                             <td><%= pro.getTelefono()%></td>
                             <td><%= pro.getCorreo()%></td>
-                            <td><%= pro.getEstado()%></td>
+                            <td>
+                                <span class="<%= pro.getEstado().equalsIgnoreCase("INACTIVO") ? "text-white bg-danger" : "text-white bg-success"%> p-2 rounded">
+                                    <%= pro.getEstado()%>
+                                </span>
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-warning" 
                                         data-bs-toggle="modal" data-bs-target="#editarModal" 
