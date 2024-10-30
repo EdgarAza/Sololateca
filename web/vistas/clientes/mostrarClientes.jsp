@@ -9,193 +9,148 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Clientes</title>
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+    <jsp:include page="../extras/nav.jsp" />
+    <%
+        String mensaje = (String) request.getAttribute("mensaje");
+        if (mensaje != null) {
+    %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Éxito!</strong> <%= mensaje%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <%
+        }
+    %>
+    <h1>Clientes</h1>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <style>
-            .tabla-madre {
-                margin-top: 2%;
-                margin-left: 3%;
-                margin-right: 3%;
-            }
-
-            .form-reportes {
-                margin-top: 2%;
-                margin-left: 3%;
-                margin-right: 3%;
-            }
-
-
-            .fa-trash{
-                color: red;
-            }
-
-            .fa-pencil{
-                color:coral;
-            }
-
-            body {
-
-                background-image: url('assets/images/fondo.png'); /* Ajusta la ruta a tu imagen */
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                margin: 0;
-                height: 100vh;
-                color: #fff; /* Opcional: cambia el color del texto para mejor contraste con la imagen */
-            }
-            h1 {
-                text-align: center;        /* Centrar el texto */
-                color: white;              /* Color del texto */
-                font-size: 3.5em;          /* Tamaño de la letra */
-                text-shadow:
-                    -2px -2px 0 black,
-                    2px -2px 0 black,
-                    -2px  2px 0 black,
-                    2px  2px 0 black;
-            }
-
-            .table-responsive {
-                max-height: 300px; /* Ajusta la altura según sea necesario */
-                overflow-y: auto; /* Activa el scrollbar vertical */
-            }
-
-            .table thead th {
-                position: sticky;
-                top: 0; /* Fija el encabezado en la parte superior */
-                background-color: white; /* Color de fondo para el encabezado */
-                z-index: 10; /* Asegura que esté por encima de otras filas */
-            }
-        </style>
-
-
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">LA SOLOLATECA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ventas
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
-                                <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Datos
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
-                                <li><a class="dropdown-item" href="cProveedores?accion=mostrar">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="cClientes?accion=mostrar">Clientes</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Configuracion
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                <li> <a class="dropdown-item" href="cInventario?accion=Backup">Backup</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
+    <div class="tabla-madre">
+        <form action="cClientes" class="row g-3 align-items-center" method="post">
+            <div class="col-auto d-flex align-items-center">
+                <input type="text" class="form-control mb-3" placeholder="Busqueda" name="txtBusqueda"> 
+            </div> 
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success mb-3" name="accion" value="Buscar">Buscar</button>
             </div>
-        </nav>
-        <h1>Clientes</h1>
+        </form>
 
-        <div class="tabla-madre">
-            <form action="cClientes" class="row g-3 align-items-center">
-                <div class="col-auto d-flex align-items-center">
-                    <input type="text" class="form-control mb-3" placeholder="Busqueda" name="txtBusqueda"> 
-                </div> 
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-success mb-3" name="accion" value="Buscar">Buscar</button>
-                </div>
-            </form>
-
-
-            <a href="cClientes?accion=guardar" type="button" class="btn btn-success">Agregar nuevo</a>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarClientesModal">Agregar</button>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Fecha de Creacion</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <%
-
                         busqueda bus = (busqueda) session.getAttribute("buscar");
-                        String x = "";
-                        if (bus != null) {
-                            x = bus.getBuscar();
-                            // Ahora puedes usar 'x' como desees
-                        } else {
-                            x = "";
-                        }
+                        String x = (bus != null) ? bus.getBuscar() : "";
                         clientesDAO dao = new clientesDAO();
                         List<clientes> list = dao.mostrar(x);
-                        System.out.println("DATO DE BUSQUEDA " + x);
-                        Iterator<clientes> iter = list.iterator();
-                        clientes cli = null;
-                        while (iter.hasNext()) {
-                            cli = iter.next();
-
+                        for (clientes cli : list) {
                     %>
-                    <tbody>
-                        <tr>
-                            <td><%=cli.getId()%></td>
-                            <td><%=cli.getNombre()%></td>
-                            <td><%=cli.getTelefono()%></td>
-                            <td><%=cli.getCorreo()%></td>
-                            <td><%=cli.getDireccion()%></td>
+                    <tr>
+                        <td><%=cli.getId()%></td>
+                        <td><%=cli.getNombre()%></td>
+                        <td><%=cli.getTelefono()%></td>
+                        <td><%=cli.getCorreo()%></td>
+                        <td><%=cli.getDireccion()%></td>
+                        <td><%=cli.getFechaCreacion()%></td>
+                        <td>
+                            <button type="button" class="btn btn-warning" 
+                                    data-bs-toggle="modal" data-bs-target="#editarClientesModal" 
+                                    data-id="<%=cli.getId()%>" 
+                                    data-nombre="<%=cli.getNombre()%>" 
+                                    data-telefono="<%=cli.getTelefono()%>"
+                                    data-correo="<%=cli.getCorreo()%>"
+                                    data-direccion="<%=cli.getDireccion()%>">Editar</button>
 
-
-                            <td>
-                                <a href="cClientes?accion=editar&id=<%=cli.getId()%>" class="fa-solid fa-pencil"></a>
-                                <a href="cClientes?accion=eliminar&id=<%=cli.getId()%>"class="fa-solid fa-trash"></a>
-                            </td>
-
-                        </tr>
-                        <%}%>
-                    </tbody>
-
-                </table>
-            </div>
-
-            <div class="form-reportes">
-                <form action="cClientes" >       
-                    <input type="submit" class="btn btn-warning" name="accion" value="Clientes">
-
-                </form>
-            </div>
-
+                            <button type="button" class="btn btn-danger" 
+                                    onclick="showConfirmDelete(<%=cli.getId()%>)">Borrar</button>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    </body>
+        <div class="form-reportes">
+            <form action="cClientes">       
+                <input type="submit" class="btn btn-warning" name="accion" value="Clientes">
+            </form>
+        </div>
+
+    </div>
+
+    <jsp:include page="guardarClientes.jsp" />
+    <jsp:include page="editarClientes.jsp" />
+
+    <div id="confirmDeleteMessage" class="confirm-delete">
+       <h5>Confirmar Eliminación</h5>
+        <p>¿Estás seguro de que deseas eliminar este registro?</p>
+         <button type="button" class="btn btn-danger" onclick="deleteRecord()">Eliminar</button>
+        <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
+    </div>
+
+    <script>
+        let recordIdToDelete = null;
+
+        function showConfirmDelete(id) {
+            recordIdToDelete = id;
+            document.getElementById('confirmDeleteMessage').style.display = 'block';
+        }
+
+        function closeConfirmDelete() {
+            document.getElementById('confirmDeleteMessage').style.display = 'none';
+        }
+
+        function deleteRecord() {
+            if (recordIdToDelete) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'cClientes';
+
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'id';  // Asegúrate de que coincida con el nombre en el controlador
+                hiddenField.value = recordIdToDelete;
+
+                const actionField = document.createElement('input');
+                actionField.type = 'hidden';
+                actionField.name = 'accion';
+                actionField.value = 'Desactivar';
+
+                form.appendChild(hiddenField);
+                form.appendChild(actionField);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        window.onload = function () {
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                setTimeout(() => {
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                    alert.style.display = 'none';
+                }, 2000);
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
 </html>

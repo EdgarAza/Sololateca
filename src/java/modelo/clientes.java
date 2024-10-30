@@ -15,16 +15,21 @@ public class clientes {
     private String telefono;
     private String correo;
     private String direccion;
+    private String fechaCreacion;
+    private String estado;
+    
 
     public clientes() {
     }
 
-    public clientes(int id, String nombre, String telefono, String correo, String direccion) {
+    public clientes(int id, String nombre, String telefono, String correo, String direccion, String fechaCreacion, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
         this.direccion = direccion;
+        this.fechaCreacion = fechaCreacion;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -66,7 +71,23 @@ public class clientes {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     
     
     

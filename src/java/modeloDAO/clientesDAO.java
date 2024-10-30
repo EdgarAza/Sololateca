@@ -29,7 +29,7 @@ public class clientesDAO implements crudClientes {
     public List mostrar(String var) {
         ArrayList<clientes> list = new ArrayList();
 
-        String sql = "SELECT * FROM clientes WHERE nombre LIKE '%" + var + "%' ";
+        String sql = "SELECT * FROM clientes WHERE nombre LIKE '%" + var + "%' && estado='ACTIVO'";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -41,7 +41,8 @@ public class clientesDAO implements crudClientes {
                 cli.setTelefono(rs.getString("telefono"));
                 cli.setCorreo(rs.getString("correo"));
                 cli.setDireccion(rs.getString("direccion"));
-
+                cli.setFechaCreacion(rs.getString("fechacreacion"));
+                cli.setEstado(rs.getString("estado"));
                 list.add(cli);
 
             }
@@ -53,32 +54,8 @@ public class clientesDAO implements crudClientes {
     }
 
     @Override
-    public clientes llenarCampos(int id) {
-
-        String sql = "SELECT * FROM clientes WHERE id = ?";
-        try {
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                cli.setId(rs.getInt("id"));
-                cli.setNombre(rs.getString("nombre"));
-                cli.setTelefono(rs.getString("telefono"));
-                cli.setCorreo(rs.getString("correo"));
-                cli.setDireccion(rs.getString("direccion"));
-
-            }
-
-        } catch (Exception e) {
-
-        }
-        return cli;
-    }
-
-    @Override
     public boolean guardar(clientes cli) {
-        String sql = "INSERT INTO clientes (nombre,telefono,correo,direccion) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO clientes (nombre,telefono,correo,direccion,fechacreacion,estado) VALUES (?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -86,6 +63,8 @@ public class clientesDAO implements crudClientes {
             ps.setString(2, cli.getTelefono());
             ps.setString(3, cli.getCorreo());
             ps.setString(4, cli.getDireccion());
+            ps.setString(5, cli.getFechaCreacion());
+            ps.setString(6, cli.getEstado());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -114,17 +93,15 @@ public class clientesDAO implements crudClientes {
     }
 
     @Override
-    public boolean eliminar(int id) {
-          String sql = "DELETE FROM clientes WHERE id = ?";
-        Connection con = null; 
-        PreparedStatement ps = null; 
-
+    public boolean desactivar(clientes cli) {
+        String sql = "UPDATE clientes SET estado = ? WHERE id = ?";
         try {
-            con = cn.getConnection(); 
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int rowsAffected = ps.executeUpdate(); 
-            return rowsAffected > 0; 
+            ps.setString(1, cli.getEstado());
+            ps.setInt(2, cli.getId());
+            ps.execute();
+            return true;
         } catch (Exception e) {
             System.out.println(e.toString());
             return false;

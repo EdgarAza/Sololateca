@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import modelo.busqueda;
 import modelo.clientes;
 import modeloDAO.clientesDAO;
@@ -30,6 +32,8 @@ public class cClientes extends HttpServlet {
     conexion con = new conexion();
     busqueda bus = new busqueda();
     reportesClientes reportes = new reportesClientes(con.getConnection());
+    DateTimeFormatter Fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String fdia = Fecha.format(LocalDateTime.now());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,13 +44,15 @@ public class cClientes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
-                      acceso = "vistas/clientes/mostrarClientes.jsp";
-        } else if (action.equalsIgnoreCase("guardar")) {
-            acceso = "vistas/clientes/guardarClientes.jsp";
-
+            acceso = "vistas/clientes/mostrarClientes.jsp";
         } else if (action.equalsIgnoreCase("Agregar")) {
             String nombre = request.getParameter("txtNombre");
             String telefono = request.getParameter("txtTelefono");
@@ -57,15 +63,15 @@ public class cClientes extends HttpServlet {
             cli.setTelefono(telefono);
             cli.setCorreo(correo);
             cli.setDireccion(direccion);
+            cli.setFechaCreacion(fdia);
+            cli.setEstado("ACTIVO");
             cliDAO.guardar(cli);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/clientes/mostrarClientes.jsp";
 
-        } else if (action.equalsIgnoreCase("editar")) {
-            request.setAttribute("idCli", request.getParameter("id"));
-            acceso = "vistas/clientes/editarClientes.jsp";
-
         } else if (action.equalsIgnoreCase("Actualizar")) {
-            id = Integer.parseInt(request.getParameter("txtid"));
+            id = Integer.parseInt(request.getParameter("txtId"));
+            String id2 = (request.getParameter("txtId"));
             String nombre = request.getParameter("txtNombre");
             String telefono = request.getParameter("txtTelefono");
             String correo = request.getParameter("txtCorreo");
@@ -77,11 +83,14 @@ public class cClientes extends HttpServlet {
             cli.setDireccion(direccion);
             cli.setId(id);
             cliDAO.editar(cli);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/clientes/mostrarClientes.jsp";
-        } else if (action.equalsIgnoreCase("eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            cliDAO.eliminar(id);
+        } else if (action.equalsIgnoreCase("Desactivar")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            cli.setEstado("INACTIVO");
+            cli.setId(id);
+            cliDAO.desactivar(cli);
+            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
             acceso = "vistas/clientes/mostrarClientes.jsp";
         } else if (action.equalsIgnoreCase("Clientes")) {
             reportes.ClientesCompleto();
@@ -90,23 +99,17 @@ public class cClientes extends HttpServlet {
         } else if (action.equalsIgnoreCase("Buscar")) {
             String busquedaTexto = request.getParameter("txtBusqueda");
 
-        busqueda bus = new busqueda();
-        bus.setBuscar(busquedaTexto);
+            busqueda bus = new busqueda();
+            bus.setBuscar(busquedaTexto);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
-        
-        acceso = "vistas/clientes/mostrarClientes.jsp";
+            HttpSession session = request.getSession();
+            session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
+
+            acceso = "vistas/clientes/mostrarClientes.jsp";
 
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
     }
 
     @Override

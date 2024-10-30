@@ -126,11 +126,18 @@
                 <button type="submit" name="accion" class="btn btn-warning" value="Minimo">Minimo</button>
                 <button type="submit" name="accion" class="btn btn-warning" value="Existencia">Existencia</button>
             </form>
-            
+
         </div>
         <jsp:include page="verInventario.jsp" />
         <jsp:include page="guardarInventario.jsp" />
         <jsp:include page="editarInventario.jsp" />
+        
+        <div id="confirmDeleteMessage" class="confirm-delete">
+            <h5>Confirmar Eliminación</h5>
+            <p>¿Estás seguro de que deseas eliminar este registro?</p>
+            <button type="button" class="btn btn-danger" onclick="deleteRecord()">Eliminar</button>
+            <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
+        </div>
         <script>
 
             let recordIdToDelete = null;
