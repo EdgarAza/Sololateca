@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">LA SOLOLATECA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,19 +26,50 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="cVenta?accion=mostrar">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="cVentas?accion=mostrar">Ventas</a></li>
-                                <li><a class="dropdown-item" href="cDiario?accion=mostrar">Diario</a></li>
+                                <li>
+                                    <form action="cVenta" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Nueva Venta</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cVentas" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Ventas</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cDiario" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Diario</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Datos
                             </a>
                             <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="cInventario?accion=mostrar">Productos</a></li>
-                                <li><a class="dropdown-item" href="cProveedores?accion=mostrar">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="cClientes?accion=mostrar">Clientes</a></li>
+                                <li>
+                                    <form action="cInventario" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Productos</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cProveedores" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Proveedores</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cClientes" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Clientes</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
 
@@ -47,9 +78,24 @@
                                 Configuracion
                             </a>
                             <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="controlador?accion=mostrar">Usurios</a></li>
-                                <li> <a class="dropdown-item" href="cReportes?accion=reportes">Reportes</a></li>
-                                <li><a class="dropdown-item" href="cInventario?accion=Backup">Backup</a></li>
+                                <li>
+                                    <form action="controlador" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="mostrar">
+                                        <button type="submit" class="dropdown-item">Usuarios</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cReportes" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="reportes">
+                                        <button type="submit" class="dropdown-item">Reportes</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="cInventario" method="post" class="d-inline">
+                                        <input type="hidden" name="accion" value="Backup">
+                                        <button type="submit" class="dropdown-item">Backup</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
 
@@ -57,5 +103,6 @@
                 </div>
             </div>
         </nav>
+
     </body>
 </html>

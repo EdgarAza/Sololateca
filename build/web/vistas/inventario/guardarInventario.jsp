@@ -1,3 +1,8 @@
+<%@page import="modelo.categoria"%>
+<%@page import="modeloDAO.categoriaDAO"%>
+<%@page import="modelo.marca"%>
+<%@page import="java.util.List"%>
+<%@page import="modeloDAO.marcaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,10 +36,34 @@
                             <input type="text" class="form-control"  placeholder="Stock" name="txtStock">
                             <label>Minimo</label>
                             <input type="text" class="form-control"  placeholder="Minimo" name="txtMinimo">
+                            <%
+                                marcaDAO dao = new marcaDAO();
+                                List<marca> list = dao.mostrar();
+                            %>
+
                             <label>Marca</label>
-                            <input type="text" class="form-control"  placeholder="Marca" name="txtMarca">
+                            <select class="form-control" name="txtMarca">
+                                <option value="">Seleccione una marca</option>
+                                <%
+                                    for (marca mar : list) {
+                                %>
+                                <option value="<%= mar.getMarca()%>"><%= mar.getMarca()%></option>
+                                <% }%>
+                            </select>
+                            <%
+                                categoriaDAO dao2 = new categoriaDAO();
+                                List<categoria> list2 = dao2.mostrar();
+                            %>
+
                             <label>Categoria</label>
-                            <input type="text" class="form-control"  placeholder="Categoria" name="txtCategoria">
+                            <select class="form-control" name="txtCategoria">
+                                <option value="">Seleccione una categoria</option>
+                                <%
+                                    for (categoria cat : list2) {
+                                %>
+                                <option value="<%= cat.getCategoria()%>"><%= cat.getCategoria()%></option>
+                                <% }%>
+                            </select>
                         </form>
                     </div>
                     <div class="modal-footer">              
@@ -52,7 +81,7 @@
             <button type="button" class="btn btn-danger" onclick="deleteRecord()">Eliminar</button>
             <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
         </div>
-        <script src="../assets/js/script/js" ></script>
+     
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>

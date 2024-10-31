@@ -48,9 +48,7 @@
                             <input type="text" name="txtFechaModificacion" class="form-control" disabled>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" form="formEditar" class="btn btn-warning" name="accion" value="Actualizar">Actualizar</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

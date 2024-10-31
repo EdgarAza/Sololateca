@@ -1,3 +1,8 @@
+<%@page import="modelo.marca"%>
+<%@page import="modeloDAO.marcaDAO"%>
+<%@page import="modelo.categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="modeloDAO.categoriaDAO"%>
 <%@page import="modelo.inventario"%>
 <%@page import="modeloDAO.inventarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -33,10 +38,35 @@
                         <input type="text" name="txtPrecio" class="form-control" required> 
                         <label>Minimo</label>
                         <input type="text" name="txtMinimo" class="form-control" required> 
-                        <label>Marca</label>
-                        <input type="text" name="txtMarca" class="form-control" required>
-                        <label>Categoria</label>
-                        <input type="text" name="txtCategoria" class="form-control" required>
+                       <%
+                                marcaDAO dao = new marcaDAO();
+                                List<marca> list = dao.mostrar();
+                            %>
+
+                            <label>Marca</label>
+                            <select class="form-control" name="txtMarca" required>
+                                <option value="">Seleccione una marca</option>
+                                <%
+                                    for (marca mar : list) {
+                                %>
+                                <option value="<%= mar.getMarca()%>"><%= mar.getMarca()%></option>
+                                <% }%>
+                            </select>
+                        <%
+                                categoriaDAO dao2 = new categoriaDAO();
+                                List<categoria> list2 = dao2.mostrar();
+                            %>
+
+                            <label>Categoria</label>
+                            <select class="form-control" name="txtCategoria" required>
+                                <option value="">Seleccione una categoria</option>
+                                <%
+                                    for (categoria cat : list2) {
+                                %>
+                                <option value="<%= cat.getCategoria()%>"><%= cat.getCategoria()%></option>
+                                <% }%>
+                            </select>
+                       
 
                     </form>
                 </div>
@@ -69,8 +99,8 @@
             modalForm.querySelector('input[name="txtCosto"]').value = costo;
             modalForm.querySelector('input[name="txtPrecio"]').value = precio;
             modalForm.querySelector('input[name="txtMinimo"]').value = minimo;
-            modalForm.querySelector('input[name="txtMarca"]').value = marca;
-            modalForm.querySelector('input[name="txtCategoria"]').value = categoria;
+            modalForm.querySelector('select[name="txtMarca"]').value = marca;
+            modalForm.querySelector('select[name="txtCategoria"]').value = categoria;
         });
     </script>
 

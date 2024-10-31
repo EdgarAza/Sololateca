@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <form action="cMC" method="post"> 
+     <form action="cInventario" method="post"> 
             <button type="submit" name="accion" class="btn btn-primary" value="mostrar">Iniciar</button>
         </form>
     </body>
