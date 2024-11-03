@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/index.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/marca-categoria/editarMarca.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cMC.java</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/marca-categoria/guardarMarca.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/marca-categoria/guardarCategoria.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/marca-categoria/mostrarMC.jsp</file>
-            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/marca-categoria/editarCategoria.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/assets/css/style.css</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/inventario/guardarInventario.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/src/java/controladores/cCompras.java</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/compras/mostrarCompras.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/inventario/mostrarInventario.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/compras/nuevaCompra.jsp</file>
+            <file>file:/C:/Users/DANIELS%20SYSTEMS/Documents/NetBeansProjects/Sololateca/web/vistas/compras/detallesCompras.jsp</file>
         </group>
     </open-files>
 </project-private>

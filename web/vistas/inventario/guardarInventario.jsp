@@ -1,15 +1,19 @@
+<%@page import="modeloDAO.unidadDAO"%>
+<%@page import="modelo.unidad"%>
 <%@page import="modelo.categoria"%>
 <%@page import="modeloDAO.categoriaDAO"%>
 <%@page import="modelo.marca"%>
 <%@page import="java.util.List"%>
 <%@page import="modeloDAO.marcaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nuevo Producto</title>
+        <title>Productos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+       
 
     </head>
     <body>
@@ -26,6 +30,20 @@
 
                             <label>Codigo</label>
                             <input type="text" class="form-control"  placeholder="Codigo" name="txtCodigo">
+                            <%
+                                unidadDAO dao3 = new unidadDAO();
+                                List<unidad> list3 = dao3.mostrar();
+                            %>
+
+                            <label>Unida de medida</label>
+                            <select class="form-control" name="txtUnidad">
+                                <option value="">Seleccione una medida</option>
+                                <%
+                                    for (unidad un : list3) {
+                                %> 
+                                <option value="<%= un.getUnidadmedida()%>"><%= un.getUnidadmedida()%></option>
+                                <% }%>
+                            </select>
                             <label>Descripcion</label>
                             <input type="text" class="form-control"  placeholder="Descripcion" name="txtDescripcion">
                             <label>Costo</label>
@@ -82,7 +100,6 @@
             <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
         </div>
      
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

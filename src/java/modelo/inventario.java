@@ -9,6 +9,7 @@ public class inventario {
     
     private int id;
     private String codigo;
+    private String unidadmedida;
     private String descripcion;
     private String stock;
     private String costo;
@@ -23,9 +24,10 @@ public class inventario {
     public inventario() {
     }
 
-    public inventario(int id, String codigo, String descripcion, String stock, String costo, String precio, String ganancia, String minimo, String marca, String categoria, String fechaCreacion, String fechaModificacion) {
+    public inventario(int id, String codigo, String unidadmedida, String descripcion, String stock, String costo, String precio, String ganancia, String minimo, String marca, String categoria, String fechaCreacion, String fechaModificacion) {
         this.id = id;
         this.codigo = codigo;
+        this.unidadmedida = unidadmedida;
         this.descripcion = descripcion;
         this.stock = stock;
         this.costo = costo;
@@ -52,6 +54,14 @@ public class inventario {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getUnidadmedida() {
+        return unidadmedida;
+    }
+
+    public void setUnidadmedida(String unidadmedida) {
+        this.unidadmedida = unidadmedida;
     }
 
     public String getDescripcion() {
@@ -134,7 +144,7 @@ public class inventario {
         this.fechaModificacion = fechaModificacion;
     }
 
-    
+   
     
   
 }

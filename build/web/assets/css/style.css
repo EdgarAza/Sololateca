@@ -5,7 +5,13 @@
     margin-right: 3%;
 }
 
+label{
+    color: black !important; 
+}
 
+h5{
+    color: black !important;
+}
 .busqueda{
     margin-top: 2%;
     margin-right: 70%;
@@ -67,3 +73,4 @@ h1 {
     width: 100%; /* Ocupa todo el ancho disponible hasta el máximo */
     z-index: 1050; /* Asegúrate de que esté por encima de otros elementos */
 }
+

@@ -48,6 +48,18 @@
         <servlet-name>cMarca</servlet-name>
         <servlet-class>controladores.cMC</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cProvCategorias</servlet-name>
+        <servlet-class>controladores.cProvCategorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cProvMarca</servlet-name>
+        <servlet-class>controladores.cProvMarca</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cCompras</servlet-name>
+        <servlet-class>controladores.cCompras</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -95,5 +107,17 @@
     <servlet-mapping>
         <servlet-name>cMarca</servlet-name>
         <url-pattern>/cMarca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cProvCategorias</servlet-name>
+        <url-pattern>/cProvCategorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cProvMarca</servlet-name>
+        <url-pattern>/cProvMarca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cCompras</servlet-name>
+        <url-pattern>/cCompras</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -31,7 +31,7 @@
 
         <h1>Inventario</h1>
         <div class="tabla-madre">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarInventarioModal">Agregar</button>
+            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#guardarInventarioModal">Agregar</button>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -70,6 +70,7 @@
                                         data-bs-toggle="modal" data-bs-target="#verInventarioModal" 
                                         data-id="<%=inv.getId()%>" 
                                         data-codigo="<%=inv.getCodigo()%>" 
+                                        data-unidad="<%=inv.getUnidadmedida()%>" 
                                         data-descripcion="<%=inv.getDescripcion()%>"
                                         data-stock="<%=inv.getStock()%>"
                                         data-costo="<%=inv.getCosto()%>"
@@ -91,6 +92,7 @@
                                         data-bs-toggle="modal" data-bs-target="#editarInventarioModal" 
                                         data-id="<%=inv.getId()%>" 
                                         data-codigo="<%=inv.getCodigo()%>" 
+                                        data-unidad="<%=inv.getUnidadmedida()%>" 
                                         data-descripcion="<%=inv.getDescripcion()%>"
                                         data-stock="<%=inv.getStock()%>"
                                         data-costo="<%=inv.getCosto()%>"
@@ -130,7 +132,7 @@
         <jsp:include page="verInventario.jsp" />
         <jsp:include page="guardarInventario.jsp" />
         <jsp:include page="editarInventario.jsp" />
-        
+
         <div id="confirmDeleteMessage" class="confirm-delete">
             <h5>Confirmar Eliminación</h5>
             <p>¿Estás seguro de que deseas eliminar este registro?</p>

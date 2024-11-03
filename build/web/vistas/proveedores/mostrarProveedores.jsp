@@ -1,3 +1,4 @@
+<%@page import="modelo.busqueda"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="modelo.proveedores"%>
 <%@page import="java.util.List"%>
@@ -27,7 +28,7 @@
         %>
         <h1>Proveedores</h1>
         <div class="tabla-madre">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarProveedoresModal">Agregar</button>
+            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#guardarProveedoresModal">Agregar</button>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -38,6 +39,8 @@
                             <th scope="col">Telefono</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Estado</th>   
+                            <th scope="col">Marcas</th>   
+                            <th scope="col">Categorias</th>   
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -59,6 +62,34 @@
                                 </span>
                             </td>
                             <td>
+                                <button type="button" class="btn btn-warning" 
+                                        data-bs-toggle="modal" data-bs-target="#agregarMarcaModal" 
+                                        data-nombre="<%=pro.getNombre()%>" 
+                                        >Marcas</button>
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning" 
+                                        data-bs-toggle="modal" data-bs-target="#agregarCategoriaModal" 
+                                        data-nombre="<%=pro.getNombre()%>" 
+                                        >Categorias</button>
+
+                            </td>
+                            <td>
+                               <button type="button" class="btn btn-warning" 
+                                        data-bs-toggle="modal" data-bs-target="#verModal" 
+                                        data-id="<%=pro.getId()%>" 
+                                        data-nombre="<%=pro.getNombre()%>" 
+                                        data-razonSocial="<%=pro.getRazonsocial()%>"
+                                        data-telefono="<%=pro.getTelefono()%>" 
+                                        data-correo="<%=pro.getCorreo()%>"
+                                        data-direccion="<%=pro.getDireccion()%>" 
+                                        data-infopago="<%=pro.getInfopago()%>"
+                                        data-conpago="<%=pro.getConpago()%>" 
+                                        data-estado="<%=pro.getEstado()%>"
+                                        >Ver</button>
+
+
                                 <button type="button" class="btn btn-warning" 
                                         data-bs-toggle="modal" data-bs-target="#editarModal" 
                                         data-id="<%=pro.getId()%>" 
@@ -82,11 +113,13 @@
                 <input type="submit" class="btn btn-warning" name="accion" value="proveedores">
             </form>
         </div>
-
-
-
+        
+        <jsp:include page="categoriasProveedores.jsp" />
+        <jsp:include page="marcasProveedores.jsp" />
+         <jsp:include page="editarProveedores.jsp" />
+        <jsp:include page="verProveedores.jsp" />
         <jsp:include page="guardarProveedores.jsp" />
-        <jsp:include page="editarProveedores.jsp" />
+       
 
 
 
@@ -107,7 +140,10 @@
             };
         </script>
 
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
+
+
+
+

@@ -13,10 +13,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import modelo.busqueda;
 import modelo.inventario;
 import modeloDAO.inventarioDAO;
 import reportes.reportesInventario;
@@ -53,11 +56,9 @@ public class cInventario extends HttpServlet {
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/inventario/mostrarInventario.jsp";
-        } else if (action.equalsIgnoreCase("guardar")) {
-            acceso = "vistas//inventario/guardarInventario.jsp";
-
         } else if (action.equalsIgnoreCase("Agregar")) {
             String codigo = request.getParameter("txtCodigo");
+            String unidad = request.getParameter("txtUnidad");
             String descripcion = request.getParameter("txtDescripcion");
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
@@ -73,6 +74,7 @@ public class cInventario extends HttpServlet {
             String fechaModificacion = fdia;
 
             inv.setCodigo(codigo);
+            inv.setUnidadmedida(unidad);
             inv.setDescripcion(descripcion);
             inv.setStock(stock);
             inv.setCosto(costo);
@@ -89,6 +91,7 @@ public class cInventario extends HttpServlet {
         } else if (action.equalsIgnoreCase("Actualizar")) {
             id = Integer.parseInt(request.getParameter("txtId"));
             String codigo = request.getParameter("txtCodigo");
+            String unidad = request.getParameter("txtUnidad");
             String descripcion = request.getParameter("txtDescripcion");
             String stock = request.getParameter("txtStock");
             String costo = request.getParameter("txtCosto");
@@ -102,6 +105,7 @@ public class cInventario extends HttpServlet {
             String categoria = request.getParameter("txtCategoria");
 
             inv.setCodigo(codigo);
+            inv.setUnidadmedida(unidad);
             inv.setDescripcion(descripcion);
             inv.setStock(stock);
             inv.setCosto(costo);
@@ -135,6 +139,14 @@ public class cInventario extends HttpServlet {
             backup p = new backup();
             p.ejecutar();
             acceso = "vistas/inventario/mostrarInventario.jsp";
+
+        } else if (action.equalsIgnoreCase("Buscar")) {
+            String busquedaTexto = request.getParameter("txtBusqueda");
+            busqueda bus = new busqueda();
+            bus.setBuscar(busquedaTexto);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
 
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);

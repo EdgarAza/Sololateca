@@ -18,6 +18,8 @@ public interface crudInventario {
     public boolean guardar(inventario inv);
 
     public boolean editar(inventario inv);
+    
+     public boolean actulizarCompra(inventario inv);
 
     public boolean eliminar(int id);
 
