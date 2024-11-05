@@ -15,27 +15,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuarios</title>
+        <title>Marca - Categorias</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/mc.css">
 
-        <style>
-            .tablas-container {
-                display: flex;
-                justify-content: space-between; /* Asegura que haya espacio entre las tablas */
-                margin-top: 2%;
-                margin-left: 6%;
-                margin-right: 6%;
-            }
-            .tabla-marca, .tabla-categoria {
-                flex: 1; /* Permite que las tablas ocupen el mismo espacio */
-                margin-right: 20px; /* Espacio entre las tablas */
-            }
-            .tabla-categoria {
-                margin-right: 0; /* Eliminar el margen derecho de la segunda tabla */
-            }
-        </style>
 
     </head>
     <body>
@@ -54,7 +39,7 @@
         <h1>MARCAS - CATEGORIAS</h1>
         <div class="tablas-container">
             <div class="tabla-marca">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarMarcasModal">Agregar</button>
+                <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#guardarMarcasModal">Agregar</button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -100,7 +85,7 @@
             </div>
 
             <div class="tabla-categoria">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarCategoriaModal">Agregar</button>
+                <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#guardarCategoriaModal">Agregar</button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

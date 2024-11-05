@@ -69,9 +69,7 @@ public class cClientes extends HttpServlet {
             request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/clientes/mostrarClientes.jsp";
 
-        } else if (action.equalsIgnoreCase("Actualizar")) {
-            id = Integer.parseInt(request.getParameter("txtId"));
-            String id2 = (request.getParameter("txtId"));
+        } else if (action.equalsIgnoreCase("AgregarV")) {
             String nombre = request.getParameter("txtNombre");
             String telefono = request.getParameter("txtTelefono");
             String correo = request.getParameter("txtCorreo");
@@ -81,21 +79,28 @@ public class cClientes extends HttpServlet {
             cli.setTelefono(telefono);
             cli.setCorreo(correo);
             cli.setDireccion(direccion);
+            cli.setFechaCreacion(fdia);
+            cli.setEstado("ACTIVO");
+            cliDAO.guardar(cli);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
+            acceso = "vistas/venta/Venta.jsp";
+
+        } else if (action.equalsIgnoreCase("Actualizar")) {
+            id = Integer.parseInt(request.getParameter("txtId"));
+            String nombre = request.getParameter("txtNombre");
+            String telefono = request.getParameter("txtTelefono");
+            String correo = request.getParameter("txtCorreo");
+            String direccion = request.getParameter("txtDireccion");
+            String estado = request.getParameter("txtEstado");
+            cli.setNombre(nombre);
+            cli.setTelefono(telefono);
+            cli.setCorreo(correo);
+            cli.setDireccion(direccion);
+            cli.setEstado(estado);
             cli.setId(id);
             cliDAO.editar(cli);
             request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/clientes/mostrarClientes.jsp";
-        } else if (action.equalsIgnoreCase("Desactivar")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            cli.setEstado("INACTIVO");
-            cli.setId(id);
-            cliDAO.desactivar(cli);
-            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
-            acceso = "vistas/clientes/mostrarClientes.jsp";
-        } else if (action.equalsIgnoreCase("Clientes")) {
-            reportes.ClientesCompleto();
-            acceso = "vistas/clientes/mostrarClientes.jsp";
-
         } else if (action.equalsIgnoreCase("Buscar")) {
             String busquedaTexto = request.getParameter("txtBusqueda");
 

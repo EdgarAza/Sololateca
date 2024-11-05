@@ -16,6 +16,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nuevo Proveedor</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">   
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/proveedores.css">
     </head>
     <body>
         <div class="modal fade" id="agregarMarcaModal" tabindex="-1" aria-labelledby="agregarMarcaModalLabel" aria-hidden="true">
@@ -65,7 +67,7 @@
                                     <td><%= pro.getMarca()%></td>
                                     <td><%= pro.getProveedor()%></td>
                                     <td>
-                                        <button type="button" class="btn btn-danger" onclick="showConfirmDelete(<%= pro.getId()%>)">
+                                        <button type="button" class="btn btn-danger" onclick="showConfirmDelete2(<%= pro.getId()%>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                             </svg>
@@ -86,7 +88,50 @@
             </div>
         </div>
 
+        <div id="confirmDeleteMessage2" class="confirm-delete">
+            <h5>Confirmar Eliminación</h5>
+            <p>¿Estás seguro de que deseas eliminar este registro?</p>
+            <button type="button" class="btn btn-danger" onclick="deleteRecord2()">Eliminar</button>
+            <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete2()">Cancelar</button>
+        </div>
+
         <script>
+            let recordIdToDelete2 = null;
+
+            function showConfirmDelete2(id) {
+                recordIdToDelete2 = id;
+                document.getElementById('confirmDeleteMessage2').style.display = 'block';
+            }
+
+            function closeConfirmDelete2() {
+                document.getElementById('confirmDeleteMessage2').style.display = 'none';
+            }
+
+            function deleteRecord2() {
+                if (recordIdToDelete2) {
+                    // Redirigir al controlador para eliminar
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = 'cProvMarca';
+
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = 'id2';
+                    hiddenField.value = recordIdToDelete2;
+
+                    const actionField = document.createElement('input');
+                    actionField.type = 'hidden';
+                    actionField.name = 'accion';
+                    actionField.value = 'Eliminar';
+
+                    form.appendChild(hiddenField);
+                    form.appendChild(actionField);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }
+
+
             const agregarMarcaModal = document.getElementById('agregarMarcaModal');
             agregarMarcaModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget; // Botón que activó el modal

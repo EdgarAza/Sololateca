@@ -65,10 +65,11 @@ public class cProvCategorias extends HttpServlet {
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
         } else if (action.equalsIgnoreCase("Eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
+            id = Integer.parseInt(request.getParameter("id3"));
             procDAO.eliminar(id);
-          acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        } 
+            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
+            acceso = "vistas/proveedores/mostrarProveedores.jsp";
+        }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }

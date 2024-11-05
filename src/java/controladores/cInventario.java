@@ -86,6 +86,7 @@ public class cInventario extends HttpServlet {
             inv.setFechaCreacion(fechaCreacion);
             inv.setFechaModificacion(fechaModificacion);
             invDao.guardar(inv);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/inventario/mostrarInventario.jsp";
 
         } else if (action.equalsIgnoreCase("Actualizar")) {
@@ -117,30 +118,14 @@ public class cInventario extends HttpServlet {
             inv.setFechaModificacion(fdia);
             inv.setId(id);
             invDao.editar(inv);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/inventario/mostrarInventario.jsp";
         } else if (action.equalsIgnoreCase("Eliminar")) {
             id = Integer.parseInt(request.getParameter("id"));
             invDao.eliminar(id);
+            request.setAttribute("mensaje", "Datos elimandos exitosamente.");
             acceso = "vistas/inventario/mostrarInventario.jsp";
-        } else if (action.equalsIgnoreCase("Inventario")) {
-            reportes.InventarioCompleto();
-            acceso = "vistas/inventario/mostrarInventario.jsp";
-
-        } else if (action.equalsIgnoreCase("Minimo")) {
-            reportes.InventarioMinimo();
-            acceso = "vistas/inventario/mostrarInventario.jsp";
-
-        } else if (action.equalsIgnoreCase("Existencia")) {
-            reportes.InventarioExistencia();
-            acceso = "vistas/inventario/mostrarInventario.jsp";
-
-        } else if (action.equalsIgnoreCase("Backup")) {
-            backup p = new backup();
-            p.ejecutar();
-            acceso = "vistas/inventario/mostrarInventario.jsp";
-
-        } else if (action.equalsIgnoreCase("Buscar")) {
+        }else if (action.equalsIgnoreCase("Buscar")) {
             String busquedaTexto = request.getParameter("txtBusqueda");
             busqueda bus = new busqueda();
             bus.setBuscar(busquedaTexto);

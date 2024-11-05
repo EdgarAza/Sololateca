@@ -12,8 +12,10 @@ import modelo.usuarios;
  * @author DANIELS SYSTEMS
  */
 public interface crudUsuarios {
+
     public List mostrar();
+
     public boolean guardar(usuarios usu);
+
     public boolean editar(usuarios usu);
-    public boolean eliminar(int usu);
 }

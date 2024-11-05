@@ -52,6 +52,7 @@ public class cMC extends HttpServlet {
             String marca = request.getParameter("txtMarca");
             mar.setMarca(marca);
             marDao.guardar(mar);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
 
         } else if (action.equalsIgnoreCase("ActualizarMarca")) {
@@ -60,16 +61,18 @@ public class cMC extends HttpServlet {
             mar.setMarca(marca);
             mar.setId(idmar);
             marDao.editar(mar);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
         } else if (action.equalsIgnoreCase("EliminarMarca")) {
             idmar = Integer.parseInt(request.getParameter("idMarca"));
             marDao.eliminar(idmar);
+            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
         } else if (action.equalsIgnoreCase("AgregarCategoria")) {
             String categoria = request.getParameter("txtCategoria");
             cat.setCategoria(categoria);
             catDao.guardar(cat);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
 
         } else if (action.equalsIgnoreCase("ActualizarCategoria")) {
@@ -79,11 +82,12 @@ public class cMC extends HttpServlet {
             cat.setCategoria(categoria);
             cat.setId(idcat);
             catDao.editar(cat);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
         } else if (action.equalsIgnoreCase("EliminarCategoria")) {
             idcat = Integer.parseInt(request.getParameter("idCategoria"));
             catDao.eliminar(idcat);
+            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
             acceso = "vistas/marca-categoria/mostrarMC.jsp";
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);

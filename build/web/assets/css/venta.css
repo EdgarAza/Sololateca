@@ -1,0 +1,11 @@
+
+.oculto {
+    display: none;
+}
+
+#tablaVenta th:nth-child(7),
+#tablaVenta td:nth-child(7),
+#tablaVenta th:nth-child(8),
+#tablaVenta td:nth-child(8) {
+    display: none;
+}

@@ -1,0 +1,8 @@
+#tablaCompra th:nth-child(7),
+#tablaCompra td:nth-child(7),
+#tablaCompra th:nth-child(8),
+#tablaCompra td:nth-child(8),
+#tablaCompra th:nth-child(9),
+#tablaCompra td:nth-child(9) {
+    display: none;
+}

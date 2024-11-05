@@ -24,7 +24,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="formVer" action="controlador" method="post">
-                            
+
                             <input type="hidden" class="form-control" name="txtId" >
                             <label>Rol</label>
                             <select class="form-select" name="txtRol" disabled>
@@ -45,6 +45,12 @@
                             <input type="text" class="form-control" name="txtTelefono" disabled>
                             <label>Direccion</label>
                             <input type="text" class="form-control" name="txtDireccion" disabled>
+                            <label>Estado</label>
+                           <label>Estado</label>
+                            <select class="form-select "  name='txtEstado' disabled>
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTVO</option>
+                            </select>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -67,6 +73,7 @@
                 const apellidos = button.getAttribute('data-apellidos');
                 const telefono = button.getAttribute('data-telefono');
                 const direccion = button.getAttribute('data-direccion');
+                 const estado = button.getAttribute('data-estado');
 
                 // Rellenar los campos del formulario en el modal
                 const modalForm = verModal.querySelector('form');
@@ -79,6 +86,7 @@
                 modalForm.querySelector('input[name="txtApellidos"]').value = apellidos;
                 modalForm.querySelector('input[name="txtTelefono"]').value = telefono;
                 modalForm.querySelector('input[name="txtDireccion"]').value = direccion;
+                 modalForm.querySelector('select[name="txtEstado"]').value = estado;
             });
         </script>
 

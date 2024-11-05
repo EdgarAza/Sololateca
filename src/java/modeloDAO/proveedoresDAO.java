@@ -55,6 +55,35 @@ public class proveedoresDAO implements crudProveedores {
 
         return list;
     }
+    
+    public List mostrarActivos() {
+        ArrayList<proveedores> list = new ArrayList();
+
+        String sql = "SELECT * FROM proveedores WHERE estado = 'ACTIVO'";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                proveedores pro = new proveedores();
+                pro.setId(rs.getInt("id"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setRazonsocial(rs.getString("razonsocial"));
+                pro.setTelefono(rs.getString("telefono"));
+                pro.setCorreo(rs.getString("correo"));
+                pro.setDireccion(rs.getString("direccion"));
+                pro.setInfopago(rs.getString("infopago"));
+                pro.setConpago(rs.getString("conpago"));
+                pro.setEstado(rs.getString("estado"));
+                list.add(pro);
+
+            }
+        } catch (Exception e) {
+
+        }
+
+        return list;
+    }
 
     @Override
     public boolean guardar(proveedores pro) {

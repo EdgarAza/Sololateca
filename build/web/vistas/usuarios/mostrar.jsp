@@ -27,7 +27,7 @@
             if (mensaje != null) {
         %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Éxito!</strong> <%= mensaje%>
+            <%= mensaje%>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%
@@ -36,7 +36,7 @@
         <h1>Usuarios</h1>
         <div class="tabla-madre">
 
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#guardarModal">Agregar</button>
+            <button type="button" class="btn btn-success  mb-3" data-bs-toggle="modal" data-bs-target="#guardarModal">Agregar</button>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -46,7 +46,8 @@
                             <th scope="col">Usuario</th>
                             <th scope="col">Clave</th>
                             <th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>   
+                            <th scope="col">Apellidos</th>  
+                            <th scope="col">Estado</th>   
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -67,6 +68,11 @@
                             <td><%=usu.getClave()%></td>
                             <td><%=usu.getNombres()%></td>
                             <td><%=usu.getApellidos()%></td>
+                            <td>
+                                 <span class="<%= usu.getEstado().equalsIgnoreCase("INACTIVO") ? "text-white bg-danger" : "text-white bg-success"%> p-2 rounded">
+                                    <%= usu.getEstado()%>
+                                </span>
+                            </td>
 
                             <td>
                                 <button type="button" class="btn btn-primary" 
@@ -80,6 +86,7 @@
                                         data-apellidos="<%=usu.getApellidos()%>"
                                         data-telefono="<%=usu.getTelefono()%>"
                                         data-direccion="<%=usu.getDireccion()%>"
+                                        data-estado="<%=usu.getEstado()%>"
                                         >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
@@ -98,18 +105,13 @@
                                         data-apellidos="<%=usu.getApellidos()%>"
                                         data-telefono="<%=usu.getTelefono()%>"
                                         data-direccion="<%=usu.getDireccion()%>"
+                                        data-estado="<%=usu.getEstado()%>"
                                         >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
                                     </svg>
                                 </button>
 
-
-                                <button type="button" class="btn btn-danger" 
-                                        onclick="showConfirmDelete(<%=usu.getId()%>)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                                    </svg></button>
 
                             </td>
 
@@ -135,49 +137,10 @@
         <jsp:include page="guardar.jsp" />
         <jsp:include page="editar.jsp" />
 
-        <!-- Mensaje de Confirmación de Eliminación -->
-        <div id="confirmDeleteMessage" class="confirm-delete">
-            <h5>Confirmar Eliminación</h5>
-            <p>¿Está seguro de que deseas eliminar este registro?</p>
-            <button type="button" class="btn btn-danger" onclick="deleteRecord()">Eliminar</button>
-            <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
-        </div>
-
+       
         <script>
-            let recordIdToDelete = null;
-
-            function showConfirmDelete(id) {
-                recordIdToDelete = id;
-                document.getElementById('confirmDeleteMessage').style.display = 'block';
-            }
-
-            function closeConfirmDelete() {
-                document.getElementById('confirmDeleteMessage').style.display = 'none';
-            }
-
-            function deleteRecord() {
-                if (recordIdToDelete) {
-                    // Redirigir al controlador para eliminar
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = 'controlador';
-
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = 'id';
-                    hiddenField.value = recordIdToDelete;
-
-                    const actionField = document.createElement('input');
-                    actionField.type = 'hidden';
-                    actionField.name = 'accion';
-                    actionField.value = 'Eliminar';
-
-                    form.appendChild(hiddenField);
-                    form.appendChild(actionField);
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            }
+            
+            
 
             // Función para cerrar la alerta automáticamente
             window.onload = function () {

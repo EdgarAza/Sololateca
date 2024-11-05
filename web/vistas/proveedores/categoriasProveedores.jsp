@@ -63,9 +63,9 @@
                                     <td><%= pro.getCategoria()%></td>
                                     <td><%= pro.getProveedor()%></td>
                                     <td>
-                                        <button type="button" class="btn btn-danger" onclick="showConfirmDelete(<%= pro.getId()%>)">
+                                        <button type="button" class="btn btn-danger" onclick="showConfirmDelete3(<%= pro.getId()%>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                             </svg>
                                         </button>
                                     </td>
@@ -83,7 +83,52 @@
             </div>
         </div>
 
+        <div id="confirmDeleteMessage3" class="confirm-delete">
+            <h5>Confirmar Eliminación</h5>
+            <p>¿Estás seguro de que deseas eliminar este registro?</p>
+            <button type="button" class="btn btn-danger" onclick="deleteRecord3()">Eliminar</button>
+            <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete3()">Cancelar</button>
+        </div>
+
         <script>
+
+            let recordIdToDelete3 = null;
+
+            function showConfirmDelete3(id) {
+                recordIdToDelete3 = id;
+                document.getElementById('confirmDeleteMessage3').style.display = 'block';
+            }
+
+            function closeConfirmDelete3() {
+                document.getElementById('confirmDeleteMessage3').style.display = 'none';
+            }
+
+            function deleteRecord3() {
+                if (recordIdToDelete3) {
+                    // Redirigir al controlador para eliminar
+                    const form3 = document.createElement('form');
+                    form3.method = 'POST';
+                    form3.action = 'cProvCategorias';
+
+                    const hiddenField3 = document.createElement('input');
+                    hiddenField3.type = 'hidden';
+                    hiddenField3.name = 'id3';
+                    hiddenField3.value = recordIdToDelete3;
+
+                    const actionField3 = document.createElement('input');
+                    actionField3.type = 'hidden';
+                    actionField3.name = 'accion';
+                    actionField3.value = 'Eliminar';
+
+                    form3.appendChild(hiddenField3);
+                    form3.appendChild(actionField3);
+                    document.body.appendChild(form3);
+                    form3.submit();
+                }
+            }
+
+
+
             const agregarCategoriaModal = document.getElementById('agregarCategoriaModal');
             agregarCategoriaModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget; // Botón que activó el modal

@@ -14,6 +14,8 @@ import modelo.proveedores;
 public interface crudProveedores {
 
     public List mostrar();
+    
+       public List mostrarActivos();
 
     public boolean guardar(proveedores pro);
 

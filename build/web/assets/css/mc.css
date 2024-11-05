@@ -1,0 +1,14 @@
+.tablas-container {
+    display: flex;
+    justify-content: space-between; /* Asegura que haya espacio entre las tablas */
+    margin-top: 2%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+.tabla-marca, .tabla-categoria {
+    flex: 1; /* Permite que las tablas ocupen el mismo espacio */
+    margin-right: 20px; /* Espacio entre las tablas */
+}
+.tabla-categoria {
+    margin-right: 0; /* Eliminar el margen derecho de la segunda tabla */
+}

@@ -19,23 +19,36 @@
 
     </head>
     <body>
+        <jsp:include page="../extras/nav.jsp" />
+
+        <%
+            String mensaje = (String) request.getAttribute("mensaje");
+            if (mensaje != null) {
+        %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Éxito!</strong> <%= mensaje%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <%
+            }
+        %>
         <h1>Compras</h1>
         <div class="tabla-madre">
             <form id="formBusqueda" action="cCompras" method="post"> 
                 <div class="row g-3">
                     <div class="col-2 mb-3">
-                        <label>Fecha</label>
-                        <input type="text" class="form-control"  placeholder="Fecha" name="txtFecha">
+                        <label class="lcolor">Fecha</label>
+                        <input type="text" id="txtFecha" class="form-control"  placeholder="Fecha" name="txtFecha">
 
                     </div>
                     <div class="col-2 mb-3">
-                        <label>Numero</label>
-                        <input type="text" class="form-control"  placeholder="Numero" name="txtNumero">
+                        <label class="lcolor">Numero</label>
+                        <input type="text" id="txtNumero" class="form-control"  placeholder="Numero" name="txtNumero">
 
                     </div>
                     <div class="col-2 mb-3">
-                        <label>Proveedor</label>
-                        <input type="text" class="form-control"  placeholder="Proveedor" name="txtProveedor">
+                        <label class="lcolor">Proveedor</label>
+                        <input type="text" id="txtProveedor" class="form-control"  placeholder="Proveedor" name="txtProveedor">
                     </div>
                 </div>
 
@@ -45,7 +58,7 @@
             </form>
 
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tableCompras">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -79,16 +92,27 @@
                             <td><%=com.getNota()%></td>
                             <td>
 
+                                <form action="cCompras" method="post" style="display: inline;">
+                                    <input type="hidden" name="accion" value="Detalle">
+                                    <input type="hidden" name="txtNumeroD" value="<%=com.getNumero()%>">
+                                    <button type="submit" class="btn btn-primary" title="Detalle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                        </svg>
+                                    </button>
+                                </form>
 
-                                <button type="submit" form="formBusqueda" name="accion" class="btn btn-primary" value="Detalle">Detalle</button>
+                          
 
 
                                 <button type="button" class="btn btn-danger" 
-                                        onclick="showConfirmDelete(<%=com.getId()%>)">
+                                        onclick="showConfirmDelete('<%=com.getNumero()%>')">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>
                                 </button>
+
                             </td>
 
                         </tr>
@@ -99,16 +123,88 @@
             </div>
 
 
-                    <form action="cInventario" method="post"> 
+            <form action="cInventario" method="post"> 
                 <button type="submit" name="accion" class="btn btn-warning mb-3" value="Inventario">Inventario</button>
                 <button type="submit" name="accion" class="btn btn-warning mb-3" value="Minimo">Minimo</button>
                 <button type="submit" name="accion" class="btn btn-warning mb-3" value="Existencia">Existencia</button>
             </form>
 
         </div>
+        <div id="confirmDeleteMessage" class="confirm-delete">
+            <h5>Confirmar Eliminación</h5>
+            <p style="color: black;">¿Estás seguro de que deseas eliminar este registro?</p>
+            <button type="button" class="btn btn-danger" onclick="deleteRecord()">Eliminar</button>
+            <button type="button" class="btn btn-secondary" onclick="closeConfirmDelete()">Cancelar</button>
+        </div>
+
+        <script>
+            let recordIdToDelete = null;
+
+            function closeConfirmDelete() {
+                document.getElementById('confirmDeleteMessage').style.display = 'none';
+            }
+
+            function showConfirmDelete(id) {
+                recordIdToDelete = id;
+                document.getElementById('confirmDeleteMessage').style.display = 'block';
+            }
+
+            function deleteRecord() {
+                if (recordIdToDelete) {
+                    // Redirigir al controlador para eliminar
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = 'cCompras';
+
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = 'numero';
+                    hiddenField.value = recordIdToDelete;
+
+                    const actionField = document.createElement('input');
+                    actionField.type = 'hidden';
+                    actionField.name = 'accion';
+                    actionField.value = 'Eliminar';
+
+                    form.appendChild(hiddenField);
+                    form.appendChild(actionField);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }
 
 
+            function filterTable() {
+                const codigoFilter = document.getElementById('txtFecha').value.toLowerCase();
+                const descripcionFilter = document.getElementById('txtNumero').value.toLowerCase();
+                const proveedorFilter = document.getElementById('txtProveedor').value.toLowerCase();
+                const table = document.querySelector('#tableCompras');
+                const rows = table.getElementsByTagName('tr');
 
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    let showRow = true;
+
+                    if (codigoFilter && cells[1].textContent.toLowerCase().indexOf(codigoFilter) === -1) {
+                        showRow = false;
+                    }
+                    if (descripcionFilter && cells[2].textContent.toLowerCase().indexOf(descripcionFilter) === -1) {
+                        showRow = false;
+                    }
+                     if (proveedorFilter && cells[3].textContent.toLowerCase().indexOf(proveedorFilter) === -1) {
+                        showRow = false;
+                    }
+
+
+                    rows[i].style.display = showRow ? '' : 'none';
+                }
+            }
+            document.getElementById('txtFecha').addEventListener('keyup', filterTable);
+            document.getElementById('txtNumero').addEventListener('keyup', filterTable);
+             document.getElementById('txtProveedor').addEventListener('keyup', filterTable);
+
+
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     </body>

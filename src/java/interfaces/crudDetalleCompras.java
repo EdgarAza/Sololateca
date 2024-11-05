@@ -13,12 +13,12 @@ import modelo.detallecompras;
  */
 public interface crudDetalleCompras {
     
-    public List mostrar();
+    public List mostrar(String var);
 
     public boolean guardar(detallecompras dcom);
 
     public boolean editar(detallecompras dcom);
 
-    public boolean eliminar(int id);
+    public boolean eliminar(String numero);
     
 }

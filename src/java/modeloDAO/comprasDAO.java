@@ -93,15 +93,15 @@ public class comprasDAO implements crudCompras {
     }
 
     @Override
-    public boolean eliminar(int id) {
-        String sql = "DELETE FROM compras WHERE id = ?";
+    public boolean eliminar(String numero) {
+        String sql = "DELETE FROM compras WHERE numero = ?";
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, numero);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {

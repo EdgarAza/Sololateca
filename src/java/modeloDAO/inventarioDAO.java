@@ -149,4 +149,19 @@ public class inventarioDAO implements crudInventario {
             return false;
         }
     }
+    
+     public boolean actulizarStock(inventario inv) {
+        String sql = "UPDATE productos SET stock = ? WHERE codigo = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, inv.getStock());
+            ps.setString(2, inv.getCodigo());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }

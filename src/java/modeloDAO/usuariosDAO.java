@@ -96,7 +96,7 @@ public class usuariosDAO implements crudUsuarios {
 
     @Override
     public boolean editar(usuarios usu) {
-        String sql = "UPDATE usuarios SET rol = ?, usuario=?, clave=?, dpi = ?, nombres = ?, apellidos = ?, telefono = ?, direccion = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET rol = ?, usuario=?, clave=?, dpi = ?, nombres = ?, apellidos = ?, telefono = ?, direccion = ?, estado=? WHERE id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -115,28 +115,11 @@ public class usuariosDAO implements crudUsuarios {
             ps.setString(6, usu.getApellidos());
             ps.setString(7, usu.getTelefono());
             ps.setString(8, usu.getDireccion());
-            ps.setInt(9, usu.getId());
+            ps.setString(9, usu.getEstado());
+            ps.setInt(10, usu.getId());
 
             ps.execute();
             return true;
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            return false;
-        }
-    }
-
-    @Override
-    public boolean eliminar(int id) {
-        String sql = "DELETE FROM usuarios WHERE id = ?";
-        Connection con = null;
-        PreparedStatement ps = null;
-
-        try {
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println(e.toString());
             return false;

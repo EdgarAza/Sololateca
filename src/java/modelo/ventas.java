@@ -9,20 +9,22 @@ package modelo;
  * @author DANIELS SYSTEMS
  */
 public class ventas {
-    
+
     private int id;
     private String fecha;
     private String cliente;
     private String total;
+    private String numero;
 
     public ventas() {
     }
 
-    public ventas(int id, String fecha, String cliente, String total) {
+    public ventas(int id, String fecha, String cliente, String total, String numero) {
         this.id = id;
         this.fecha = fecha;
         this.cliente = cliente;
         this.total = total;
+        this.numero = numero;
     }
 
     public int getId() {
@@ -56,7 +58,13 @@ public class ventas {
     public void setTotal(String total) {
         this.total = total;
     }
-    
-    
-    
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
 }

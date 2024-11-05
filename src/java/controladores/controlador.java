@@ -60,7 +60,6 @@ public class controlador extends HttpServlet {
             String direccion = request.getParameter("txtDireccion");
             String estado = "ACTIVO";
 
-            
             usu.setRol(rol);
             usu.setUsuario(usuario);
             usu.setClave(clave);
@@ -71,6 +70,7 @@ public class controlador extends HttpServlet {
             usu.setDireccion(direccion);
             usu.setEstado(estado);
             dao.guardar(usu);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/usuarios/mostrar.jsp";
 
         } else if (action.equalsIgnoreCase("Actualizar")) {
@@ -83,7 +83,7 @@ public class controlador extends HttpServlet {
             String apellidos = request.getParameter("txtApellidos");
             String telefono = request.getParameter("txtTelefono");
             String direccion = request.getParameter("txtDireccion");
-         
+            String estado = request.getParameter("txtEstado");
 
             usu.setRol(rol);
             usu.setUsuario(usuario);
@@ -93,27 +93,12 @@ public class controlador extends HttpServlet {
             usu.setApellidos(apellidos);
             usu.setTelefono(telefono);
             usu.setDireccion(direccion);
+            usu.setEstado(estado);
             usu.setId(id);
             dao.editar(usu);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/usuarios/mostrar.jsp";
-        } else if (action.equalsIgnoreCase("Eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            dao.eliminar(id);
-            acceso = "vistas/usuarios/mostrar.jsp";
-        } else if (action.equalsIgnoreCase("Usuarios")) {
-            reportes.UsuariosCompletos();
-            acceso = "vistas/usuarios/mostrar.jsp";
-
-        } else if (action.equalsIgnoreCase("Activos")) {
-            reportes.UsuariosActivos();
-            acceso = "vistas/usuarios/mostrar.jsp";
-
-        } else if (action.equalsIgnoreCase("Inactivos")) {
-            reportes.UsuariosInactivos();
-            acceso = "vistas/usuarios/mostrar.jsp";
-
-        }
+        } 
 
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);

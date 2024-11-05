@@ -4,6 +4,7 @@
     Author     : DANIELS SYSTEMS
 --%>
 
+<%@page import="modelo.busqueda"%>
 <%@page import="modelo.detallecompras"%>
 <%@page import="modeloDAO.detalleComprasDAO"%>
 <%@page import="java.util.Iterator"%>
@@ -20,7 +21,9 @@
     <body>
         <h1>Detalle de Compra</h1>
         <div class="tabla-madre">
-            
+            <form action="cCompras" method="post"> 
+                <button type="submit" name="accion" class="btn btn-primary mb-3" value="mostrar">Regresar</button>
+            </form>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -37,13 +40,13 @@
                     </thead>
 
                     <%
-                        detalleComprasDAO dao = new detalleComprasDAO();
-                        List<detallecompras> list = dao.mostrar();
-                        Iterator<detallecompras> iter = list.iterator();
-                        detallecompras dcom = null;
-                        while (iter.hasNext()) {
-                            dcom = iter.next();
+                       
 
+                            busqueda bus = (busqueda) session.getAttribute("buscar");
+                            String x = (bus != null) ? bus.getBuscar() : "";
+                            detalleComprasDAO dao = new detalleComprasDAO();
+                            List<detallecompras> list = dao.mostrar(x);
+                            for (detallecompras dcom : list) {
                     %>
                     <tbody>
                         <tr>
@@ -64,13 +67,9 @@
             </div>
 
 
-            <form action="cInventario" method="post"> 
-                <button type="submit" name="accion" class="btn btn-warning" value="Inventario">Inventario</button>
-                <button type="submit" name="accion" class="btn btn-warning" value="Minimo">Minimo</button>
-                <button type="submit" name="accion" class="btn btn-warning" value="Existencia">Existencia</button>
-            </form>
+
 
         </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

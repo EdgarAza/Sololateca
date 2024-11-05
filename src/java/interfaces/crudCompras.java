@@ -19,5 +19,5 @@ public interface crudCompras {
 
     public boolean editar(compras comp);
 
-    public boolean eliminar(int id);
+    public boolean eliminar(String numero);
 }

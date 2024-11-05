@@ -46,7 +46,7 @@ public class cProveedores extends HttpServlet {
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        }else if (action.equalsIgnoreCase("Agregar")) {
+        } else if (action.equalsIgnoreCase("Agregar")) {
             String nombre = request.getParameter("txtNombre");
             String razonSocial = request.getParameter("txtRazonSocial");
             String telefono = request.getParameter("txtTelefono");
@@ -64,6 +64,7 @@ public class cProveedores extends HttpServlet {
             pro.setConpago(conpago);
             pro.setEstado("ACTIVO");
             proDAO.guardar(pro);
+            request.setAttribute("mensaje", "Datos guardados exitosamente.");
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
 
         } else if (action.equalsIgnoreCase("Actualizar")) {
@@ -87,13 +88,9 @@ public class cProveedores extends HttpServlet {
             pro.setEstado(estado);
             pro.setId(id);
             proDAO.editar(pro);
-
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
-        }  else if (action.equalsIgnoreCase("proveedores")) {
-            reportes.ProveedoresCompleto();
-            acceso = "vistas/proveedores/mostrarProveedores.jsp";
-
-        }
+        } 
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }

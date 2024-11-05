@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import modelo.busqueda;
 import modelo.compras;
 import modelo.detallecompras;
 import modelo.historialproductos;
@@ -30,7 +32,7 @@ public class cCompras extends HttpServlet {
     historialProductosDAO hproDAO = new historialProductosDAO();
     inventario inv = new inventario();
     inventarioDAO invDAO = new inventarioDAO();
-
+    String numero;
     double xcantidad = 0.00;
     double xstock = 0.00;
     double xnstock = 0.00;
@@ -58,10 +60,14 @@ public class cCompras extends HttpServlet {
             acceso = "vistas/compras/mostrarCompras.jsp";
         } else if (action.equalsIgnoreCase("Nueva")) {
             acceso = "vistas/compras/nuevaCompra.jsp";
-        }else if (action.equalsIgnoreCase("Detalle")) {
+        } else if (action.equalsIgnoreCase("Detalle")) {
+            String busquedaTexto = request.getParameter("txtNumeroD");
+            busqueda bus = new busqueda();
+            bus.setBuscar(busquedaTexto);
+            HttpSession session = request.getSession();
+            session.setAttribute("buscar", bus);
             acceso = "vistas/compras/detallesCompras.jsp";
-        }
-        else if (action.equalsIgnoreCase("AgregarDatos")) {
+        } else if (action.equalsIgnoreCase("AgregarDatos")) {
             String fecha = request.getParameter("txtFecha");
             String numero = request.getParameter("txtNumero");
             String proveedor = request.getParameter("txtProveedor");
@@ -136,6 +142,14 @@ public class cCompras extends HttpServlet {
             }
             acceso = "vistas/compras/mostrarCompras.jsp";
 
+        } else if (action.equalsIgnoreCase("Eliminar")) {
+           
+            numero = request.getParameter("numero");     
+            compDAO.eliminar(numero);      
+            dcomDAO.eliminar(numero);
+
+            request.setAttribute("mensaje", "Datos actualizados exitosamente.");
+            acceso = "vistas/compras/mostrarCompras.jsp";
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);

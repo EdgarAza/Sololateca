@@ -9,28 +9,33 @@ package modelo;
  * @author DANIELS SYSTEMS
  */
 public class diario {
-    
-    
+
     private int id;
+    private String fecha;
+    private String numero;
     private String cliente;
     private String vendedor;
     private String codigo;
     private String cantidad;
     private String descripcion;
     private String precio;
+    private String costo;
     private String subtotal;
 
     public diario() {
     }
 
-    public diario(int id, String cliente, String vendedor, String codigo, String cantidad, String descripcion, String precio, String subtotal) {
+    public diario(int id, String fecha, String numero, String cliente, String vendedor, String codigo, String cantidad, String descripcion, String precio, String costo, String subtotal) {
         this.id = id;
+        this.fecha = fecha;
+        this.numero = numero;
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.codigo = codigo;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.costo = costo;
         this.subtotal = subtotal;
     }
 
@@ -40,6 +45,22 @@ public class diario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getCliente() {
@@ -90,6 +111,14 @@ public class diario {
         this.precio = precio;
     }
 
+    public String getCosto() {
+        return costo;
+    }
+
+    public void setCosto(String costo) {
+        this.costo = costo;
+    }
+
     public String getSubtotal() {
         return subtotal;
     }
@@ -97,8 +126,5 @@ public class diario {
     public void setSubtotal(String subtotal) {
         this.subtotal = subtotal;
     }
-    
-    
-    
-    
+
 }

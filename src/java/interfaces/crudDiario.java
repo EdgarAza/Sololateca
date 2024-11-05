@@ -12,10 +12,12 @@ import modelo.diario;
  * @author DANIELS SYSTEMS
  */
 public interface crudDiario {
+
+    public List mostrar(String var);
     
-      public List mostrar();
+    public List mostrarDetalle(String var);
 
     public boolean guardar(diario dia);
 
-    public boolean eliminar(int id);
+    public boolean eliminar(String numero);
 }

@@ -61,8 +61,9 @@ public class cProvMarca extends HttpServlet {
             session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
 
         } else if (action.equalsIgnoreCase("Eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
+            id = Integer.parseInt(request.getParameter("id2"));
             promDAO.eliminar(id);
+             request.setAttribute("mensaje", "Datos eliminados exitosamente.");
             acceso = "vistas/proveedores/mostrarProveedores.jsp";
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);

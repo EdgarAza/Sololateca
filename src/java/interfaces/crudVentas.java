@@ -14,9 +14,9 @@ import modelo.ventas;
 public interface crudVentas {
     
     
-      public List mostrar();
+      public List mostrar(String var);
 
     public boolean guardar(ventas ven);
 
-    public boolean eliminar(int id);
+    public boolean eliminar(String numero);
 }

@@ -27,9 +27,9 @@ public class detalleComprasDAO implements crudDetalleCompras {
     detallecompras dcom = new detallecompras();
 
     @Override
-    public List mostrar() {
+    public List mostrar(String var) {
          ArrayList<detallecompras> list = new ArrayList();
-        String sql = "SELECT * FROM detallecompras";
+        String sql = "SELECT * FROM detallecompras WHERE numero LIKE '%" + var + "%'";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -94,15 +94,15 @@ public class detalleComprasDAO implements crudDetalleCompras {
     }
 
     @Override
-    public boolean eliminar(int id) {
-        String sql = "DELETE FROM detallecompras WHERE id = ?";
+    public boolean eliminar(String numero) {
+        String sql = "DELETE FROM detallecompras WHERE numero = ?";
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, numero);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {

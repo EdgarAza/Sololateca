@@ -15,10 +15,10 @@ public interface crudClientes {
 
     public List mostrar(String var);
 
+    public List mostrarVenta(String var);
+
     public boolean guardar(clientes cli);
 
     public boolean editar(clientes cli);
-    
-    public boolean desactivar(clientes cli);
 
 }

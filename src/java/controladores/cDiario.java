@@ -13,6 +13,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import modelo.busqueda;
 import modelo.diario;
 import modeloDAO.diarioDAO;
 import reportes.reportesDiario;
@@ -27,6 +31,8 @@ public class cDiario extends HttpServlet {
     diario dia = new diario();
     diarioDAO diaDao = new diarioDAO();
     conexion con = new conexion();
+    DateTimeFormatter Fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String fdia = Fecha.format(LocalDateTime.now());
     reportesDiario reportes = new reportesDiario(con.getConnection());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -38,9 +44,20 @@ public class cDiario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("mostrar")) {
+            busqueda bus = new busqueda();
+            bus.setBuscar(fdia);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
             acceso = "vistas/diario/mostrarDiario.jsp";
         } else if (action.equalsIgnoreCase("Agregar")) {
 
@@ -62,23 +79,21 @@ public class cDiario extends HttpServlet {
             diaDao.guardar(dia);
             acceso = "vistas/diario/mostrarDiario.jsp";
 
-        } else if (action.equalsIgnoreCase("eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            diaDao.eliminar(id);
-             acceso = "vistas/diario/mostrarDiario.jsp";
-        }else if (action.equalsIgnoreCase("Ventas")) {
-            reportes.ClientesCompleto();
+        } else if (action.equalsIgnoreCase("Eliminar")) {
+            String numerox = request.getParameter("numerox");
+            diaDao.eliminar(numerox);
+            request.setAttribute("mensaje", "Datos eliminados exitosamente.");
             acceso = "vistas/diario/mostrarDiario.jsp";
-
+        } else if (action.equalsIgnoreCase("Buscar")) {
+            String busquedaTexto = request.getParameter("txtBusqueda");
+            busqueda bus = new busqueda();
+            bus.setBuscar(busquedaTexto);
+            HttpSession session = request.getSession();
+            session.setAttribute("buscar", bus); // Usa la misma clave "buscar"
+            acceso = "vistas/diario/mostrarDiario.jsp";
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override

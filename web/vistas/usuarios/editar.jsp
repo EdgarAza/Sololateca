@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar Usuario</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        
+
 
     </head>
     <body>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="formEditar" action="controlador" method="post">
-                            
+
                             <input type="hidden" class="form-control" name="txtId"  >
                             <label>Rol</label>
                             <select class="form-select "  name='txtRol'>
@@ -48,6 +48,11 @@
                             <input type="text" class="form-control" name="txtTelefono">
                             <label>Direccion</label>
                             <input type="text" class="form-control" name="txtDireccion" required>
+                           <label>Estado</label>
+                            <select class="form-select "  name='txtEstado' >
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTVO</option>
+                            </select>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -70,12 +75,13 @@
                 const apellidos = button.getAttribute('data-apellidos');
                 const telefono = button.getAttribute('data-telefono');
                 const direccion = button.getAttribute('data-direccion');
-               
+                const estado = button.getAttribute('data-estado');
+
 
                 // Rellenar los campos del formulario en el modal
                 const modalForm = editarModal.querySelector('form');
                 modalForm.querySelector('input[name="txtId"]').value = id;
-                modalForm.querySelector('select[name="txtRol"]').value = rol; 
+                modalForm.querySelector('select[name="txtRol"]').value = rol;
                 modalForm.querySelector('input[name="txtUsuario"]').value = usuario;
                 modalForm.querySelector('input[name="txtClave"]').value = clave;
                 modalForm.querySelector('input[name="txtDpi"]').value = dpi;
@@ -83,6 +89,7 @@
                 modalForm.querySelector('input[name="txtApellidos"]').value = apellidos;
                 modalForm.querySelector('input[name="txtTelefono"]').value = telefono;
                 modalForm.querySelector('input[name="txtDireccion"]').value = direccion;
+                modalForm.querySelector('select[name="txtEstado"]').value = estado;
             });
         </script>
 

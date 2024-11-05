@@ -22,5 +22,7 @@ public interface crudInventario {
      public boolean actulizarCompra(inventario inv);
 
     public boolean eliminar(int id);
+    
+      public boolean actulizarStock(inventario inv);
 
 }
